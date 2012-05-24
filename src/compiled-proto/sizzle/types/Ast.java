@@ -935,26 +935,29 @@ public final class Ast {
     
     public enum FileType
         implements com.google.protobuf.ProtocolMessageEnum {
-      SOURCE(0, 0),
-      BINARY(1, 1),
-      TEXT(2, 2),
-      XML(3, 3),
+      UNKNOWN(0, 0),
+      SOURCE(1, 1),
+      BINARY(2, 2),
+      TEXT(3, 3),
+      XML(4, 4),
       ;
       
-      public static final int SOURCE_VALUE = 0;
-      public static final int BINARY_VALUE = 1;
-      public static final int TEXT_VALUE = 2;
-      public static final int XML_VALUE = 3;
+      public static final int UNKNOWN_VALUE = 0;
+      public static final int SOURCE_VALUE = 1;
+      public static final int BINARY_VALUE = 2;
+      public static final int TEXT_VALUE = 3;
+      public static final int XML_VALUE = 4;
       
       
       public final int getNumber() { return value; }
       
       public static FileType valueOf(int value) {
         switch (value) {
-          case 0: return SOURCE;
-          case 1: return BINARY;
-          case 2: return TEXT;
-          case 3: return XML;
+          case 0: return UNKNOWN;
+          case 1: return SOURCE;
+          case 2: return BINARY;
+          case 3: return TEXT;
+          case 4: return XML;
           default: return null;
         }
       }
@@ -985,7 +988,7 @@ public final class Ast {
       }
       
       private static final FileType[] VALUES = {
-        SOURCE, BINARY, TEXT, XML, 
+        UNKNOWN, SOURCE, BINARY, TEXT, XML, 
       };
       
       public static FileType valueOf(
@@ -1107,7 +1110,7 @@ public final class Ast {
     private void initFields() {
       name_ = "";
       content_ = "";
-      type_ = sizzle.types.Ast.File.FileType.SOURCE;
+      type_ = sizzle.types.Ast.File.FileType.UNKNOWN;
       packages_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -1306,7 +1309,7 @@ public final class Ast {
         bitField0_ = (bitField0_ & ~0x00000001);
         content_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        type_ = sizzle.types.Ast.File.FileType.SOURCE;
+        type_ = sizzle.types.Ast.File.FileType.UNKNOWN;
         bitField0_ = (bitField0_ & ~0x00000004);
         if (packagesBuilder_ == null) {
           packages_ = java.util.Collections.emptyList();
@@ -1579,7 +1582,7 @@ public final class Ast {
       }
       
       // required .sizzle.types.File.FileType type = 3;
-      private sizzle.types.Ast.File.FileType type_ = sizzle.types.Ast.File.FileType.SOURCE;
+      private sizzle.types.Ast.File.FileType type_ = sizzle.types.Ast.File.FileType.UNKNOWN;
       public boolean hasType() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
@@ -1597,7 +1600,7 @@ public final class Ast {
       }
       public Builder clearType() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        type_ = sizzle.types.Ast.File.FileType.SOURCE;
+        type_ = sizzle.types.Ast.File.FileType.UNKNOWN;
         onChanged();
         return this;
       }
@@ -7017,26 +7020,26 @@ public final class Ast {
       "\n\tast.proto\022\014sizzle.types\"]\n\007Library\022\020\n\010" +
       "filename\030\001 \002(\t\022\014\n\004name\030\002 \002(\t\022\017\n\007version\030" +
       "\003 \002(\t\022!\n\005files\030\004 \003(\0132\022.sizzle.types.File" +
-      "\"\260\001\n\004File\022\014\n\004name\030\001 \002(\t\022\017\n\007content\030\002 \002(\t" +
+      "\"\275\001\n\004File\022\014\n\004name\030\001 \002(\t\022\017\n\007content\030\002 \002(\t" +
       "\022)\n\004type\030\003 \002(\0162\033.sizzle.types.File.FileT" +
       "ype\022\'\n\010packages\030\004 \003(\0132\025.sizzle.types.Pac" +
-      "kage\"5\n\010FileType\022\n\n\006SOURCE\020\000\022\n\n\006BINARY\020\001" +
-      "\022\010\n\004TEXT\020\002\022\007\n\003XML\020\003\":\n\007Package\022\014\n\004name\030\001" +
-      " \002(\t\022!\n\005types\030\002 \003(\0132\022.sizzle.types.Type\"" +
-      "\262\001\n\004Type\022\014\n\004name\030\001 \002(\t\022-\n\013annotations\030\002 ",
-      "\003(\0132\030.sizzle.types.Annotation\022!\n\005types\030\003" +
-      " \003(\0132\022.sizzle.types.Type\022%\n\007methods\030\004 \003(" +
-      "\0132\024.sizzle.types.Method\022#\n\006fields\030\005 \003(\0132" +
-      "\023.sizzle.types.Field\"\320\001\n\006Method\022\014\n\004name\030" +
-      "\001 \002(\t\022-\n\013annotations\030\002 \003(\0132\030.sizzle.type" +
-      "s.Annotation\022\'\n\013return_type\030\003 \002(\0132\022.sizz" +
-      "le.types.Type\022%\n\targ_types\030\004 \003(\0132\022.sizzl" +
-      "e.types.Type\022\021\n\targ_names\030\005 \003(\t\022&\n\nexcep" +
-      "tions\030\006 \003(\0132\022.sizzle.types.Type\"7\n\005Field" +
-      "\022\014\n\004name\030\001 \002(\t\022 \n\004type\030\002 \002(\0132\022.sizzle.ty",
-      "pes.Type\"?\n\nAnnotation\022 \n\004type\030\001 \002(\0132\022.s" +
-      "izzle.types.Type\022\017\n\007content\030\002 \002(\t\"\032\n\007Com" +
-      "ment\022\017\n\007content\030\001 \002(\t"
+      "kage\"B\n\010FileType\022\013\n\007UNKNOWN\020\000\022\n\n\006SOURCE\020" +
+      "\001\022\n\n\006BINARY\020\002\022\010\n\004TEXT\020\003\022\007\n\003XML\020\004\":\n\007Pack" +
+      "age\022\014\n\004name\030\001 \002(\t\022!\n\005types\030\002 \003(\0132\022.sizzl" +
+      "e.types.Type\"\262\001\n\004Type\022\014\n\004name\030\001 \002(\t\022-\n\013a",
+      "nnotations\030\002 \003(\0132\030.sizzle.types.Annotati" +
+      "on\022!\n\005types\030\003 \003(\0132\022.sizzle.types.Type\022%\n" +
+      "\007methods\030\004 \003(\0132\024.sizzle.types.Method\022#\n\006" +
+      "fields\030\005 \003(\0132\023.sizzle.types.Field\"\320\001\n\006Me" +
+      "thod\022\014\n\004name\030\001 \002(\t\022-\n\013annotations\030\002 \003(\0132" +
+      "\030.sizzle.types.Annotation\022\'\n\013return_type" +
+      "\030\003 \002(\0132\022.sizzle.types.Type\022%\n\targ_types\030" +
+      "\004 \003(\0132\022.sizzle.types.Type\022\021\n\targ_names\030\005" +
+      " \003(\t\022&\n\nexceptions\030\006 \003(\0132\022.sizzle.types." +
+      "Type\"7\n\005Field\022\014\n\004name\030\001 \002(\t\022 \n\004type\030\002 \002(",
+      "\0132\022.sizzle.types.Type\"?\n\nAnnotation\022 \n\004t" +
+      "ype\030\001 \002(\0132\022.sizzle.types.Type\022\017\n\007content" +
+      "\030\002 \002(\t\"\032\n\007Comment\022\017\n\007content\030\001 \002(\t"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

@@ -742,32 +742,35 @@ public final class Bugs {
     
     public enum BugStatus
         implements com.google.protobuf.ProtocolMessageEnum {
-      OPEN(0, 0),
-      CLOSED(1, 1),
-      RESOLVED(2, 2),
-      FIXED(3, 3),
-      REOPEN(4, 4),
-      DUPLICATE(5, 5),
+      UNKNOWN(0, 0),
+      OPEN(1, 1),
+      CLOSED(2, 2),
+      RESOLVED(3, 3),
+      FIXED(4, 4),
+      REOPEN(5, 5),
+      DUPLICATE(6, 6),
       ;
       
-      public static final int OPEN_VALUE = 0;
-      public static final int CLOSED_VALUE = 1;
-      public static final int RESOLVED_VALUE = 2;
-      public static final int FIXED_VALUE = 3;
-      public static final int REOPEN_VALUE = 4;
-      public static final int DUPLICATE_VALUE = 5;
+      public static final int UNKNOWN_VALUE = 0;
+      public static final int OPEN_VALUE = 1;
+      public static final int CLOSED_VALUE = 2;
+      public static final int RESOLVED_VALUE = 3;
+      public static final int FIXED_VALUE = 4;
+      public static final int REOPEN_VALUE = 5;
+      public static final int DUPLICATE_VALUE = 6;
       
       
       public final int getNumber() { return value; }
       
       public static BugStatus valueOf(int value) {
         switch (value) {
-          case 0: return OPEN;
-          case 1: return CLOSED;
-          case 2: return RESOLVED;
-          case 3: return FIXED;
-          case 4: return REOPEN;
-          case 5: return DUPLICATE;
+          case 0: return UNKNOWN;
+          case 1: return OPEN;
+          case 2: return CLOSED;
+          case 3: return RESOLVED;
+          case 4: return FIXED;
+          case 5: return REOPEN;
+          case 6: return DUPLICATE;
           default: return null;
         }
       }
@@ -798,7 +801,7 @@ public final class Bugs {
       }
       
       private static final BugStatus[] VALUES = {
-        OPEN, CLOSED, RESOLVED, FIXED, REOPEN, DUPLICATE, 
+        UNKNOWN, OPEN, CLOSED, RESOLVED, FIXED, REOPEN, DUPLICATE, 
       };
       
       public static BugStatus valueOf(
@@ -1000,7 +1003,7 @@ public final class Bugs {
       closedDate_ = 0L;
       summary_ = "";
       description_ = "";
-      status_ = sizzle.types.Bugs.Bug.BugStatus.OPEN;
+      status_ = sizzle.types.Bugs.Bug.BugStatus.UNKNOWN;
       severity_ = "";
     }
     private byte memoizedIsInitialized = -1;
@@ -1257,7 +1260,7 @@ public final class Bugs {
         bitField0_ = (bitField0_ & ~0x00000010);
         description_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
-        status_ = sizzle.types.Bugs.Bug.BugStatus.OPEN;
+        status_ = sizzle.types.Bugs.Bug.BugStatus.UNKNOWN;
         bitField0_ = (bitField0_ & ~0x00000040);
         severity_ = "";
         bitField0_ = (bitField0_ & ~0x00000080);
@@ -1739,7 +1742,7 @@ public final class Bugs {
       }
       
       // required .sizzle.types.Bug.BugStatus status = 7;
-      private sizzle.types.Bugs.Bug.BugStatus status_ = sizzle.types.Bugs.Bug.BugStatus.OPEN;
+      private sizzle.types.Bugs.Bug.BugStatus status_ = sizzle.types.Bugs.Bug.BugStatus.UNKNOWN;
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
@@ -1757,7 +1760,7 @@ public final class Bugs {
       }
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000040);
-        status_ = sizzle.types.Bugs.Bug.BugStatus.OPEN;
+        status_ = sizzle.types.Bugs.Bug.BugStatus.UNKNOWN;
         onChanged();
         return this;
       }
@@ -1830,14 +1833,15 @@ public final class Bugs {
     java.lang.String[] descriptorData = {
       "\n\nbugs.proto\022\014sizzle.types\032\014shared.proto" +
       "\"=\n\rBugRepository\022\013\n\003url\030\001 \002(\t\022\037\n\004bugs\030\002" +
-      " \003(\0132\021.sizzle.types.Bug\"\241\002\n\003Bug\022\n\n\002id\030\001 " +
+      " \003(\0132\021.sizzle.types.Bug\"\256\002\n\003Bug\022\n\n\002id\030\001 " +
       "\002(\t\022&\n\010reporter\030\002 \002(\0132\024.sizzle.types.Per" +
       "son\022\025\n\rreported_date\030\003 \002(\004\022\023\n\013closed_dat" +
       "e\030\004 \002(\004\022\017\n\007summary\030\005 \002(\t\022\023\n\013description\030" +
       "\006 \002(\t\022+\n\006status\030\007 \002(\0162\033.sizzle.types.Bug" +
-      ".BugStatus\022\020\n\010severity\030\010 \002(\t\"U\n\tBugStatu" +
-      "s\022\010\n\004OPEN\020\000\022\n\n\006CLOSED\020\001\022\014\n\010RESOLVED\020\002\022\t\n" +
-      "\005FIXED\020\003\022\n\n\006REOPEN\020\004\022\r\n\tDUPLICATE\020\005"
+      ".BugStatus\022\020\n\010severity\030\010 \002(\t\"b\n\tBugStatu" +
+      "s\022\013\n\007UNKNOWN\020\000\022\010\n\004OPEN\020\001\022\n\n\006CLOSED\020\002\022\014\n\010" +
+      "RESOLVED\020\003\022\t\n\005FIXED\020\004\022\n\n\006REOPEN\020\005\022\r\n\tDUP",
+      "LICATE\020\006"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
