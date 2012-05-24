@@ -1,0 +1,5 @@
+counter: table sum[name: int] of int;
+
+data: int = input;
+
+emit counter[data] <- 1;
