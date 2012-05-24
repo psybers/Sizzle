@@ -1,0 +1,11 @@
+package sizzle.types;
+
+import "code.proto";
+import "bugs.proto";
+
+message Project {
+	required string name = 1;
+	required string url = 2;
+	repeated CodeRepository code_repositories = 3;
+	repeated BugRepository bug_repositories = 4;
+}

@@ -1,0 +1,18 @@
+package sizzle.types;
+
+import "ast.proto";
+import "shared.proto";
+
+message CodeRepository {
+	required string url = 1;
+	repeated Revision revisions = 2;
+}
+
+message Revision {
+	required int32 id = 1;
+	required Person author = 2;
+	required Person committer = 3;
+	required Date commit_date = 4;
+	required string log = 5;
+	repeated File files = 6;
+}

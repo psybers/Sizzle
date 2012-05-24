@@ -1,0 +1,27 @@
+package sizzle.types;
+
+import "shared.proto";
+
+message BugRepository {
+	required string url = 1;
+	repeated Bug bugs = 2;
+}
+
+message Bug {
+	required string id = 1;
+	required Person reporter = 2;
+	required Date reported_date = 3;
+	required Date closed_date = 4;
+	required string summary = 5;
+	required string description = 6;
+	enum BugStatus {
+		OPEN = 0;
+		CLOSED = 1;
+		RESOLVED = 2;
+		FIXED = 3;
+		REOPEN = 4;
+		DUPLICATE = 5;
+	}
+	required BugStatus status = 7;
+	required string severity = 8;
+}
