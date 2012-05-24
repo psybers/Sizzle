@@ -1,0 +1,8 @@
+proto "toplevel.proto"
+
+counts: table sum of int;
+repo: CodeRepository = input;
+cur_rev: repo.revisions[len(repo.revisions) - 1];
+
+when (i: some int; cur_rev.libraries[i].filename == "junit.jar")
+	emit counts <- 1;

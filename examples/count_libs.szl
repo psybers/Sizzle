@@ -1,0 +1,8 @@
+proto "toplevel.proto"
+
+counts: table sum[Library] of int;
+repo: CodeRepository = input;
+cur_rev: repo.revisions[len(repo.revisions) - 1];
+
+when (i: each int; def(cur_rev.libraries[i]))
+	emit counts[cur_rev.libraries[i]] <- 1;
