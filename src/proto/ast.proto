@@ -11,10 +11,11 @@ message File {
 	required string name = 1;
 	required string content = 2;
 	enum FileType {
-		SOURCE = 0;
-		BINARY = 1;
-		TEXT = 2;
-		XML = 3;
+		UNKNOWN = 0;
+		SOURCE = 1;
+		BINARY = 2;
+		TEXT = 3;
+		XML = 4;
 	}
 	required FileType type = 3;
 	repeated Package packages = 4;

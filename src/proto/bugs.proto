@@ -15,12 +15,13 @@ message Bug {
 	required string summary = 5;
 	required string description = 6;
 	enum BugStatus {
-		OPEN = 0;
-		CLOSED = 1;
-		RESOLVED = 2;
-		FIXED = 3;
-		REOPEN = 4;
-		DUPLICATE = 5;
+		UNKNOWN = 0;
+		OPEN = 1;
+		CLOSED = 2;
+		RESOLVED = 3;
+		FIXED = 4;
+		REOPEN = 5;
+		DUPLICATE = 6;
 	}
 	required BugStatus status = 7;
 	required string severity = 8;
