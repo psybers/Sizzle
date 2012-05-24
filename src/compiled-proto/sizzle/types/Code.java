@@ -693,10 +693,9 @@ public final class Code {
     sizzle.types.Shared.Person getCommitter();
     sizzle.types.Shared.PersonOrBuilder getCommitterOrBuilder();
     
-    // required .sizzle.types.Date commit_date = 4;
+    // required uint64 commit_date = 4;
     boolean hasCommitDate();
-    sizzle.types.Shared.Date getCommitDate();
-    sizzle.types.Shared.DateOrBuilder getCommitDateOrBuilder();
+    long getCommitDate();
     
     // required string log = 5;
     boolean hasLog();
@@ -777,16 +776,13 @@ public final class Code {
       return committer_;
     }
     
-    // required .sizzle.types.Date commit_date = 4;
+    // required uint64 commit_date = 4;
     public static final int COMMIT_DATE_FIELD_NUMBER = 4;
-    private sizzle.types.Shared.Date commitDate_;
+    private long commitDate_;
     public boolean hasCommitDate() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
-    public sizzle.types.Shared.Date getCommitDate() {
-      return commitDate_;
-    }
-    public sizzle.types.Shared.DateOrBuilder getCommitDateOrBuilder() {
+    public long getCommitDate() {
       return commitDate_;
     }
     
@@ -847,7 +843,7 @@ public final class Code {
       id_ = 0;
       author_ = sizzle.types.Shared.Person.getDefaultInstance();
       committer_ = sizzle.types.Shared.Person.getDefaultInstance();
-      commitDate_ = sizzle.types.Shared.Date.getDefaultInstance();
+      commitDate_ = 0L;
       log_ = "";
       files_ = java.util.Collections.emptyList();
     }
@@ -884,10 +880,6 @@ public final class Code {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!getCommitDate().isInitialized()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       for (int i = 0; i < getFilesCount(); i++) {
         if (!getFiles(i).isInitialized()) {
           memoizedIsInitialized = 0;
@@ -911,7 +903,7 @@ public final class Code {
         output.writeMessage(3, committer_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeMessage(4, commitDate_);
+        output.writeUInt64(4, commitDate_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBytes(5, getLogBytes());
@@ -942,7 +934,7 @@ public final class Code {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, commitDate_);
+          .computeUInt64Size(4, commitDate_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1070,7 +1062,6 @@ public final class Code {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getAuthorFieldBuilder();
           getCommitterFieldBuilder();
-          getCommitDateFieldBuilder();
           getFilesFieldBuilder();
         }
       }
@@ -1094,11 +1085,7 @@ public final class Code {
           committerBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000004);
-        if (commitDateBuilder_ == null) {
-          commitDate_ = sizzle.types.Shared.Date.getDefaultInstance();
-        } else {
-          commitDateBuilder_.clear();
-        }
+        commitDate_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000008);
         log_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -1169,11 +1156,7 @@ public final class Code {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        if (commitDateBuilder_ == null) {
-          result.commitDate_ = commitDate_;
-        } else {
-          result.commitDate_ = commitDateBuilder_.build();
-        }
+        result.commitDate_ = commitDate_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
@@ -1213,7 +1196,7 @@ public final class Code {
           mergeCommitter(other.getCommitter());
         }
         if (other.hasCommitDate()) {
-          mergeCommitDate(other.getCommitDate());
+          setCommitDate(other.getCommitDate());
         }
         if (other.hasLog()) {
           setLog(other.getLog());
@@ -1277,10 +1260,6 @@ public final class Code {
           
           return false;
         }
-        if (!getCommitDate().isInitialized()) {
-          
-          return false;
-        }
         for (int i = 0; i < getFilesCount(); i++) {
           if (!getFiles(i).isInitialized()) {
             
@@ -1336,13 +1315,9 @@ public final class Code {
               setCommitter(subBuilder.buildPartial());
               break;
             }
-            case 34: {
-              sizzle.types.Shared.Date.Builder subBuilder = sizzle.types.Shared.Date.newBuilder();
-              if (hasCommitDate()) {
-                subBuilder.mergeFrom(getCommitDate());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setCommitDate(subBuilder.buildPartial());
+            case 32: {
+              bitField0_ |= 0x00000008;
+              commitDate_ = input.readUInt64();
               break;
             }
             case 42: {
@@ -1563,94 +1538,25 @@ public final class Code {
         return committerBuilder_;
       }
       
-      // required .sizzle.types.Date commit_date = 4;
-      private sizzle.types.Shared.Date commitDate_ = sizzle.types.Shared.Date.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          sizzle.types.Shared.Date, sizzle.types.Shared.Date.Builder, sizzle.types.Shared.DateOrBuilder> commitDateBuilder_;
+      // required uint64 commit_date = 4;
+      private long commitDate_ ;
       public boolean hasCommitDate() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
-      public sizzle.types.Shared.Date getCommitDate() {
-        if (commitDateBuilder_ == null) {
-          return commitDate_;
-        } else {
-          return commitDateBuilder_.getMessage();
-        }
+      public long getCommitDate() {
+        return commitDate_;
       }
-      public Builder setCommitDate(sizzle.types.Shared.Date value) {
-        if (commitDateBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          commitDate_ = value;
-          onChanged();
-        } else {
-          commitDateBuilder_.setMessage(value);
-        }
+      public Builder setCommitDate(long value) {
         bitField0_ |= 0x00000008;
-        return this;
-      }
-      public Builder setCommitDate(
-          sizzle.types.Shared.Date.Builder builderForValue) {
-        if (commitDateBuilder_ == null) {
-          commitDate_ = builderForValue.build();
-          onChanged();
-        } else {
-          commitDateBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000008;
-        return this;
-      }
-      public Builder mergeCommitDate(sizzle.types.Shared.Date value) {
-        if (commitDateBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008) &&
-              commitDate_ != sizzle.types.Shared.Date.getDefaultInstance()) {
-            commitDate_ =
-              sizzle.types.Shared.Date.newBuilder(commitDate_).mergeFrom(value).buildPartial();
-          } else {
-            commitDate_ = value;
-          }
-          onChanged();
-        } else {
-          commitDateBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000008;
+        commitDate_ = value;
+        onChanged();
         return this;
       }
       public Builder clearCommitDate() {
-        if (commitDateBuilder_ == null) {
-          commitDate_ = sizzle.types.Shared.Date.getDefaultInstance();
-          onChanged();
-        } else {
-          commitDateBuilder_.clear();
-        }
         bitField0_ = (bitField0_ & ~0x00000008);
-        return this;
-      }
-      public sizzle.types.Shared.Date.Builder getCommitDateBuilder() {
-        bitField0_ |= 0x00000008;
+        commitDate_ = 0L;
         onChanged();
-        return getCommitDateFieldBuilder().getBuilder();
-      }
-      public sizzle.types.Shared.DateOrBuilder getCommitDateOrBuilder() {
-        if (commitDateBuilder_ != null) {
-          return commitDateBuilder_.getMessageOrBuilder();
-        } else {
-          return commitDate_;
-        }
-      }
-      private com.google.protobuf.SingleFieldBuilder<
-          sizzle.types.Shared.Date, sizzle.types.Shared.Date.Builder, sizzle.types.Shared.DateOrBuilder> 
-          getCommitDateFieldBuilder() {
-        if (commitDateBuilder_ == null) {
-          commitDateBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              sizzle.types.Shared.Date, sizzle.types.Shared.Date.Builder, sizzle.types.Shared.DateOrBuilder>(
-                  commitDate_,
-                  getParentForChildren(),
-                  isClean());
-          commitDate_ = null;
-        }
-        return commitDateBuilder_;
+        return this;
       }
       
       // required string log = 5;
@@ -1908,11 +1814,11 @@ public final class Code {
       "\n\ncode.proto\022\014sizzle.types\032\tast.proto\032\014s" +
       "hared.proto\"H\n\016CodeRepository\022\013\n\003url\030\001 \002" +
       "(\t\022)\n\trevisions\030\002 \003(\0132\026.sizzle.types.Rev" +
-      "ision\"\276\001\n\010Revision\022\n\n\002id\030\001 \002(\005\022$\n\006author" +
+      "ision\"\252\001\n\010Revision\022\n\n\002id\030\001 \002(\005\022$\n\006author" +
       "\030\002 \002(\0132\024.sizzle.types.Person\022\'\n\tcommitte" +
-      "r\030\003 \002(\0132\024.sizzle.types.Person\022\'\n\013commit_" +
-      "date\030\004 \002(\0132\022.sizzle.types.Date\022\013\n\003log\030\005 " +
-      "\002(\t\022!\n\005files\030\006 \003(\0132\022.sizzle.types.File"
+      "r\030\003 \002(\0132\024.sizzle.types.Person\022\023\n\013commit_" +
+      "date\030\004 \002(\004\022\013\n\003log\030\005 \002(\t\022!\n\005files\030\006 \003(\0132\022" +
+      ".sizzle.types.File"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

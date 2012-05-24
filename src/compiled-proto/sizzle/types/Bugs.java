@@ -688,15 +688,13 @@ public final class Bugs {
     sizzle.types.Shared.Person getReporter();
     sizzle.types.Shared.PersonOrBuilder getReporterOrBuilder();
     
-    // required .sizzle.types.Date reported_date = 3;
+    // required uint64 reported_date = 3;
     boolean hasReportedDate();
-    sizzle.types.Shared.Date getReportedDate();
-    sizzle.types.Shared.DateOrBuilder getReportedDateOrBuilder();
+    long getReportedDate();
     
-    // required .sizzle.types.Date closed_date = 4;
+    // required uint64 closed_date = 4;
     boolean hasClosedDate();
-    sizzle.types.Shared.Date getClosedDate();
-    sizzle.types.Shared.DateOrBuilder getClosedDateOrBuilder();
+    long getClosedDate();
     
     // required string summary = 5;
     boolean hasSummary();
@@ -869,29 +867,23 @@ public final class Bugs {
       return reporter_;
     }
     
-    // required .sizzle.types.Date reported_date = 3;
+    // required uint64 reported_date = 3;
     public static final int REPORTED_DATE_FIELD_NUMBER = 3;
-    private sizzle.types.Shared.Date reportedDate_;
+    private long reportedDate_;
     public boolean hasReportedDate() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
-    public sizzle.types.Shared.Date getReportedDate() {
-      return reportedDate_;
-    }
-    public sizzle.types.Shared.DateOrBuilder getReportedDateOrBuilder() {
+    public long getReportedDate() {
       return reportedDate_;
     }
     
-    // required .sizzle.types.Date closed_date = 4;
+    // required uint64 closed_date = 4;
     public static final int CLOSED_DATE_FIELD_NUMBER = 4;
-    private sizzle.types.Shared.Date closedDate_;
+    private long closedDate_;
     public boolean hasClosedDate() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
-    public sizzle.types.Shared.Date getClosedDate() {
-      return closedDate_;
-    }
-    public sizzle.types.Shared.DateOrBuilder getClosedDateOrBuilder() {
+    public long getClosedDate() {
       return closedDate_;
     }
     
@@ -1004,8 +996,8 @@ public final class Bugs {
     private void initFields() {
       id_ = "";
       reporter_ = sizzle.types.Shared.Person.getDefaultInstance();
-      reportedDate_ = sizzle.types.Shared.Date.getDefaultInstance();
-      closedDate_ = sizzle.types.Shared.Date.getDefaultInstance();
+      reportedDate_ = 0L;
+      closedDate_ = 0L;
       summary_ = "";
       description_ = "";
       status_ = sizzle.types.Bugs.Bug.BugStatus.OPEN;
@@ -1052,14 +1044,6 @@ public final class Bugs {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!getReportedDate().isInitialized()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!getClosedDate().isInitialized()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -1074,10 +1058,10 @@ public final class Bugs {
         output.writeMessage(2, reporter_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeMessage(3, reportedDate_);
+        output.writeUInt64(3, reportedDate_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeMessage(4, closedDate_);
+        output.writeUInt64(4, closedDate_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBytes(5, getSummaryBytes());
@@ -1110,11 +1094,11 @@ public final class Bugs {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, reportedDate_);
+          .computeUInt64Size(3, reportedDate_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, closedDate_);
+          .computeUInt64Size(4, closedDate_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1249,8 +1233,6 @@ public final class Bugs {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getReporterFieldBuilder();
-          getReportedDateFieldBuilder();
-          getClosedDateFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1267,17 +1249,9 @@ public final class Bugs {
           reporterBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000002);
-        if (reportedDateBuilder_ == null) {
-          reportedDate_ = sizzle.types.Shared.Date.getDefaultInstance();
-        } else {
-          reportedDateBuilder_.clear();
-        }
+        reportedDate_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
-        if (closedDateBuilder_ == null) {
-          closedDate_ = sizzle.types.Shared.Date.getDefaultInstance();
-        } else {
-          closedDateBuilder_.clear();
-        }
+        closedDate_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000008);
         summary_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -1340,19 +1314,11 @@ public final class Bugs {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        if (reportedDateBuilder_ == null) {
-          result.reportedDate_ = reportedDate_;
-        } else {
-          result.reportedDate_ = reportedDateBuilder_.build();
-        }
+        result.reportedDate_ = reportedDate_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        if (closedDateBuilder_ == null) {
-          result.closedDate_ = closedDate_;
-        } else {
-          result.closedDate_ = closedDateBuilder_.build();
-        }
+        result.closedDate_ = closedDate_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
@@ -1392,10 +1358,10 @@ public final class Bugs {
           mergeReporter(other.getReporter());
         }
         if (other.hasReportedDate()) {
-          mergeReportedDate(other.getReportedDate());
+          setReportedDate(other.getReportedDate());
         }
         if (other.hasClosedDate()) {
-          mergeClosedDate(other.getClosedDate());
+          setClosedDate(other.getClosedDate());
         }
         if (other.hasSummary()) {
           setSummary(other.getSummary());
@@ -1450,14 +1416,6 @@ public final class Bugs {
           
           return false;
         }
-        if (!getReportedDate().isInitialized()) {
-          
-          return false;
-        }
-        if (!getClosedDate().isInitialized()) {
-          
-          return false;
-        }
         return true;
       }
       
@@ -1498,22 +1456,14 @@ public final class Bugs {
               setReporter(subBuilder.buildPartial());
               break;
             }
-            case 26: {
-              sizzle.types.Shared.Date.Builder subBuilder = sizzle.types.Shared.Date.newBuilder();
-              if (hasReportedDate()) {
-                subBuilder.mergeFrom(getReportedDate());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setReportedDate(subBuilder.buildPartial());
+            case 24: {
+              bitField0_ |= 0x00000004;
+              reportedDate_ = input.readUInt64();
               break;
             }
-            case 34: {
-              sizzle.types.Shared.Date.Builder subBuilder = sizzle.types.Shared.Date.newBuilder();
-              if (hasClosedDate()) {
-                subBuilder.mergeFrom(getClosedDate());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setClosedDate(subBuilder.buildPartial());
+            case 32: {
+              bitField0_ |= 0x00000008;
+              closedDate_ = input.readUInt64();
               break;
             }
             case 42: {
@@ -1674,184 +1624,46 @@ public final class Bugs {
         return reporterBuilder_;
       }
       
-      // required .sizzle.types.Date reported_date = 3;
-      private sizzle.types.Shared.Date reportedDate_ = sizzle.types.Shared.Date.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          sizzle.types.Shared.Date, sizzle.types.Shared.Date.Builder, sizzle.types.Shared.DateOrBuilder> reportedDateBuilder_;
+      // required uint64 reported_date = 3;
+      private long reportedDate_ ;
       public boolean hasReportedDate() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
-      public sizzle.types.Shared.Date getReportedDate() {
-        if (reportedDateBuilder_ == null) {
-          return reportedDate_;
-        } else {
-          return reportedDateBuilder_.getMessage();
-        }
+      public long getReportedDate() {
+        return reportedDate_;
       }
-      public Builder setReportedDate(sizzle.types.Shared.Date value) {
-        if (reportedDateBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          reportedDate_ = value;
-          onChanged();
-        } else {
-          reportedDateBuilder_.setMessage(value);
-        }
+      public Builder setReportedDate(long value) {
         bitField0_ |= 0x00000004;
-        return this;
-      }
-      public Builder setReportedDate(
-          sizzle.types.Shared.Date.Builder builderForValue) {
-        if (reportedDateBuilder_ == null) {
-          reportedDate_ = builderForValue.build();
-          onChanged();
-        } else {
-          reportedDateBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      public Builder mergeReportedDate(sizzle.types.Shared.Date value) {
-        if (reportedDateBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004) &&
-              reportedDate_ != sizzle.types.Shared.Date.getDefaultInstance()) {
-            reportedDate_ =
-              sizzle.types.Shared.Date.newBuilder(reportedDate_).mergeFrom(value).buildPartial();
-          } else {
-            reportedDate_ = value;
-          }
-          onChanged();
-        } else {
-          reportedDateBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000004;
+        reportedDate_ = value;
+        onChanged();
         return this;
       }
       public Builder clearReportedDate() {
-        if (reportedDateBuilder_ == null) {
-          reportedDate_ = sizzle.types.Shared.Date.getDefaultInstance();
-          onChanged();
-        } else {
-          reportedDateBuilder_.clear();
-        }
         bitField0_ = (bitField0_ & ~0x00000004);
+        reportedDate_ = 0L;
+        onChanged();
         return this;
       }
-      public sizzle.types.Shared.Date.Builder getReportedDateBuilder() {
-        bitField0_ |= 0x00000004;
-        onChanged();
-        return getReportedDateFieldBuilder().getBuilder();
-      }
-      public sizzle.types.Shared.DateOrBuilder getReportedDateOrBuilder() {
-        if (reportedDateBuilder_ != null) {
-          return reportedDateBuilder_.getMessageOrBuilder();
-        } else {
-          return reportedDate_;
-        }
-      }
-      private com.google.protobuf.SingleFieldBuilder<
-          sizzle.types.Shared.Date, sizzle.types.Shared.Date.Builder, sizzle.types.Shared.DateOrBuilder> 
-          getReportedDateFieldBuilder() {
-        if (reportedDateBuilder_ == null) {
-          reportedDateBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              sizzle.types.Shared.Date, sizzle.types.Shared.Date.Builder, sizzle.types.Shared.DateOrBuilder>(
-                  reportedDate_,
-                  getParentForChildren(),
-                  isClean());
-          reportedDate_ = null;
-        }
-        return reportedDateBuilder_;
-      }
       
-      // required .sizzle.types.Date closed_date = 4;
-      private sizzle.types.Shared.Date closedDate_ = sizzle.types.Shared.Date.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          sizzle.types.Shared.Date, sizzle.types.Shared.Date.Builder, sizzle.types.Shared.DateOrBuilder> closedDateBuilder_;
+      // required uint64 closed_date = 4;
+      private long closedDate_ ;
       public boolean hasClosedDate() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
-      public sizzle.types.Shared.Date getClosedDate() {
-        if (closedDateBuilder_ == null) {
-          return closedDate_;
-        } else {
-          return closedDateBuilder_.getMessage();
-        }
+      public long getClosedDate() {
+        return closedDate_;
       }
-      public Builder setClosedDate(sizzle.types.Shared.Date value) {
-        if (closedDateBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          closedDate_ = value;
-          onChanged();
-        } else {
-          closedDateBuilder_.setMessage(value);
-        }
+      public Builder setClosedDate(long value) {
         bitField0_ |= 0x00000008;
-        return this;
-      }
-      public Builder setClosedDate(
-          sizzle.types.Shared.Date.Builder builderForValue) {
-        if (closedDateBuilder_ == null) {
-          closedDate_ = builderForValue.build();
-          onChanged();
-        } else {
-          closedDateBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000008;
-        return this;
-      }
-      public Builder mergeClosedDate(sizzle.types.Shared.Date value) {
-        if (closedDateBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008) &&
-              closedDate_ != sizzle.types.Shared.Date.getDefaultInstance()) {
-            closedDate_ =
-              sizzle.types.Shared.Date.newBuilder(closedDate_).mergeFrom(value).buildPartial();
-          } else {
-            closedDate_ = value;
-          }
-          onChanged();
-        } else {
-          closedDateBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000008;
+        closedDate_ = value;
+        onChanged();
         return this;
       }
       public Builder clearClosedDate() {
-        if (closedDateBuilder_ == null) {
-          closedDate_ = sizzle.types.Shared.Date.getDefaultInstance();
-          onChanged();
-        } else {
-          closedDateBuilder_.clear();
-        }
         bitField0_ = (bitField0_ & ~0x00000008);
-        return this;
-      }
-      public sizzle.types.Shared.Date.Builder getClosedDateBuilder() {
-        bitField0_ |= 0x00000008;
+        closedDate_ = 0L;
         onChanged();
-        return getClosedDateFieldBuilder().getBuilder();
-      }
-      public sizzle.types.Shared.DateOrBuilder getClosedDateOrBuilder() {
-        if (closedDateBuilder_ != null) {
-          return closedDateBuilder_.getMessageOrBuilder();
-        } else {
-          return closedDate_;
-        }
-      }
-      private com.google.protobuf.SingleFieldBuilder<
-          sizzle.types.Shared.Date, sizzle.types.Shared.Date.Builder, sizzle.types.Shared.DateOrBuilder> 
-          getClosedDateFieldBuilder() {
-        if (closedDateBuilder_ == null) {
-          closedDateBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              sizzle.types.Shared.Date, sizzle.types.Shared.Date.Builder, sizzle.types.Shared.DateOrBuilder>(
-                  closedDate_,
-                  getParentForChildren(),
-                  isClean());
-          closedDate_ = null;
-        }
-        return closedDateBuilder_;
+        return this;
       }
       
       // required string summary = 5;
@@ -2018,14 +1830,13 @@ public final class Bugs {
     java.lang.String[] descriptorData = {
       "\n\nbugs.proto\022\014sizzle.types\032\014shared.proto" +
       "\"=\n\rBugRepository\022\013\n\003url\030\001 \002(\t\022\037\n\004bugs\030\002" +
-      " \003(\0132\021.sizzle.types.Bug\"\311\002\n\003Bug\022\n\n\002id\030\001 " +
+      " \003(\0132\021.sizzle.types.Bug\"\241\002\n\003Bug\022\n\n\002id\030\001 " +
       "\002(\t\022&\n\010reporter\030\002 \002(\0132\024.sizzle.types.Per" +
-      "son\022)\n\rreported_date\030\003 \002(\0132\022.sizzle.type" +
-      "s.Date\022\'\n\013closed_date\030\004 \002(\0132\022.sizzle.typ" +
-      "es.Date\022\017\n\007summary\030\005 \002(\t\022\023\n\013description\030" +
+      "son\022\025\n\rreported_date\030\003 \002(\004\022\023\n\013closed_dat" +
+      "e\030\004 \002(\004\022\017\n\007summary\030\005 \002(\t\022\023\n\013description\030" +
       "\006 \002(\t\022+\n\006status\030\007 \002(\0162\033.sizzle.types.Bug" +
       ".BugStatus\022\020\n\010severity\030\010 \002(\t\"U\n\tBugStatu" +
-      "s\022\010\n\004OPEN\020\000\022\n\n\006CLOSED\020\001\022\014\n\010RESOLVED\020\002\022\t\n",
+      "s\022\010\n\004OPEN\020\000\022\n\n\006CLOSED\020\001\022\014\n\010RESOLVED\020\002\022\t\n" +
       "\005FIXED\020\003\022\n\n\006REOPEN\020\004\022\r\n\tDUPLICATE\020\005"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =

@@ -12,7 +12,7 @@ message Revision {
 	required int32 id = 1;
 	required Person author = 2;
 	required Person committer = 3;
-	required Date commit_date = 4;
+	required uint64 commit_date = 4;
 	required string log = 5;
 	repeated File files = 6;
 }

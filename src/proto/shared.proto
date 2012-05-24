@@ -5,7 +5,3 @@ message Person {
 	required string real_name = 2;
 	required string email = 3;
 }
-
-message Date {
-	required int32 unixtime = 1;
-}
