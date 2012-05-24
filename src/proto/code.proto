@@ -15,4 +15,5 @@ message Revision {
 	required uint64 commit_date = 4;
 	required string log = 5;
 	repeated File files = 6;
+	repeated Library libraries = 7;
 }
