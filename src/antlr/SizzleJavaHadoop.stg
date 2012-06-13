@@ -10,6 +10,7 @@ public class <name> extends sizzle.runtime.SizzleRunner {
 		org.apache.hadoop.mapreduce.Job job = super.job(ins, out, robust);
 		job.setInputFormatClass(<inputFormatClass>.class);
 		job.setJobName("<name>: " + out);
+		job.setJarByClass(<name>SizzleMapper.class);
 		
 		job.setMapperClass(<name>SizzleMapper.class);
 		job.setCombinerClass(<name>SizzleCombiner.class);
