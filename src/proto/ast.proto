@@ -18,7 +18,7 @@ message File {
 		XML = 4;
 	}
 	required FileType type = 3;
-	repeated Package packages = 4;
+	required Package pkg = 4;
 }
 
 message Package {

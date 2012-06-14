@@ -895,15 +895,10 @@ public final class Ast {
     boolean hasType();
     sizzle.types.Ast.File.FileType getType();
     
-    // repeated .sizzle.types.Package packages = 4;
-    java.util.List<sizzle.types.Ast.Package> 
-        getPackagesList();
-    sizzle.types.Ast.Package getPackages(int index);
-    int getPackagesCount();
-    java.util.List<? extends sizzle.types.Ast.PackageOrBuilder> 
-        getPackagesOrBuilderList();
-    sizzle.types.Ast.PackageOrBuilder getPackagesOrBuilder(
-        int index);
+    // required .sizzle.types.Package pkg = 4;
+    boolean hasPkg();
+    sizzle.types.Ast.Package getPkg();
+    sizzle.types.Ast.PackageOrBuilder getPkgOrBuilder();
   }
   public static final class File extends
       com.google.protobuf.GeneratedMessage
@@ -1086,32 +1081,24 @@ public final class Ast {
       return type_;
     }
     
-    // repeated .sizzle.types.Package packages = 4;
-    public static final int PACKAGES_FIELD_NUMBER = 4;
-    private java.util.List<sizzle.types.Ast.Package> packages_;
-    public java.util.List<sizzle.types.Ast.Package> getPackagesList() {
-      return packages_;
+    // required .sizzle.types.Package pkg = 4;
+    public static final int PKG_FIELD_NUMBER = 4;
+    private sizzle.types.Ast.Package pkg_;
+    public boolean hasPkg() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
-    public java.util.List<? extends sizzle.types.Ast.PackageOrBuilder> 
-        getPackagesOrBuilderList() {
-      return packages_;
+    public sizzle.types.Ast.Package getPkg() {
+      return pkg_;
     }
-    public int getPackagesCount() {
-      return packages_.size();
-    }
-    public sizzle.types.Ast.Package getPackages(int index) {
-      return packages_.get(index);
-    }
-    public sizzle.types.Ast.PackageOrBuilder getPackagesOrBuilder(
-        int index) {
-      return packages_.get(index);
+    public sizzle.types.Ast.PackageOrBuilder getPkgOrBuilder() {
+      return pkg_;
     }
     
     private void initFields() {
       name_ = "";
       content_ = "";
       type_ = sizzle.types.Ast.File.FileType.UNKNOWN;
-      packages_ = java.util.Collections.emptyList();
+      pkg_ = sizzle.types.Ast.Package.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1130,11 +1117,13 @@ public final class Ast {
         memoizedIsInitialized = 0;
         return false;
       }
-      for (int i = 0; i < getPackagesCount(); i++) {
-        if (!getPackages(i).isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
+      if (!hasPkg()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getPkg().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
       }
       memoizedIsInitialized = 1;
       return true;
@@ -1152,8 +1141,8 @@ public final class Ast {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeEnum(3, type_.getNumber());
       }
-      for (int i = 0; i < packages_.size(); i++) {
-        output.writeMessage(4, packages_.get(i));
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeMessage(4, pkg_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1176,9 +1165,9 @@ public final class Ast {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(3, type_.getNumber());
       }
-      for (int i = 0; i < packages_.size(); i++) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, packages_.get(i));
+          .computeMessageSize(4, pkg_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1296,7 +1285,7 @@ public final class Ast {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getPackagesFieldBuilder();
+          getPkgFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1311,12 +1300,12 @@ public final class Ast {
         bitField0_ = (bitField0_ & ~0x00000002);
         type_ = sizzle.types.Ast.File.FileType.UNKNOWN;
         bitField0_ = (bitField0_ & ~0x00000004);
-        if (packagesBuilder_ == null) {
-          packages_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+        if (pkgBuilder_ == null) {
+          pkg_ = sizzle.types.Ast.Package.getDefaultInstance();
         } else {
-          packagesBuilder_.clear();
+          pkgBuilder_.clear();
         }
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
       
@@ -1367,14 +1356,13 @@ public final class Ast {
           to_bitField0_ |= 0x00000004;
         }
         result.type_ = type_;
-        if (packagesBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
-            packages_ = java.util.Collections.unmodifiableList(packages_);
-            bitField0_ = (bitField0_ & ~0x00000008);
-          }
-          result.packages_ = packages_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        if (pkgBuilder_ == null) {
+          result.pkg_ = pkg_;
         } else {
-          result.packages_ = packagesBuilder_.build();
+          result.pkg_ = pkgBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1401,31 +1389,8 @@ public final class Ast {
         if (other.hasType()) {
           setType(other.getType());
         }
-        if (packagesBuilder_ == null) {
-          if (!other.packages_.isEmpty()) {
-            if (packages_.isEmpty()) {
-              packages_ = other.packages_;
-              bitField0_ = (bitField0_ & ~0x00000008);
-            } else {
-              ensurePackagesIsMutable();
-              packages_.addAll(other.packages_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.packages_.isEmpty()) {
-            if (packagesBuilder_.isEmpty()) {
-              packagesBuilder_.dispose();
-              packagesBuilder_ = null;
-              packages_ = other.packages_;
-              bitField0_ = (bitField0_ & ~0x00000008);
-              packagesBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getPackagesFieldBuilder() : null;
-            } else {
-              packagesBuilder_.addAllMessages(other.packages_);
-            }
-          }
+        if (other.hasPkg()) {
+          mergePkg(other.getPkg());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1444,11 +1409,13 @@ public final class Ast {
           
           return false;
         }
-        for (int i = 0; i < getPackagesCount(); i++) {
-          if (!getPackages(i).isInitialized()) {
-            
-            return false;
-          }
+        if (!hasPkg()) {
+          
+          return false;
+        }
+        if (!getPkg().isInitialized()) {
+          
+          return false;
         }
         return true;
       }
@@ -1499,8 +1466,11 @@ public final class Ast {
             }
             case 34: {
               sizzle.types.Ast.Package.Builder subBuilder = sizzle.types.Ast.Package.newBuilder();
+              if (hasPkg()) {
+                subBuilder.mergeFrom(getPkg());
+              }
               input.readMessage(subBuilder, extensionRegistry);
-              addPackages(subBuilder.buildPartial());
+              setPkg(subBuilder.buildPartial());
               break;
             }
           }
@@ -1605,190 +1575,94 @@ public final class Ast {
         return this;
       }
       
-      // repeated .sizzle.types.Package packages = 4;
-      private java.util.List<sizzle.types.Ast.Package> packages_ =
-        java.util.Collections.emptyList();
-      private void ensurePackagesIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          packages_ = new java.util.ArrayList<sizzle.types.Ast.Package>(packages_);
-          bitField0_ |= 0x00000008;
-         }
+      // required .sizzle.types.Package pkg = 4;
+      private sizzle.types.Ast.Package pkg_ = sizzle.types.Ast.Package.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          sizzle.types.Ast.Package, sizzle.types.Ast.Package.Builder, sizzle.types.Ast.PackageOrBuilder> pkgBuilder_;
+      public boolean hasPkg() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
-      
-      private com.google.protobuf.RepeatedFieldBuilder<
-          sizzle.types.Ast.Package, sizzle.types.Ast.Package.Builder, sizzle.types.Ast.PackageOrBuilder> packagesBuilder_;
-      
-      public java.util.List<sizzle.types.Ast.Package> getPackagesList() {
-        if (packagesBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(packages_);
+      public sizzle.types.Ast.Package getPkg() {
+        if (pkgBuilder_ == null) {
+          return pkg_;
         } else {
-          return packagesBuilder_.getMessageList();
+          return pkgBuilder_.getMessage();
         }
       }
-      public int getPackagesCount() {
-        if (packagesBuilder_ == null) {
-          return packages_.size();
-        } else {
-          return packagesBuilder_.getCount();
-        }
-      }
-      public sizzle.types.Ast.Package getPackages(int index) {
-        if (packagesBuilder_ == null) {
-          return packages_.get(index);
-        } else {
-          return packagesBuilder_.getMessage(index);
-        }
-      }
-      public Builder setPackages(
-          int index, sizzle.types.Ast.Package value) {
-        if (packagesBuilder_ == null) {
+      public Builder setPkg(sizzle.types.Ast.Package value) {
+        if (pkgBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensurePackagesIsMutable();
-          packages_.set(index, value);
+          pkg_ = value;
           onChanged();
         } else {
-          packagesBuilder_.setMessage(index, value);
+          pkgBuilder_.setMessage(value);
         }
+        bitField0_ |= 0x00000008;
         return this;
       }
-      public Builder setPackages(
-          int index, sizzle.types.Ast.Package.Builder builderForValue) {
-        if (packagesBuilder_ == null) {
-          ensurePackagesIsMutable();
-          packages_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          packagesBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addPackages(sizzle.types.Ast.Package value) {
-        if (packagesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensurePackagesIsMutable();
-          packages_.add(value);
-          onChanged();
-        } else {
-          packagesBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      public Builder addPackages(
-          int index, sizzle.types.Ast.Package value) {
-        if (packagesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensurePackagesIsMutable();
-          packages_.add(index, value);
-          onChanged();
-        } else {
-          packagesBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      public Builder addPackages(
+      public Builder setPkg(
           sizzle.types.Ast.Package.Builder builderForValue) {
-        if (packagesBuilder_ == null) {
-          ensurePackagesIsMutable();
-          packages_.add(builderForValue.build());
+        if (pkgBuilder_ == null) {
+          pkg_ = builderForValue.build();
           onChanged();
         } else {
-          packagesBuilder_.addMessage(builderForValue.build());
+          pkgBuilder_.setMessage(builderForValue.build());
         }
+        bitField0_ |= 0x00000008;
         return this;
       }
-      public Builder addPackages(
-          int index, sizzle.types.Ast.Package.Builder builderForValue) {
-        if (packagesBuilder_ == null) {
-          ensurePackagesIsMutable();
-          packages_.add(index, builderForValue.build());
+      public Builder mergePkg(sizzle.types.Ast.Package value) {
+        if (pkgBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              pkg_ != sizzle.types.Ast.Package.getDefaultInstance()) {
+            pkg_ =
+              sizzle.types.Ast.Package.newBuilder(pkg_).mergeFrom(value).buildPartial();
+          } else {
+            pkg_ = value;
+          }
           onChanged();
         } else {
-          packagesBuilder_.addMessage(index, builderForValue.build());
+          pkgBuilder_.mergeFrom(value);
         }
+        bitField0_ |= 0x00000008;
         return this;
       }
-      public Builder addAllPackages(
-          java.lang.Iterable<? extends sizzle.types.Ast.Package> values) {
-        if (packagesBuilder_ == null) {
-          ensurePackagesIsMutable();
-          super.addAll(values, packages_);
+      public Builder clearPkg() {
+        if (pkgBuilder_ == null) {
+          pkg_ = sizzle.types.Ast.Package.getDefaultInstance();
           onChanged();
         } else {
-          packagesBuilder_.addAllMessages(values);
+          pkgBuilder_.clear();
         }
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
-      public Builder clearPackages() {
-        if (packagesBuilder_ == null) {
-          packages_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
-          onChanged();
+      public sizzle.types.Ast.Package.Builder getPkgBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getPkgFieldBuilder().getBuilder();
+      }
+      public sizzle.types.Ast.PackageOrBuilder getPkgOrBuilder() {
+        if (pkgBuilder_ != null) {
+          return pkgBuilder_.getMessageOrBuilder();
         } else {
-          packagesBuilder_.clear();
-        }
-        return this;
-      }
-      public Builder removePackages(int index) {
-        if (packagesBuilder_ == null) {
-          ensurePackagesIsMutable();
-          packages_.remove(index);
-          onChanged();
-        } else {
-          packagesBuilder_.remove(index);
-        }
-        return this;
-      }
-      public sizzle.types.Ast.Package.Builder getPackagesBuilder(
-          int index) {
-        return getPackagesFieldBuilder().getBuilder(index);
-      }
-      public sizzle.types.Ast.PackageOrBuilder getPackagesOrBuilder(
-          int index) {
-        if (packagesBuilder_ == null) {
-          return packages_.get(index);  } else {
-          return packagesBuilder_.getMessageOrBuilder(index);
+          return pkg_;
         }
       }
-      public java.util.List<? extends sizzle.types.Ast.PackageOrBuilder> 
-           getPackagesOrBuilderList() {
-        if (packagesBuilder_ != null) {
-          return packagesBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(packages_);
-        }
-      }
-      public sizzle.types.Ast.Package.Builder addPackagesBuilder() {
-        return getPackagesFieldBuilder().addBuilder(
-            sizzle.types.Ast.Package.getDefaultInstance());
-      }
-      public sizzle.types.Ast.Package.Builder addPackagesBuilder(
-          int index) {
-        return getPackagesFieldBuilder().addBuilder(
-            index, sizzle.types.Ast.Package.getDefaultInstance());
-      }
-      public java.util.List<sizzle.types.Ast.Package.Builder> 
-           getPackagesBuilderList() {
-        return getPackagesFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
+      private com.google.protobuf.SingleFieldBuilder<
           sizzle.types.Ast.Package, sizzle.types.Ast.Package.Builder, sizzle.types.Ast.PackageOrBuilder> 
-          getPackagesFieldBuilder() {
-        if (packagesBuilder_ == null) {
-          packagesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+          getPkgFieldBuilder() {
+        if (pkgBuilder_ == null) {
+          pkgBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               sizzle.types.Ast.Package, sizzle.types.Ast.Package.Builder, sizzle.types.Ast.PackageOrBuilder>(
-                  packages_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  pkg_,
                   getParentForChildren(),
                   isClean());
-          packages_ = null;
+          pkg_ = null;
         }
-        return packagesBuilder_;
+        return pkgBuilder_;
       }
       
       // @@protoc_insertion_point(builder_scope:sizzle.types.File)
@@ -7020,26 +6894,26 @@ public final class Ast {
       "\n\tast.proto\022\014sizzle.types\"]\n\007Library\022\020\n\010" +
       "filename\030\001 \002(\t\022\014\n\004name\030\002 \002(\t\022\017\n\007version\030" +
       "\003 \002(\t\022!\n\005files\030\004 \003(\0132\022.sizzle.types.File" +
-      "\"\275\001\n\004File\022\014\n\004name\030\001 \002(\t\022\017\n\007content\030\002 \002(\t" +
+      "\"\270\001\n\004File\022\014\n\004name\030\001 \002(\t\022\017\n\007content\030\002 \002(\t" +
       "\022)\n\004type\030\003 \002(\0162\033.sizzle.types.File.FileT" +
-      "ype\022\'\n\010packages\030\004 \003(\0132\025.sizzle.types.Pac" +
-      "kage\"B\n\010FileType\022\013\n\007UNKNOWN\020\000\022\n\n\006SOURCE\020" +
-      "\001\022\n\n\006BINARY\020\002\022\010\n\004TEXT\020\003\022\007\n\003XML\020\004\":\n\007Pack" +
-      "age\022\014\n\004name\030\001 \002(\t\022!\n\005types\030\002 \003(\0132\022.sizzl" +
-      "e.types.Type\"\262\001\n\004Type\022\014\n\004name\030\001 \002(\t\022-\n\013a",
-      "nnotations\030\002 \003(\0132\030.sizzle.types.Annotati" +
-      "on\022!\n\005types\030\003 \003(\0132\022.sizzle.types.Type\022%\n" +
-      "\007methods\030\004 \003(\0132\024.sizzle.types.Method\022#\n\006" +
-      "fields\030\005 \003(\0132\023.sizzle.types.Field\"\320\001\n\006Me" +
-      "thod\022\014\n\004name\030\001 \002(\t\022-\n\013annotations\030\002 \003(\0132" +
-      "\030.sizzle.types.Annotation\022\'\n\013return_type" +
-      "\030\003 \002(\0132\022.sizzle.types.Type\022%\n\targ_types\030" +
-      "\004 \003(\0132\022.sizzle.types.Type\022\021\n\targ_names\030\005" +
-      " \003(\t\022&\n\nexceptions\030\006 \003(\0132\022.sizzle.types." +
-      "Type\"7\n\005Field\022\014\n\004name\030\001 \002(\t\022 \n\004type\030\002 \002(",
-      "\0132\022.sizzle.types.Type\"?\n\nAnnotation\022 \n\004t" +
-      "ype\030\001 \002(\0132\022.sizzle.types.Type\022\017\n\007content" +
-      "\030\002 \002(\t\"\032\n\007Comment\022\017\n\007content\030\001 \002(\t"
+      "ype\022\"\n\003pkg\030\004 \002(\0132\025.sizzle.types.Package\"" +
+      "B\n\010FileType\022\013\n\007UNKNOWN\020\000\022\n\n\006SOURCE\020\001\022\n\n\006" +
+      "BINARY\020\002\022\010\n\004TEXT\020\003\022\007\n\003XML\020\004\":\n\007Package\022\014" +
+      "\n\004name\030\001 \002(\t\022!\n\005types\030\002 \003(\0132\022.sizzle.typ" +
+      "es.Type\"\262\001\n\004Type\022\014\n\004name\030\001 \002(\t\022-\n\013annota",
+      "tions\030\002 \003(\0132\030.sizzle.types.Annotation\022!\n" +
+      "\005types\030\003 \003(\0132\022.sizzle.types.Type\022%\n\007meth" +
+      "ods\030\004 \003(\0132\024.sizzle.types.Method\022#\n\006field" +
+      "s\030\005 \003(\0132\023.sizzle.types.Field\"\320\001\n\006Method\022" +
+      "\014\n\004name\030\001 \002(\t\022-\n\013annotations\030\002 \003(\0132\030.siz" +
+      "zle.types.Annotation\022\'\n\013return_type\030\003 \002(" +
+      "\0132\022.sizzle.types.Type\022%\n\targ_types\030\004 \003(\013" +
+      "2\022.sizzle.types.Type\022\021\n\targ_names\030\005 \003(\t\022" +
+      "&\n\nexceptions\030\006 \003(\0132\022.sizzle.types.Type\"" +
+      "7\n\005Field\022\014\n\004name\030\001 \002(\t\022 \n\004type\030\002 \002(\0132\022.s",
+      "izzle.types.Type\"?\n\nAnnotation\022 \n\004type\030\001" +
+      " \002(\0132\022.sizzle.types.Type\022\017\n\007content\030\002 \002(" +
+      "\t\"\032\n\007Comment\022\017\n\007content\030\001 \002(\t"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7059,7 +6933,7 @@ public final class Ast {
           internal_static_sizzle_types_File_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_sizzle_types_File_descriptor,
-              new java.lang.String[] { "Name", "Content", "Type", "Packages", },
+              new java.lang.String[] { "Name", "Content", "Type", "Pkg", },
               sizzle.types.Ast.File.class,
               sizzle.types.Ast.File.Builder.class);
           internal_static_sizzle_types_Package_descriptor =
