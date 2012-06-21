@@ -930,29 +930,29 @@ public final class Ast {
     
     public enum FileType
         implements com.google.protobuf.ProtocolMessageEnum {
-      UNKNOWN(0, 0),
-      SOURCE(1, 1),
-      BINARY(2, 2),
-      TEXT(3, 3),
-      XML(4, 4),
+      UNKNOWN(0, 1),
+      SOURCE(1, 2),
+      BINARY(2, 3),
+      TEXT(3, 4),
+      XML(4, 5),
       ;
       
-      public static final int UNKNOWN_VALUE = 0;
-      public static final int SOURCE_VALUE = 1;
-      public static final int BINARY_VALUE = 2;
-      public static final int TEXT_VALUE = 3;
-      public static final int XML_VALUE = 4;
+      public static final int UNKNOWN_VALUE = 1;
+      public static final int SOURCE_VALUE = 2;
+      public static final int BINARY_VALUE = 3;
+      public static final int TEXT_VALUE = 4;
+      public static final int XML_VALUE = 5;
       
       
       public final int getNumber() { return value; }
       
       public static FileType valueOf(int value) {
         switch (value) {
-          case 0: return UNKNOWN;
-          case 1: return SOURCE;
-          case 2: return BINARY;
-          case 3: return TEXT;
-          case 4: return XML;
+          case 1: return UNKNOWN;
+          case 2: return SOURCE;
+          case 3: return BINARY;
+          case 4: return TEXT;
+          case 5: return XML;
           default: return null;
         }
       }
@@ -6204,8 +6204,8 @@ public final class Ast {
       "\"\275\001\n\004File\022\014\n\004name\030\001 \002(\t\022\017\n\007content\030\002 \002(\t" +
       "\022.\n\tfile_type\030\003 \002(\0162\033.sizzle.types.File." +
       "FileType\022\"\n\003pkg\030\004 \002(\0132\025.sizzle.types.Pac" +
-      "kage\"B\n\010FileType\022\013\n\007UNKNOWN\020\000\022\n\n\006SOURCE\020" +
-      "\001\022\n\n\006BINARY\020\002\022\010\n\004TEXT\020\003\022\007\n\003XML\020\004\":\n\007Pack" +
+      "kage\"B\n\010FileType\022\013\n\007UNKNOWN\020\001\022\n\n\006SOURCE\020" +
+      "\002\022\n\n\006BINARY\020\003\022\010\n\004TEXT\020\004\022\007\n\003XML\020\005\":\n\007Pack" +
       "age\022\014\n\004name\030\001 \002(\t\022!\n\005types\030\002 \003(\0132\022.sizzl" +
       "e.types.Type\"\251\001\n\004Type\022\014\n\004name\030\001 \002(\t\022-\n\013a",
       "nnotations\030\002 \003(\0132\030.sizzle.types.Annotati" +

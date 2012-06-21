@@ -742,35 +742,35 @@ public final class Bugs {
     
     public enum BugStatus
         implements com.google.protobuf.ProtocolMessageEnum {
-      UNKNOWN(0, 0),
-      OPEN(1, 1),
-      CLOSED(2, 2),
-      RESOLVED(3, 3),
-      FIXED(4, 4),
-      REOPEN(5, 5),
-      DUPLICATE(6, 6),
+      UNKNOWN(0, 1),
+      OPEN(1, 2),
+      CLOSED(2, 3),
+      RESOLVED(3, 4),
+      FIXED(4, 5),
+      REOPEN(5, 6),
+      DUPLICATE(6, 7),
       ;
       
-      public static final int UNKNOWN_VALUE = 0;
-      public static final int OPEN_VALUE = 1;
-      public static final int CLOSED_VALUE = 2;
-      public static final int RESOLVED_VALUE = 3;
-      public static final int FIXED_VALUE = 4;
-      public static final int REOPEN_VALUE = 5;
-      public static final int DUPLICATE_VALUE = 6;
+      public static final int UNKNOWN_VALUE = 1;
+      public static final int OPEN_VALUE = 2;
+      public static final int CLOSED_VALUE = 3;
+      public static final int RESOLVED_VALUE = 4;
+      public static final int FIXED_VALUE = 5;
+      public static final int REOPEN_VALUE = 6;
+      public static final int DUPLICATE_VALUE = 7;
       
       
       public final int getNumber() { return value; }
       
       public static BugStatus valueOf(int value) {
         switch (value) {
-          case 0: return UNKNOWN;
-          case 1: return OPEN;
-          case 2: return CLOSED;
-          case 3: return RESOLVED;
-          case 4: return FIXED;
-          case 5: return REOPEN;
-          case 6: return DUPLICATE;
+          case 1: return UNKNOWN;
+          case 2: return OPEN;
+          case 3: return CLOSED;
+          case 4: return RESOLVED;
+          case 5: return FIXED;
+          case 6: return REOPEN;
+          case 7: return DUPLICATE;
           default: return null;
         }
       }
@@ -1839,9 +1839,9 @@ public final class Bugs {
       "e\030\004 \002(\004\022\017\n\007summary\030\005 \002(\t\022\023\n\013description\030" +
       "\006 \002(\t\022+\n\006status\030\007 \002(\0162\033.sizzle.types.Bug" +
       ".BugStatus\022\020\n\010severity\030\010 \002(\t\"b\n\tBugStatu" +
-      "s\022\013\n\007UNKNOWN\020\000\022\010\n\004OPEN\020\001\022\n\n\006CLOSED\020\002\022\014\n\010" +
-      "RESOLVED\020\003\022\t\n\005FIXED\020\004\022\n\n\006REOPEN\020\005\022\r\n\tDUP",
-      "LICATE\020\006"
+      "s\022\013\n\007UNKNOWN\020\001\022\010\n\004OPEN\020\002\022\n\n\006CLOSED\020\003\022\014\n\010" +
+      "RESOLVED\020\004\022\t\n\005FIXED\020\005\022\n\n\006REOPEN\020\006\022\r\n\tDUP",
+      "LICATE\020\007"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
