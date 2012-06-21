@@ -891,9 +891,9 @@ public final class Ast {
     boolean hasContent();
     String getContent();
     
-    // required .sizzle.types.File.FileType type = 3;
-    boolean hasType();
-    sizzle.types.Ast.File.FileType getType();
+    // required .sizzle.types.File.FileType file_type = 3;
+    boolean hasFileType();
+    sizzle.types.Ast.File.FileType getFileType();
     
     // required .sizzle.types.Package pkg = 4;
     boolean hasPkg();
@@ -1071,14 +1071,14 @@ public final class Ast {
       }
     }
     
-    // required .sizzle.types.File.FileType type = 3;
-    public static final int TYPE_FIELD_NUMBER = 3;
-    private sizzle.types.Ast.File.FileType type_;
-    public boolean hasType() {
+    // required .sizzle.types.File.FileType file_type = 3;
+    public static final int FILE_TYPE_FIELD_NUMBER = 3;
+    private sizzle.types.Ast.File.FileType fileType_;
+    public boolean hasFileType() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
-    public sizzle.types.Ast.File.FileType getType() {
-      return type_;
+    public sizzle.types.Ast.File.FileType getFileType() {
+      return fileType_;
     }
     
     // required .sizzle.types.Package pkg = 4;
@@ -1097,7 +1097,7 @@ public final class Ast {
     private void initFields() {
       name_ = "";
       content_ = "";
-      type_ = sizzle.types.Ast.File.FileType.UNKNOWN;
+      fileType_ = sizzle.types.Ast.File.FileType.UNKNOWN;
       pkg_ = sizzle.types.Ast.Package.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
@@ -1113,7 +1113,7 @@ public final class Ast {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasType()) {
+      if (!hasFileType()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -1139,7 +1139,7 @@ public final class Ast {
         output.writeBytes(2, getContentBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeEnum(3, type_.getNumber());
+        output.writeEnum(3, fileType_.getNumber());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeMessage(4, pkg_);
@@ -1163,7 +1163,7 @@ public final class Ast {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(3, type_.getNumber());
+          .computeEnumSize(3, fileType_.getNumber());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1298,7 +1298,7 @@ public final class Ast {
         bitField0_ = (bitField0_ & ~0x00000001);
         content_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        type_ = sizzle.types.Ast.File.FileType.UNKNOWN;
+        fileType_ = sizzle.types.Ast.File.FileType.UNKNOWN;
         bitField0_ = (bitField0_ & ~0x00000004);
         if (pkgBuilder_ == null) {
           pkg_ = sizzle.types.Ast.Package.getDefaultInstance();
@@ -1355,7 +1355,7 @@ public final class Ast {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.type_ = type_;
+        result.fileType_ = fileType_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
@@ -1386,8 +1386,8 @@ public final class Ast {
         if (other.hasContent()) {
           setContent(other.getContent());
         }
-        if (other.hasType()) {
-          setType(other.getType());
+        if (other.hasFileType()) {
+          setFileType(other.getFileType());
         }
         if (other.hasPkg()) {
           mergePkg(other.getPkg());
@@ -1405,7 +1405,7 @@ public final class Ast {
           
           return false;
         }
-        if (!hasType()) {
+        if (!hasFileType()) {
           
           return false;
         }
@@ -1460,7 +1460,7 @@ public final class Ast {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
                 bitField0_ |= 0x00000004;
-                type_ = value;
+                fileType_ = value;
               }
               break;
             }
@@ -1551,26 +1551,26 @@ public final class Ast {
         onChanged();
       }
       
-      // required .sizzle.types.File.FileType type = 3;
-      private sizzle.types.Ast.File.FileType type_ = sizzle.types.Ast.File.FileType.UNKNOWN;
-      public boolean hasType() {
+      // required .sizzle.types.File.FileType file_type = 3;
+      private sizzle.types.Ast.File.FileType fileType_ = sizzle.types.Ast.File.FileType.UNKNOWN;
+      public boolean hasFileType() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
-      public sizzle.types.Ast.File.FileType getType() {
-        return type_;
+      public sizzle.types.Ast.File.FileType getFileType() {
+        return fileType_;
       }
-      public Builder setType(sizzle.types.Ast.File.FileType value) {
+      public Builder setFileType(sizzle.types.Ast.File.FileType value) {
         if (value == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000004;
-        type_ = value;
+        fileType_ = value;
         onChanged();
         return this;
       }
-      public Builder clearType() {
+      public Builder clearFileType() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        type_ = sizzle.types.Ast.File.FileType.UNKNOWN;
+        fileType_ = sizzle.types.Ast.File.FileType.UNKNOWN;
         onChanged();
         return this;
       }
@@ -2361,16 +2361,6 @@ public final class Ast {
     sizzle.types.Ast.AnnotationOrBuilder getAnnotationsOrBuilder(
         int index);
     
-    // repeated .sizzle.types.Type types = 3;
-    java.util.List<sizzle.types.Ast.Type> 
-        getTypesList();
-    sizzle.types.Ast.Type getTypes(int index);
-    int getTypesCount();
-    java.util.List<? extends sizzle.types.Ast.TypeOrBuilder> 
-        getTypesOrBuilderList();
-    sizzle.types.Ast.TypeOrBuilder getTypesOrBuilder(
-        int index);
-    
     // repeated .sizzle.types.Method methods = 4;
     java.util.List<sizzle.types.Ast.Method> 
         getMethodsList();
@@ -2473,27 +2463,6 @@ public final class Ast {
       return annotations_.get(index);
     }
     
-    // repeated .sizzle.types.Type types = 3;
-    public static final int TYPES_FIELD_NUMBER = 3;
-    private java.util.List<sizzle.types.Ast.Type> types_;
-    public java.util.List<sizzle.types.Ast.Type> getTypesList() {
-      return types_;
-    }
-    public java.util.List<? extends sizzle.types.Ast.TypeOrBuilder> 
-        getTypesOrBuilderList() {
-      return types_;
-    }
-    public int getTypesCount() {
-      return types_.size();
-    }
-    public sizzle.types.Ast.Type getTypes(int index) {
-      return types_.get(index);
-    }
-    public sizzle.types.Ast.TypeOrBuilder getTypesOrBuilder(
-        int index) {
-      return types_.get(index);
-    }
-    
     // repeated .sizzle.types.Method methods = 4;
     public static final int METHODS_FIELD_NUMBER = 4;
     private java.util.List<sizzle.types.Ast.Method> methods_;
@@ -2539,7 +2508,6 @@ public final class Ast {
     private void initFields() {
       name_ = "";
       annotations_ = java.util.Collections.emptyList();
-      types_ = java.util.Collections.emptyList();
       methods_ = java.util.Collections.emptyList();
       fields_ = java.util.Collections.emptyList();
     }
@@ -2554,12 +2522,6 @@ public final class Ast {
       }
       for (int i = 0; i < getAnnotationsCount(); i++) {
         if (!getAnnotations(i).isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
-      for (int i = 0; i < getTypesCount(); i++) {
-        if (!getTypes(i).isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -2589,9 +2551,6 @@ public final class Ast {
       for (int i = 0; i < annotations_.size(); i++) {
         output.writeMessage(2, annotations_.get(i));
       }
-      for (int i = 0; i < types_.size(); i++) {
-        output.writeMessage(3, types_.get(i));
-      }
       for (int i = 0; i < methods_.size(); i++) {
         output.writeMessage(4, methods_.get(i));
       }
@@ -2614,10 +2573,6 @@ public final class Ast {
       for (int i = 0; i < annotations_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, annotations_.get(i));
-      }
-      for (int i = 0; i < types_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, types_.get(i));
       }
       for (int i = 0; i < methods_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -2744,7 +2699,6 @@ public final class Ast {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getAnnotationsFieldBuilder();
-          getTypesFieldBuilder();
           getMethodsFieldBuilder();
           getFieldsFieldBuilder();
         }
@@ -2763,21 +2717,15 @@ public final class Ast {
         } else {
           annotationsBuilder_.clear();
         }
-        if (typesBuilder_ == null) {
-          types_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
-        } else {
-          typesBuilder_.clear();
-        }
         if (methodsBuilder_ == null) {
           methods_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000004);
         } else {
           methodsBuilder_.clear();
         }
         if (fieldsBuilder_ == null) {
           fields_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000008);
         } else {
           fieldsBuilder_.clear();
         }
@@ -2832,28 +2780,19 @@ public final class Ast {
         } else {
           result.annotations_ = annotationsBuilder_.build();
         }
-        if (typesBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
-            types_ = java.util.Collections.unmodifiableList(types_);
-            bitField0_ = (bitField0_ & ~0x00000004);
-          }
-          result.types_ = types_;
-        } else {
-          result.types_ = typesBuilder_.build();
-        }
         if (methodsBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
             methods_ = java.util.Collections.unmodifiableList(methods_);
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000004);
           }
           result.methods_ = methods_;
         } else {
           result.methods_ = methodsBuilder_.build();
         }
         if (fieldsBuilder_ == null) {
-          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
             fields_ = java.util.Collections.unmodifiableList(fields_);
-            bitField0_ = (bitField0_ & ~0x00000010);
+            bitField0_ = (bitField0_ & ~0x00000008);
           }
           result.fields_ = fields_;
         } else {
@@ -2904,37 +2843,11 @@ public final class Ast {
             }
           }
         }
-        if (typesBuilder_ == null) {
-          if (!other.types_.isEmpty()) {
-            if (types_.isEmpty()) {
-              types_ = other.types_;
-              bitField0_ = (bitField0_ & ~0x00000004);
-            } else {
-              ensureTypesIsMutable();
-              types_.addAll(other.types_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.types_.isEmpty()) {
-            if (typesBuilder_.isEmpty()) {
-              typesBuilder_.dispose();
-              typesBuilder_ = null;
-              types_ = other.types_;
-              bitField0_ = (bitField0_ & ~0x00000004);
-              typesBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getTypesFieldBuilder() : null;
-            } else {
-              typesBuilder_.addAllMessages(other.types_);
-            }
-          }
-        }
         if (methodsBuilder_ == null) {
           if (!other.methods_.isEmpty()) {
             if (methods_.isEmpty()) {
               methods_ = other.methods_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000004);
             } else {
               ensureMethodsIsMutable();
               methods_.addAll(other.methods_);
@@ -2947,7 +2860,7 @@ public final class Ast {
               methodsBuilder_.dispose();
               methodsBuilder_ = null;
               methods_ = other.methods_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000004);
               methodsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getMethodsFieldBuilder() : null;
@@ -2960,7 +2873,7 @@ public final class Ast {
           if (!other.fields_.isEmpty()) {
             if (fields_.isEmpty()) {
               fields_ = other.fields_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000008);
             } else {
               ensureFieldsIsMutable();
               fields_.addAll(other.fields_);
@@ -2973,7 +2886,7 @@ public final class Ast {
               fieldsBuilder_.dispose();
               fieldsBuilder_ = null;
               fields_ = other.fields_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000008);
               fieldsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getFieldsFieldBuilder() : null;
@@ -2993,12 +2906,6 @@ public final class Ast {
         }
         for (int i = 0; i < getAnnotationsCount(); i++) {
           if (!getAnnotations(i).isInitialized()) {
-            
-            return false;
-          }
-        }
-        for (int i = 0; i < getTypesCount(); i++) {
-          if (!getTypes(i).isInitialized()) {
             
             return false;
           }
@@ -3050,12 +2957,6 @@ public final class Ast {
               sizzle.types.Ast.Annotation.Builder subBuilder = sizzle.types.Ast.Annotation.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addAnnotations(subBuilder.buildPartial());
-              break;
-            }
-            case 26: {
-              sizzle.types.Ast.Type.Builder subBuilder = sizzle.types.Ast.Type.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addTypes(subBuilder.buildPartial());
               break;
             }
             case 34: {
@@ -3298,199 +3199,13 @@ public final class Ast {
         return annotationsBuilder_;
       }
       
-      // repeated .sizzle.types.Type types = 3;
-      private java.util.List<sizzle.types.Ast.Type> types_ =
-        java.util.Collections.emptyList();
-      private void ensureTypesIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          types_ = new java.util.ArrayList<sizzle.types.Ast.Type>(types_);
-          bitField0_ |= 0x00000004;
-         }
-      }
-      
-      private com.google.protobuf.RepeatedFieldBuilder<
-          sizzle.types.Ast.Type, sizzle.types.Ast.Type.Builder, sizzle.types.Ast.TypeOrBuilder> typesBuilder_;
-      
-      public java.util.List<sizzle.types.Ast.Type> getTypesList() {
-        if (typesBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(types_);
-        } else {
-          return typesBuilder_.getMessageList();
-        }
-      }
-      public int getTypesCount() {
-        if (typesBuilder_ == null) {
-          return types_.size();
-        } else {
-          return typesBuilder_.getCount();
-        }
-      }
-      public sizzle.types.Ast.Type getTypes(int index) {
-        if (typesBuilder_ == null) {
-          return types_.get(index);
-        } else {
-          return typesBuilder_.getMessage(index);
-        }
-      }
-      public Builder setTypes(
-          int index, sizzle.types.Ast.Type value) {
-        if (typesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureTypesIsMutable();
-          types_.set(index, value);
-          onChanged();
-        } else {
-          typesBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      public Builder setTypes(
-          int index, sizzle.types.Ast.Type.Builder builderForValue) {
-        if (typesBuilder_ == null) {
-          ensureTypesIsMutable();
-          types_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          typesBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addTypes(sizzle.types.Ast.Type value) {
-        if (typesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureTypesIsMutable();
-          types_.add(value);
-          onChanged();
-        } else {
-          typesBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      public Builder addTypes(
-          int index, sizzle.types.Ast.Type value) {
-        if (typesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureTypesIsMutable();
-          types_.add(index, value);
-          onChanged();
-        } else {
-          typesBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      public Builder addTypes(
-          sizzle.types.Ast.Type.Builder builderForValue) {
-        if (typesBuilder_ == null) {
-          ensureTypesIsMutable();
-          types_.add(builderForValue.build());
-          onChanged();
-        } else {
-          typesBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addTypes(
-          int index, sizzle.types.Ast.Type.Builder builderForValue) {
-        if (typesBuilder_ == null) {
-          ensureTypesIsMutable();
-          types_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          typesBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addAllTypes(
-          java.lang.Iterable<? extends sizzle.types.Ast.Type> values) {
-        if (typesBuilder_ == null) {
-          ensureTypesIsMutable();
-          super.addAll(values, types_);
-          onChanged();
-        } else {
-          typesBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      public Builder clearTypes() {
-        if (typesBuilder_ == null) {
-          types_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
-          onChanged();
-        } else {
-          typesBuilder_.clear();
-        }
-        return this;
-      }
-      public Builder removeTypes(int index) {
-        if (typesBuilder_ == null) {
-          ensureTypesIsMutable();
-          types_.remove(index);
-          onChanged();
-        } else {
-          typesBuilder_.remove(index);
-        }
-        return this;
-      }
-      public sizzle.types.Ast.Type.Builder getTypesBuilder(
-          int index) {
-        return getTypesFieldBuilder().getBuilder(index);
-      }
-      public sizzle.types.Ast.TypeOrBuilder getTypesOrBuilder(
-          int index) {
-        if (typesBuilder_ == null) {
-          return types_.get(index);  } else {
-          return typesBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      public java.util.List<? extends sizzle.types.Ast.TypeOrBuilder> 
-           getTypesOrBuilderList() {
-        if (typesBuilder_ != null) {
-          return typesBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(types_);
-        }
-      }
-      public sizzle.types.Ast.Type.Builder addTypesBuilder() {
-        return getTypesFieldBuilder().addBuilder(
-            sizzle.types.Ast.Type.getDefaultInstance());
-      }
-      public sizzle.types.Ast.Type.Builder addTypesBuilder(
-          int index) {
-        return getTypesFieldBuilder().addBuilder(
-            index, sizzle.types.Ast.Type.getDefaultInstance());
-      }
-      public java.util.List<sizzle.types.Ast.Type.Builder> 
-           getTypesBuilderList() {
-        return getTypesFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          sizzle.types.Ast.Type, sizzle.types.Ast.Type.Builder, sizzle.types.Ast.TypeOrBuilder> 
-          getTypesFieldBuilder() {
-        if (typesBuilder_ == null) {
-          typesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              sizzle.types.Ast.Type, sizzle.types.Ast.Type.Builder, sizzle.types.Ast.TypeOrBuilder>(
-                  types_,
-                  ((bitField0_ & 0x00000004) == 0x00000004),
-                  getParentForChildren(),
-                  isClean());
-          types_ = null;
-        }
-        return typesBuilder_;
-      }
-      
       // repeated .sizzle.types.Method methods = 4;
       private java.util.List<sizzle.types.Ast.Method> methods_ =
         java.util.Collections.emptyList();
       private void ensureMethodsIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
           methods_ = new java.util.ArrayList<sizzle.types.Ast.Method>(methods_);
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000004;
          }
       }
       
@@ -3606,7 +3321,7 @@ public final class Ast {
       public Builder clearMethods() {
         if (methodsBuilder_ == null) {
           methods_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000004);
           onChanged();
         } else {
           methodsBuilder_.clear();
@@ -3662,7 +3377,7 @@ public final class Ast {
           methodsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               sizzle.types.Ast.Method, sizzle.types.Ast.Method.Builder, sizzle.types.Ast.MethodOrBuilder>(
                   methods_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  ((bitField0_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
                   isClean());
           methods_ = null;
@@ -3674,9 +3389,9 @@ public final class Ast {
       private java.util.List<sizzle.types.Ast.Field> fields_ =
         java.util.Collections.emptyList();
       private void ensureFieldsIsMutable() {
-        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
           fields_ = new java.util.ArrayList<sizzle.types.Ast.Field>(fields_);
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000008;
          }
       }
       
@@ -3792,7 +3507,7 @@ public final class Ast {
       public Builder clearFields() {
         if (fieldsBuilder_ == null) {
           fields_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000008);
           onChanged();
         } else {
           fieldsBuilder_.clear();
@@ -3848,7 +3563,7 @@ public final class Ast {
           fieldsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               sizzle.types.Ast.Field, sizzle.types.Ast.Field.Builder, sizzle.types.Ast.FieldOrBuilder>(
                   fields_,
-                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  ((bitField0_ & 0x00000008) == 0x00000008),
                   getParentForChildren(),
                   isClean());
           fields_ = null;
@@ -3884,35 +3599,24 @@ public final class Ast {
     sizzle.types.Ast.AnnotationOrBuilder getAnnotationsOrBuilder(
         int index);
     
-    // required .sizzle.types.Type return_type = 3;
+    // required string return_type = 3;
     boolean hasReturnType();
-    sizzle.types.Ast.Type getReturnType();
-    sizzle.types.Ast.TypeOrBuilder getReturnTypeOrBuilder();
+    String getReturnType();
     
-    // repeated .sizzle.types.Type arg_types = 4;
-    java.util.List<sizzle.types.Ast.Type> 
-        getArgTypesList();
-    sizzle.types.Ast.Type getArgTypes(int index);
+    // repeated string arg_types = 4;
+    java.util.List<String> getArgTypesList();
     int getArgTypesCount();
-    java.util.List<? extends sizzle.types.Ast.TypeOrBuilder> 
-        getArgTypesOrBuilderList();
-    sizzle.types.Ast.TypeOrBuilder getArgTypesOrBuilder(
-        int index);
+    String getArgTypes(int index);
     
     // repeated string arg_names = 5;
     java.util.List<String> getArgNamesList();
     int getArgNamesCount();
     String getArgNames(int index);
     
-    // repeated .sizzle.types.Type exceptions = 6;
-    java.util.List<sizzle.types.Ast.Type> 
-        getExceptionsList();
-    sizzle.types.Ast.Type getExceptions(int index);
+    // repeated string exceptions = 6;
+    java.util.List<String> getExceptionsList();
     int getExceptionsCount();
-    java.util.List<? extends sizzle.types.Ast.TypeOrBuilder> 
-        getExceptionsOrBuilderList();
-    sizzle.types.Ast.TypeOrBuilder getExceptionsOrBuilder(
-        int index);
+    String getExceptions(int index);
   }
   public static final class Method extends
       com.google.protobuf.GeneratedMessage
@@ -3996,37 +3700,49 @@ public final class Ast {
       return annotations_.get(index);
     }
     
-    // required .sizzle.types.Type return_type = 3;
+    // required string return_type = 3;
     public static final int RETURN_TYPE_FIELD_NUMBER = 3;
-    private sizzle.types.Ast.Type returnType_;
+    private java.lang.Object returnType_;
     public boolean hasReturnType() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public sizzle.types.Ast.Type getReturnType() {
-      return returnType_;
+    public String getReturnType() {
+      java.lang.Object ref = returnType_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          returnType_ = s;
+        }
+        return s;
+      }
     }
-    public sizzle.types.Ast.TypeOrBuilder getReturnTypeOrBuilder() {
-      return returnType_;
+    private com.google.protobuf.ByteString getReturnTypeBytes() {
+      java.lang.Object ref = returnType_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        returnType_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
     
-    // repeated .sizzle.types.Type arg_types = 4;
+    // repeated string arg_types = 4;
     public static final int ARG_TYPES_FIELD_NUMBER = 4;
-    private java.util.List<sizzle.types.Ast.Type> argTypes_;
-    public java.util.List<sizzle.types.Ast.Type> getArgTypesList() {
-      return argTypes_;
-    }
-    public java.util.List<? extends sizzle.types.Ast.TypeOrBuilder> 
-        getArgTypesOrBuilderList() {
+    private com.google.protobuf.LazyStringList argTypes_;
+    public java.util.List<String>
+        getArgTypesList() {
       return argTypes_;
     }
     public int getArgTypesCount() {
       return argTypes_.size();
     }
-    public sizzle.types.Ast.Type getArgTypes(int index) {
-      return argTypes_.get(index);
-    }
-    public sizzle.types.Ast.TypeOrBuilder getArgTypesOrBuilder(
-        int index) {
+    public String getArgTypes(int index) {
       return argTypes_.get(index);
     }
     
@@ -4044,34 +3760,27 @@ public final class Ast {
       return argNames_.get(index);
     }
     
-    // repeated .sizzle.types.Type exceptions = 6;
+    // repeated string exceptions = 6;
     public static final int EXCEPTIONS_FIELD_NUMBER = 6;
-    private java.util.List<sizzle.types.Ast.Type> exceptions_;
-    public java.util.List<sizzle.types.Ast.Type> getExceptionsList() {
-      return exceptions_;
-    }
-    public java.util.List<? extends sizzle.types.Ast.TypeOrBuilder> 
-        getExceptionsOrBuilderList() {
+    private com.google.protobuf.LazyStringList exceptions_;
+    public java.util.List<String>
+        getExceptionsList() {
       return exceptions_;
     }
     public int getExceptionsCount() {
       return exceptions_.size();
     }
-    public sizzle.types.Ast.Type getExceptions(int index) {
-      return exceptions_.get(index);
-    }
-    public sizzle.types.Ast.TypeOrBuilder getExceptionsOrBuilder(
-        int index) {
+    public String getExceptions(int index) {
       return exceptions_.get(index);
     }
     
     private void initFields() {
       name_ = "";
       annotations_ = java.util.Collections.emptyList();
-      returnType_ = sizzle.types.Ast.Type.getDefaultInstance();
-      argTypes_ = java.util.Collections.emptyList();
+      returnType_ = "";
+      argTypes_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       argNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      exceptions_ = java.util.Collections.emptyList();
+      exceptions_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4092,22 +3801,6 @@ public final class Ast {
           return false;
         }
       }
-      if (!getReturnType().isInitialized()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      for (int i = 0; i < getArgTypesCount(); i++) {
-        if (!getArgTypes(i).isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
-      for (int i = 0; i < getExceptionsCount(); i++) {
-        if (!getExceptions(i).isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -4122,16 +3815,16 @@ public final class Ast {
         output.writeMessage(2, annotations_.get(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeMessage(3, returnType_);
+        output.writeBytes(3, getReturnTypeBytes());
       }
       for (int i = 0; i < argTypes_.size(); i++) {
-        output.writeMessage(4, argTypes_.get(i));
+        output.writeBytes(4, argTypes_.getByteString(i));
       }
       for (int i = 0; i < argNames_.size(); i++) {
         output.writeBytes(5, argNames_.getByteString(i));
       }
       for (int i = 0; i < exceptions_.size(); i++) {
-        output.writeMessage(6, exceptions_.get(i));
+        output.writeBytes(6, exceptions_.getByteString(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -4152,11 +3845,16 @@ public final class Ast {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, returnType_);
+          .computeBytesSize(3, getReturnTypeBytes());
       }
-      for (int i = 0; i < argTypes_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, argTypes_.get(i));
+      {
+        int dataSize = 0;
+        for (int i = 0; i < argTypes_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(argTypes_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getArgTypesList().size();
       }
       {
         int dataSize = 0;
@@ -4167,9 +3865,14 @@ public final class Ast {
         size += dataSize;
         size += 1 * getArgNamesList().size();
       }
-      for (int i = 0; i < exceptions_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, exceptions_.get(i));
+      {
+        int dataSize = 0;
+        for (int i = 0; i < exceptions_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(exceptions_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getExceptionsList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4288,9 +3991,6 @@ public final class Ast {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getAnnotationsFieldBuilder();
-          getReturnTypeFieldBuilder();
-          getArgTypesFieldBuilder();
-          getExceptionsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -4307,26 +4007,14 @@ public final class Ast {
         } else {
           annotationsBuilder_.clear();
         }
-        if (returnTypeBuilder_ == null) {
-          returnType_ = sizzle.types.Ast.Type.getDefaultInstance();
-        } else {
-          returnTypeBuilder_.clear();
-        }
+        returnType_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        if (argTypesBuilder_ == null) {
-          argTypes_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
-        } else {
-          argTypesBuilder_.clear();
-        }
+        argTypes_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
         argNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000010);
-        if (exceptionsBuilder_ == null) {
-          exceptions_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
-        } else {
-          exceptionsBuilder_.clear();
-        }
+        exceptions_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
       
@@ -4381,35 +4069,25 @@ public final class Ast {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000002;
         }
-        if (returnTypeBuilder_ == null) {
-          result.returnType_ = returnType_;
-        } else {
-          result.returnType_ = returnTypeBuilder_.build();
+        result.returnType_ = returnType_;
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          argTypes_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              argTypes_);
+          bitField0_ = (bitField0_ & ~0x00000008);
         }
-        if (argTypesBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
-            argTypes_ = java.util.Collections.unmodifiableList(argTypes_);
-            bitField0_ = (bitField0_ & ~0x00000008);
-          }
-          result.argTypes_ = argTypes_;
-        } else {
-          result.argTypes_ = argTypesBuilder_.build();
-        }
+        result.argTypes_ = argTypes_;
         if (((bitField0_ & 0x00000010) == 0x00000010)) {
           argNames_ = new com.google.protobuf.UnmodifiableLazyStringList(
               argNames_);
           bitField0_ = (bitField0_ & ~0x00000010);
         }
         result.argNames_ = argNames_;
-        if (exceptionsBuilder_ == null) {
-          if (((bitField0_ & 0x00000020) == 0x00000020)) {
-            exceptions_ = java.util.Collections.unmodifiableList(exceptions_);
-            bitField0_ = (bitField0_ & ~0x00000020);
-          }
-          result.exceptions_ = exceptions_;
-        } else {
-          result.exceptions_ = exceptionsBuilder_.build();
+        if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          exceptions_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              exceptions_);
+          bitField0_ = (bitField0_ & ~0x00000020);
         }
+        result.exceptions_ = exceptions_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4456,33 +4134,17 @@ public final class Ast {
           }
         }
         if (other.hasReturnType()) {
-          mergeReturnType(other.getReturnType());
+          setReturnType(other.getReturnType());
         }
-        if (argTypesBuilder_ == null) {
-          if (!other.argTypes_.isEmpty()) {
-            if (argTypes_.isEmpty()) {
-              argTypes_ = other.argTypes_;
-              bitField0_ = (bitField0_ & ~0x00000008);
-            } else {
-              ensureArgTypesIsMutable();
-              argTypes_.addAll(other.argTypes_);
-            }
-            onChanged();
+        if (!other.argTypes_.isEmpty()) {
+          if (argTypes_.isEmpty()) {
+            argTypes_ = other.argTypes_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            ensureArgTypesIsMutable();
+            argTypes_.addAll(other.argTypes_);
           }
-        } else {
-          if (!other.argTypes_.isEmpty()) {
-            if (argTypesBuilder_.isEmpty()) {
-              argTypesBuilder_.dispose();
-              argTypesBuilder_ = null;
-              argTypes_ = other.argTypes_;
-              bitField0_ = (bitField0_ & ~0x00000008);
-              argTypesBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getArgTypesFieldBuilder() : null;
-            } else {
-              argTypesBuilder_.addAllMessages(other.argTypes_);
-            }
-          }
+          onChanged();
         }
         if (!other.argNames_.isEmpty()) {
           if (argNames_.isEmpty()) {
@@ -4494,31 +4156,15 @@ public final class Ast {
           }
           onChanged();
         }
-        if (exceptionsBuilder_ == null) {
-          if (!other.exceptions_.isEmpty()) {
-            if (exceptions_.isEmpty()) {
-              exceptions_ = other.exceptions_;
-              bitField0_ = (bitField0_ & ~0x00000020);
-            } else {
-              ensureExceptionsIsMutable();
-              exceptions_.addAll(other.exceptions_);
-            }
-            onChanged();
+        if (!other.exceptions_.isEmpty()) {
+          if (exceptions_.isEmpty()) {
+            exceptions_ = other.exceptions_;
+            bitField0_ = (bitField0_ & ~0x00000020);
+          } else {
+            ensureExceptionsIsMutable();
+            exceptions_.addAll(other.exceptions_);
           }
-        } else {
-          if (!other.exceptions_.isEmpty()) {
-            if (exceptionsBuilder_.isEmpty()) {
-              exceptionsBuilder_.dispose();
-              exceptionsBuilder_ = null;
-              exceptions_ = other.exceptions_;
-              bitField0_ = (bitField0_ & ~0x00000020);
-              exceptionsBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getExceptionsFieldBuilder() : null;
-            } else {
-              exceptionsBuilder_.addAllMessages(other.exceptions_);
-            }
-          }
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4535,22 +4181,6 @@ public final class Ast {
         }
         for (int i = 0; i < getAnnotationsCount(); i++) {
           if (!getAnnotations(i).isInitialized()) {
-            
-            return false;
-          }
-        }
-        if (!getReturnType().isInitialized()) {
-          
-          return false;
-        }
-        for (int i = 0; i < getArgTypesCount(); i++) {
-          if (!getArgTypes(i).isInitialized()) {
-            
-            return false;
-          }
-        }
-        for (int i = 0; i < getExceptionsCount(); i++) {
-          if (!getExceptions(i).isInitialized()) {
             
             return false;
           }
@@ -4593,18 +4223,13 @@ public final class Ast {
               break;
             }
             case 26: {
-              sizzle.types.Ast.Type.Builder subBuilder = sizzle.types.Ast.Type.newBuilder();
-              if (hasReturnType()) {
-                subBuilder.mergeFrom(getReturnType());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setReturnType(subBuilder.buildPartial());
+              bitField0_ |= 0x00000004;
+              returnType_ = input.readBytes();
               break;
             }
             case 34: {
-              sizzle.types.Ast.Type.Builder subBuilder = sizzle.types.Ast.Type.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addArgTypes(subBuilder.buildPartial());
+              ensureArgTypesIsMutable();
+              argTypes_.add(input.readBytes());
               break;
             }
             case 42: {
@@ -4613,9 +4238,8 @@ public final class Ast {
               break;
             }
             case 50: {
-              sizzle.types.Ast.Type.Builder subBuilder = sizzle.types.Ast.Type.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addExceptions(subBuilder.buildPartial());
+              ensureExceptionsIsMutable();
+              exceptions_.add(input.readBytes());
               break;
             }
           }
@@ -4846,280 +4470,96 @@ public final class Ast {
         return annotationsBuilder_;
       }
       
-      // required .sizzle.types.Type return_type = 3;
-      private sizzle.types.Ast.Type returnType_ = sizzle.types.Ast.Type.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          sizzle.types.Ast.Type, sizzle.types.Ast.Type.Builder, sizzle.types.Ast.TypeOrBuilder> returnTypeBuilder_;
+      // required string return_type = 3;
+      private java.lang.Object returnType_ = "";
       public boolean hasReturnType() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
-      public sizzle.types.Ast.Type getReturnType() {
-        if (returnTypeBuilder_ == null) {
-          return returnType_;
+      public String getReturnType() {
+        java.lang.Object ref = returnType_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          returnType_ = s;
+          return s;
         } else {
-          return returnTypeBuilder_.getMessage();
+          return (String) ref;
         }
       }
-      public Builder setReturnType(sizzle.types.Ast.Type value) {
-        if (returnTypeBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          returnType_ = value;
-          onChanged();
-        } else {
-          returnTypeBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      public Builder setReturnType(
-          sizzle.types.Ast.Type.Builder builderForValue) {
-        if (returnTypeBuilder_ == null) {
-          returnType_ = builderForValue.build();
-          onChanged();
-        } else {
-          returnTypeBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      public Builder mergeReturnType(sizzle.types.Ast.Type value) {
-        if (returnTypeBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004) &&
-              returnType_ != sizzle.types.Ast.Type.getDefaultInstance()) {
-            returnType_ =
-              sizzle.types.Ast.Type.newBuilder(returnType_).mergeFrom(value).buildPartial();
-          } else {
-            returnType_ = value;
-          }
-          onChanged();
-        } else {
-          returnTypeBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000004;
+      public Builder setReturnType(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        returnType_ = value;
+        onChanged();
         return this;
       }
       public Builder clearReturnType() {
-        if (returnTypeBuilder_ == null) {
-          returnType_ = sizzle.types.Ast.Type.getDefaultInstance();
-          onChanged();
-        } else {
-          returnTypeBuilder_.clear();
-        }
         bitField0_ = (bitField0_ & ~0x00000004);
+        returnType_ = getDefaultInstance().getReturnType();
+        onChanged();
         return this;
       }
-      public sizzle.types.Ast.Type.Builder getReturnTypeBuilder() {
+      void setReturnType(com.google.protobuf.ByteString value) {
         bitField0_ |= 0x00000004;
+        returnType_ = value;
         onChanged();
-        return getReturnTypeFieldBuilder().getBuilder();
-      }
-      public sizzle.types.Ast.TypeOrBuilder getReturnTypeOrBuilder() {
-        if (returnTypeBuilder_ != null) {
-          return returnTypeBuilder_.getMessageOrBuilder();
-        } else {
-          return returnType_;
-        }
-      }
-      private com.google.protobuf.SingleFieldBuilder<
-          sizzle.types.Ast.Type, sizzle.types.Ast.Type.Builder, sizzle.types.Ast.TypeOrBuilder> 
-          getReturnTypeFieldBuilder() {
-        if (returnTypeBuilder_ == null) {
-          returnTypeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              sizzle.types.Ast.Type, sizzle.types.Ast.Type.Builder, sizzle.types.Ast.TypeOrBuilder>(
-                  returnType_,
-                  getParentForChildren(),
-                  isClean());
-          returnType_ = null;
-        }
-        return returnTypeBuilder_;
       }
       
-      // repeated .sizzle.types.Type arg_types = 4;
-      private java.util.List<sizzle.types.Ast.Type> argTypes_ =
-        java.util.Collections.emptyList();
+      // repeated string arg_types = 4;
+      private com.google.protobuf.LazyStringList argTypes_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureArgTypesIsMutable() {
         if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          argTypes_ = new java.util.ArrayList<sizzle.types.Ast.Type>(argTypes_);
+          argTypes_ = new com.google.protobuf.LazyStringArrayList(argTypes_);
           bitField0_ |= 0x00000008;
          }
       }
-      
-      private com.google.protobuf.RepeatedFieldBuilder<
-          sizzle.types.Ast.Type, sizzle.types.Ast.Type.Builder, sizzle.types.Ast.TypeOrBuilder> argTypesBuilder_;
-      
-      public java.util.List<sizzle.types.Ast.Type> getArgTypesList() {
-        if (argTypesBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(argTypes_);
-        } else {
-          return argTypesBuilder_.getMessageList();
-        }
+      public java.util.List<String>
+          getArgTypesList() {
+        return java.util.Collections.unmodifiableList(argTypes_);
       }
       public int getArgTypesCount() {
-        if (argTypesBuilder_ == null) {
-          return argTypes_.size();
-        } else {
-          return argTypesBuilder_.getCount();
-        }
+        return argTypes_.size();
       }
-      public sizzle.types.Ast.Type getArgTypes(int index) {
-        if (argTypesBuilder_ == null) {
-          return argTypes_.get(index);
-        } else {
-          return argTypesBuilder_.getMessage(index);
-        }
+      public String getArgTypes(int index) {
+        return argTypes_.get(index);
       }
       public Builder setArgTypes(
-          int index, sizzle.types.Ast.Type value) {
-        if (argTypesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureArgTypesIsMutable();
-          argTypes_.set(index, value);
-          onChanged();
-        } else {
-          argTypesBuilder_.setMessage(index, value);
-        }
+          int index, String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureArgTypesIsMutable();
+        argTypes_.set(index, value);
+        onChanged();
         return this;
       }
-      public Builder setArgTypes(
-          int index, sizzle.types.Ast.Type.Builder builderForValue) {
-        if (argTypesBuilder_ == null) {
-          ensureArgTypesIsMutable();
-          argTypes_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          argTypesBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addArgTypes(sizzle.types.Ast.Type value) {
-        if (argTypesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureArgTypesIsMutable();
-          argTypes_.add(value);
-          onChanged();
-        } else {
-          argTypesBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      public Builder addArgTypes(
-          int index, sizzle.types.Ast.Type value) {
-        if (argTypesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureArgTypesIsMutable();
-          argTypes_.add(index, value);
-          onChanged();
-        } else {
-          argTypesBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      public Builder addArgTypes(
-          sizzle.types.Ast.Type.Builder builderForValue) {
-        if (argTypesBuilder_ == null) {
-          ensureArgTypesIsMutable();
-          argTypes_.add(builderForValue.build());
-          onChanged();
-        } else {
-          argTypesBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addArgTypes(
-          int index, sizzle.types.Ast.Type.Builder builderForValue) {
-        if (argTypesBuilder_ == null) {
-          ensureArgTypesIsMutable();
-          argTypes_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          argTypesBuilder_.addMessage(index, builderForValue.build());
-        }
+      public Builder addArgTypes(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureArgTypesIsMutable();
+        argTypes_.add(value);
+        onChanged();
         return this;
       }
       public Builder addAllArgTypes(
-          java.lang.Iterable<? extends sizzle.types.Ast.Type> values) {
-        if (argTypesBuilder_ == null) {
-          ensureArgTypesIsMutable();
-          super.addAll(values, argTypes_);
-          onChanged();
-        } else {
-          argTypesBuilder_.addAllMessages(values);
-        }
+          java.lang.Iterable<String> values) {
+        ensureArgTypesIsMutable();
+        super.addAll(values, argTypes_);
+        onChanged();
         return this;
       }
       public Builder clearArgTypes() {
-        if (argTypesBuilder_ == null) {
-          argTypes_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
-          onChanged();
-        } else {
-          argTypesBuilder_.clear();
-        }
+        argTypes_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        onChanged();
         return this;
       }
-      public Builder removeArgTypes(int index) {
-        if (argTypesBuilder_ == null) {
-          ensureArgTypesIsMutable();
-          argTypes_.remove(index);
-          onChanged();
-        } else {
-          argTypesBuilder_.remove(index);
-        }
-        return this;
-      }
-      public sizzle.types.Ast.Type.Builder getArgTypesBuilder(
-          int index) {
-        return getArgTypesFieldBuilder().getBuilder(index);
-      }
-      public sizzle.types.Ast.TypeOrBuilder getArgTypesOrBuilder(
-          int index) {
-        if (argTypesBuilder_ == null) {
-          return argTypes_.get(index);  } else {
-          return argTypesBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      public java.util.List<? extends sizzle.types.Ast.TypeOrBuilder> 
-           getArgTypesOrBuilderList() {
-        if (argTypesBuilder_ != null) {
-          return argTypesBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(argTypes_);
-        }
-      }
-      public sizzle.types.Ast.Type.Builder addArgTypesBuilder() {
-        return getArgTypesFieldBuilder().addBuilder(
-            sizzle.types.Ast.Type.getDefaultInstance());
-      }
-      public sizzle.types.Ast.Type.Builder addArgTypesBuilder(
-          int index) {
-        return getArgTypesFieldBuilder().addBuilder(
-            index, sizzle.types.Ast.Type.getDefaultInstance());
-      }
-      public java.util.List<sizzle.types.Ast.Type.Builder> 
-           getArgTypesBuilderList() {
-        return getArgTypesFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          sizzle.types.Ast.Type, sizzle.types.Ast.Type.Builder, sizzle.types.Ast.TypeOrBuilder> 
-          getArgTypesFieldBuilder() {
-        if (argTypesBuilder_ == null) {
-          argTypesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              sizzle.types.Ast.Type, sizzle.types.Ast.Type.Builder, sizzle.types.Ast.TypeOrBuilder>(
-                  argTypes_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
-                  getParentForChildren(),
-                  isClean());
-          argTypes_ = null;
-        }
-        return argTypesBuilder_;
+      void addArgTypes(com.google.protobuf.ByteString value) {
+        ensureArgTypesIsMutable();
+        argTypes_.add(value);
+        onChanged();
       }
       
       // repeated string arg_names = 5;
@@ -5178,190 +4618,60 @@ public final class Ast {
         onChanged();
       }
       
-      // repeated .sizzle.types.Type exceptions = 6;
-      private java.util.List<sizzle.types.Ast.Type> exceptions_ =
-        java.util.Collections.emptyList();
+      // repeated string exceptions = 6;
+      private com.google.protobuf.LazyStringList exceptions_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureExceptionsIsMutable() {
         if (!((bitField0_ & 0x00000020) == 0x00000020)) {
-          exceptions_ = new java.util.ArrayList<sizzle.types.Ast.Type>(exceptions_);
+          exceptions_ = new com.google.protobuf.LazyStringArrayList(exceptions_);
           bitField0_ |= 0x00000020;
          }
       }
-      
-      private com.google.protobuf.RepeatedFieldBuilder<
-          sizzle.types.Ast.Type, sizzle.types.Ast.Type.Builder, sizzle.types.Ast.TypeOrBuilder> exceptionsBuilder_;
-      
-      public java.util.List<sizzle.types.Ast.Type> getExceptionsList() {
-        if (exceptionsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(exceptions_);
-        } else {
-          return exceptionsBuilder_.getMessageList();
-        }
+      public java.util.List<String>
+          getExceptionsList() {
+        return java.util.Collections.unmodifiableList(exceptions_);
       }
       public int getExceptionsCount() {
-        if (exceptionsBuilder_ == null) {
-          return exceptions_.size();
-        } else {
-          return exceptionsBuilder_.getCount();
-        }
+        return exceptions_.size();
       }
-      public sizzle.types.Ast.Type getExceptions(int index) {
-        if (exceptionsBuilder_ == null) {
-          return exceptions_.get(index);
-        } else {
-          return exceptionsBuilder_.getMessage(index);
-        }
+      public String getExceptions(int index) {
+        return exceptions_.get(index);
       }
       public Builder setExceptions(
-          int index, sizzle.types.Ast.Type value) {
-        if (exceptionsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureExceptionsIsMutable();
-          exceptions_.set(index, value);
-          onChanged();
-        } else {
-          exceptionsBuilder_.setMessage(index, value);
-        }
+          int index, String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureExceptionsIsMutable();
+        exceptions_.set(index, value);
+        onChanged();
         return this;
       }
-      public Builder setExceptions(
-          int index, sizzle.types.Ast.Type.Builder builderForValue) {
-        if (exceptionsBuilder_ == null) {
-          ensureExceptionsIsMutable();
-          exceptions_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          exceptionsBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addExceptions(sizzle.types.Ast.Type value) {
-        if (exceptionsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureExceptionsIsMutable();
-          exceptions_.add(value);
-          onChanged();
-        } else {
-          exceptionsBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      public Builder addExceptions(
-          int index, sizzle.types.Ast.Type value) {
-        if (exceptionsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureExceptionsIsMutable();
-          exceptions_.add(index, value);
-          onChanged();
-        } else {
-          exceptionsBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      public Builder addExceptions(
-          sizzle.types.Ast.Type.Builder builderForValue) {
-        if (exceptionsBuilder_ == null) {
-          ensureExceptionsIsMutable();
-          exceptions_.add(builderForValue.build());
-          onChanged();
-        } else {
-          exceptionsBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addExceptions(
-          int index, sizzle.types.Ast.Type.Builder builderForValue) {
-        if (exceptionsBuilder_ == null) {
-          ensureExceptionsIsMutable();
-          exceptions_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          exceptionsBuilder_.addMessage(index, builderForValue.build());
-        }
+      public Builder addExceptions(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureExceptionsIsMutable();
+        exceptions_.add(value);
+        onChanged();
         return this;
       }
       public Builder addAllExceptions(
-          java.lang.Iterable<? extends sizzle.types.Ast.Type> values) {
-        if (exceptionsBuilder_ == null) {
-          ensureExceptionsIsMutable();
-          super.addAll(values, exceptions_);
-          onChanged();
-        } else {
-          exceptionsBuilder_.addAllMessages(values);
-        }
+          java.lang.Iterable<String> values) {
+        ensureExceptionsIsMutable();
+        super.addAll(values, exceptions_);
+        onChanged();
         return this;
       }
       public Builder clearExceptions() {
-        if (exceptionsBuilder_ == null) {
-          exceptions_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
-          onChanged();
-        } else {
-          exceptionsBuilder_.clear();
-        }
+        exceptions_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        onChanged();
         return this;
       }
-      public Builder removeExceptions(int index) {
-        if (exceptionsBuilder_ == null) {
-          ensureExceptionsIsMutable();
-          exceptions_.remove(index);
-          onChanged();
-        } else {
-          exceptionsBuilder_.remove(index);
-        }
-        return this;
-      }
-      public sizzle.types.Ast.Type.Builder getExceptionsBuilder(
-          int index) {
-        return getExceptionsFieldBuilder().getBuilder(index);
-      }
-      public sizzle.types.Ast.TypeOrBuilder getExceptionsOrBuilder(
-          int index) {
-        if (exceptionsBuilder_ == null) {
-          return exceptions_.get(index);  } else {
-          return exceptionsBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      public java.util.List<? extends sizzle.types.Ast.TypeOrBuilder> 
-           getExceptionsOrBuilderList() {
-        if (exceptionsBuilder_ != null) {
-          return exceptionsBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(exceptions_);
-        }
-      }
-      public sizzle.types.Ast.Type.Builder addExceptionsBuilder() {
-        return getExceptionsFieldBuilder().addBuilder(
-            sizzle.types.Ast.Type.getDefaultInstance());
-      }
-      public sizzle.types.Ast.Type.Builder addExceptionsBuilder(
-          int index) {
-        return getExceptionsFieldBuilder().addBuilder(
-            index, sizzle.types.Ast.Type.getDefaultInstance());
-      }
-      public java.util.List<sizzle.types.Ast.Type.Builder> 
-           getExceptionsBuilderList() {
-        return getExceptionsFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          sizzle.types.Ast.Type, sizzle.types.Ast.Type.Builder, sizzle.types.Ast.TypeOrBuilder> 
-          getExceptionsFieldBuilder() {
-        if (exceptionsBuilder_ == null) {
-          exceptionsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              sizzle.types.Ast.Type, sizzle.types.Ast.Type.Builder, sizzle.types.Ast.TypeOrBuilder>(
-                  exceptions_,
-                  ((bitField0_ & 0x00000020) == 0x00000020),
-                  getParentForChildren(),
-                  isClean());
-          exceptions_ = null;
-        }
-        return exceptionsBuilder_;
+      void addExceptions(com.google.protobuf.ByteString value) {
+        ensureExceptionsIsMutable();
+        exceptions_.add(value);
+        onChanged();
       }
       
       // @@protoc_insertion_point(builder_scope:sizzle.types.Method)
@@ -5382,10 +4692,9 @@ public final class Ast {
     boolean hasName();
     String getName();
     
-    // required .sizzle.types.Type type = 2;
-    boolean hasType();
-    sizzle.types.Ast.Type getType();
-    sizzle.types.Ast.TypeOrBuilder getTypeOrBuilder();
+    // required string type_name = 2;
+    boolean hasTypeName();
+    String getTypeName();
   }
   public static final class Field extends
       com.google.protobuf.GeneratedMessage
@@ -5448,22 +4757,41 @@ public final class Ast {
       }
     }
     
-    // required .sizzle.types.Type type = 2;
-    public static final int TYPE_FIELD_NUMBER = 2;
-    private sizzle.types.Ast.Type type_;
-    public boolean hasType() {
+    // required string type_name = 2;
+    public static final int TYPE_NAME_FIELD_NUMBER = 2;
+    private java.lang.Object typeName_;
+    public boolean hasTypeName() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public sizzle.types.Ast.Type getType() {
-      return type_;
+    public String getTypeName() {
+      java.lang.Object ref = typeName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          typeName_ = s;
+        }
+        return s;
+      }
     }
-    public sizzle.types.Ast.TypeOrBuilder getTypeOrBuilder() {
-      return type_;
+    private com.google.protobuf.ByteString getTypeNameBytes() {
+      java.lang.Object ref = typeName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        typeName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
     
     private void initFields() {
       name_ = "";
-      type_ = sizzle.types.Ast.Type.getDefaultInstance();
+      typeName_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5474,11 +4802,7 @@ public final class Ast {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasType()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!getType().isInitialized()) {
+      if (!hasTypeName()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -5493,7 +4817,7 @@ public final class Ast {
         output.writeBytes(1, getNameBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeMessage(2, type_);
+        output.writeBytes(2, getTypeNameBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -5510,7 +4834,7 @@ public final class Ast {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, type_);
+          .computeBytesSize(2, getTypeNameBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5628,7 +4952,6 @@ public final class Ast {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getTypeFieldBuilder();
         }
       }
       private static Builder create() {
@@ -5639,11 +4962,7 @@ public final class Ast {
         super.clear();
         name_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        if (typeBuilder_ == null) {
-          type_ = sizzle.types.Ast.Type.getDefaultInstance();
-        } else {
-          typeBuilder_.clear();
-        }
+        typeName_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -5690,11 +5009,7 @@ public final class Ast {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        if (typeBuilder_ == null) {
-          result.type_ = type_;
-        } else {
-          result.type_ = typeBuilder_.build();
-        }
+        result.typeName_ = typeName_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5714,8 +5029,8 @@ public final class Ast {
         if (other.hasName()) {
           setName(other.getName());
         }
-        if (other.hasType()) {
-          mergeType(other.getType());
+        if (other.hasTypeName()) {
+          setTypeName(other.getTypeName());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5726,11 +5041,7 @@ public final class Ast {
           
           return false;
         }
-        if (!hasType()) {
-          
-          return false;
-        }
-        if (!getType().isInitialized()) {
+        if (!hasTypeName()) {
           
           return false;
         }
@@ -5766,12 +5077,8 @@ public final class Ast {
               break;
             }
             case 18: {
-              sizzle.types.Ast.Type.Builder subBuilder = sizzle.types.Ast.Type.newBuilder();
-              if (hasType()) {
-                subBuilder.mergeFrom(getType());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setType(subBuilder.buildPartial());
+              bitField0_ |= 0x00000002;
+              typeName_ = input.readBytes();
               break;
             }
           }
@@ -5816,94 +5123,40 @@ public final class Ast {
         onChanged();
       }
       
-      // required .sizzle.types.Type type = 2;
-      private sizzle.types.Ast.Type type_ = sizzle.types.Ast.Type.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          sizzle.types.Ast.Type, sizzle.types.Ast.Type.Builder, sizzle.types.Ast.TypeOrBuilder> typeBuilder_;
-      public boolean hasType() {
+      // required string type_name = 2;
+      private java.lang.Object typeName_ = "";
+      public boolean hasTypeName() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public sizzle.types.Ast.Type getType() {
-        if (typeBuilder_ == null) {
-          return type_;
+      public String getTypeName() {
+        java.lang.Object ref = typeName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          typeName_ = s;
+          return s;
         } else {
-          return typeBuilder_.getMessage();
+          return (String) ref;
         }
       }
-      public Builder setType(sizzle.types.Ast.Type value) {
-        if (typeBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          type_ = value;
-          onChanged();
-        } else {
-          typeBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      public Builder setType(
-          sizzle.types.Ast.Type.Builder builderForValue) {
-        if (typeBuilder_ == null) {
-          type_ = builderForValue.build();
-          onChanged();
-        } else {
-          typeBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      public Builder mergeType(sizzle.types.Ast.Type value) {
-        if (typeBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              type_ != sizzle.types.Ast.Type.getDefaultInstance()) {
-            type_ =
-              sizzle.types.Ast.Type.newBuilder(type_).mergeFrom(value).buildPartial();
-          } else {
-            type_ = value;
-          }
-          onChanged();
-        } else {
-          typeBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      public Builder clearType() {
-        if (typeBuilder_ == null) {
-          type_ = sizzle.types.Ast.Type.getDefaultInstance();
-          onChanged();
-        } else {
-          typeBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-      public sizzle.types.Ast.Type.Builder getTypeBuilder() {
-        bitField0_ |= 0x00000002;
+      public Builder setTypeName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        typeName_ = value;
         onChanged();
-        return getTypeFieldBuilder().getBuilder();
+        return this;
       }
-      public sizzle.types.Ast.TypeOrBuilder getTypeOrBuilder() {
-        if (typeBuilder_ != null) {
-          return typeBuilder_.getMessageOrBuilder();
-        } else {
-          return type_;
-        }
+      public Builder clearTypeName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        typeName_ = getDefaultInstance().getTypeName();
+        onChanged();
+        return this;
       }
-      private com.google.protobuf.SingleFieldBuilder<
-          sizzle.types.Ast.Type, sizzle.types.Ast.Type.Builder, sizzle.types.Ast.TypeOrBuilder> 
-          getTypeFieldBuilder() {
-        if (typeBuilder_ == null) {
-          typeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              sizzle.types.Ast.Type, sizzle.types.Ast.Type.Builder, sizzle.types.Ast.TypeOrBuilder>(
-                  type_,
-                  getParentForChildren(),
-                  isClean());
-          type_ = null;
-        }
-        return typeBuilder_;
+      void setTypeName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000002;
+        typeName_ = value;
+        onChanged();
       }
       
       // @@protoc_insertion_point(builder_scope:sizzle.types.Field)
@@ -5920,10 +5173,9 @@ public final class Ast {
   public interface AnnotationOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // required .sizzle.types.Type type = 1;
-    boolean hasType();
-    sizzle.types.Ast.Type getType();
-    sizzle.types.Ast.TypeOrBuilder getTypeOrBuilder();
+    // required string type_name = 1;
+    boolean hasTypeName();
+    String getTypeName();
     
     // required string content = 2;
     boolean hasContent();
@@ -5958,17 +5210,36 @@ public final class Ast {
     }
     
     private int bitField0_;
-    // required .sizzle.types.Type type = 1;
-    public static final int TYPE_FIELD_NUMBER = 1;
-    private sizzle.types.Ast.Type type_;
-    public boolean hasType() {
+    // required string type_name = 1;
+    public static final int TYPE_NAME_FIELD_NUMBER = 1;
+    private java.lang.Object typeName_;
+    public boolean hasTypeName() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public sizzle.types.Ast.Type getType() {
-      return type_;
+    public String getTypeName() {
+      java.lang.Object ref = typeName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          typeName_ = s;
+        }
+        return s;
+      }
     }
-    public sizzle.types.Ast.TypeOrBuilder getTypeOrBuilder() {
-      return type_;
+    private com.google.protobuf.ByteString getTypeNameBytes() {
+      java.lang.Object ref = typeName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        typeName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
     
     // required string content = 2;
@@ -6004,7 +5275,7 @@ public final class Ast {
     }
     
     private void initFields() {
-      type_ = sizzle.types.Ast.Type.getDefaultInstance();
+      typeName_ = "";
       content_ = "";
     }
     private byte memoizedIsInitialized = -1;
@@ -6012,15 +5283,11 @@ public final class Ast {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
       
-      if (!hasType()) {
+      if (!hasTypeName()) {
         memoizedIsInitialized = 0;
         return false;
       }
       if (!hasContent()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!getType().isInitialized()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -6032,7 +5299,7 @@ public final class Ast {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, type_);
+        output.writeBytes(1, getTypeNameBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(2, getContentBytes());
@@ -6048,7 +5315,7 @@ public final class Ast {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, type_);
+          .computeBytesSize(1, getTypeNameBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -6170,7 +5437,6 @@ public final class Ast {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getTypeFieldBuilder();
         }
       }
       private static Builder create() {
@@ -6179,11 +5445,7 @@ public final class Ast {
       
       public Builder clear() {
         super.clear();
-        if (typeBuilder_ == null) {
-          type_ = sizzle.types.Ast.Type.getDefaultInstance();
-        } else {
-          typeBuilder_.clear();
-        }
+        typeName_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         content_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -6228,11 +5490,7 @@ public final class Ast {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        if (typeBuilder_ == null) {
-          result.type_ = type_;
-        } else {
-          result.type_ = typeBuilder_.build();
-        }
+        result.typeName_ = typeName_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -6253,8 +5511,8 @@ public final class Ast {
       
       public Builder mergeFrom(sizzle.types.Ast.Annotation other) {
         if (other == sizzle.types.Ast.Annotation.getDefaultInstance()) return this;
-        if (other.hasType()) {
-          mergeType(other.getType());
+        if (other.hasTypeName()) {
+          setTypeName(other.getTypeName());
         }
         if (other.hasContent()) {
           setContent(other.getContent());
@@ -6264,15 +5522,11 @@ public final class Ast {
       }
       
       public final boolean isInitialized() {
-        if (!hasType()) {
+        if (!hasTypeName()) {
           
           return false;
         }
         if (!hasContent()) {
-          
-          return false;
-        }
-        if (!getType().isInitialized()) {
           
           return false;
         }
@@ -6303,12 +5557,8 @@ public final class Ast {
               break;
             }
             case 10: {
-              sizzle.types.Ast.Type.Builder subBuilder = sizzle.types.Ast.Type.newBuilder();
-              if (hasType()) {
-                subBuilder.mergeFrom(getType());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setType(subBuilder.buildPartial());
+              bitField0_ |= 0x00000001;
+              typeName_ = input.readBytes();
               break;
             }
             case 18: {
@@ -6322,94 +5572,40 @@ public final class Ast {
       
       private int bitField0_;
       
-      // required .sizzle.types.Type type = 1;
-      private sizzle.types.Ast.Type type_ = sizzle.types.Ast.Type.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          sizzle.types.Ast.Type, sizzle.types.Ast.Type.Builder, sizzle.types.Ast.TypeOrBuilder> typeBuilder_;
-      public boolean hasType() {
+      // required string type_name = 1;
+      private java.lang.Object typeName_ = "";
+      public boolean hasTypeName() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public sizzle.types.Ast.Type getType() {
-        if (typeBuilder_ == null) {
-          return type_;
+      public String getTypeName() {
+        java.lang.Object ref = typeName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          typeName_ = s;
+          return s;
         } else {
-          return typeBuilder_.getMessage();
+          return (String) ref;
         }
       }
-      public Builder setType(sizzle.types.Ast.Type value) {
-        if (typeBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          type_ = value;
-          onChanged();
-        } else {
-          typeBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      public Builder setType(
-          sizzle.types.Ast.Type.Builder builderForValue) {
-        if (typeBuilder_ == null) {
-          type_ = builderForValue.build();
-          onChanged();
-        } else {
-          typeBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      public Builder mergeType(sizzle.types.Ast.Type value) {
-        if (typeBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              type_ != sizzle.types.Ast.Type.getDefaultInstance()) {
-            type_ =
-              sizzle.types.Ast.Type.newBuilder(type_).mergeFrom(value).buildPartial();
-          } else {
-            type_ = value;
-          }
-          onChanged();
-        } else {
-          typeBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      public Builder clearType() {
-        if (typeBuilder_ == null) {
-          type_ = sizzle.types.Ast.Type.getDefaultInstance();
-          onChanged();
-        } else {
-          typeBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-      public sizzle.types.Ast.Type.Builder getTypeBuilder() {
-        bitField0_ |= 0x00000001;
+      public Builder setTypeName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        typeName_ = value;
         onChanged();
-        return getTypeFieldBuilder().getBuilder();
+        return this;
       }
-      public sizzle.types.Ast.TypeOrBuilder getTypeOrBuilder() {
-        if (typeBuilder_ != null) {
-          return typeBuilder_.getMessageOrBuilder();
-        } else {
-          return type_;
-        }
+      public Builder clearTypeName() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        typeName_ = getDefaultInstance().getTypeName();
+        onChanged();
+        return this;
       }
-      private com.google.protobuf.SingleFieldBuilder<
-          sizzle.types.Ast.Type, sizzle.types.Ast.Type.Builder, sizzle.types.Ast.TypeOrBuilder> 
-          getTypeFieldBuilder() {
-        if (typeBuilder_ == null) {
-          typeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              sizzle.types.Ast.Type, sizzle.types.Ast.Type.Builder, sizzle.types.Ast.TypeOrBuilder>(
-                  type_,
-                  getParentForChildren(),
-                  isClean());
-          type_ = null;
-        }
-        return typeBuilder_;
+      void setTypeName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000001;
+        typeName_ = value;
+        onChanged();
       }
       
       // required string content = 2;
@@ -6894,25 +6090,22 @@ public final class Ast {
       "\n\tast.proto\022\014sizzle.types\"]\n\007Library\022\020\n\010" +
       "filename\030\001 \002(\t\022\014\n\004name\030\002 \002(\t\022\017\n\007version\030" +
       "\003 \002(\t\022!\n\005files\030\004 \003(\0132\022.sizzle.types.File" +
-      "\"\270\001\n\004File\022\014\n\004name\030\001 \002(\t\022\017\n\007content\030\002 \002(\t" +
-      "\022)\n\004type\030\003 \002(\0162\033.sizzle.types.File.FileT" +
-      "ype\022\"\n\003pkg\030\004 \002(\0132\025.sizzle.types.Package\"" +
-      "B\n\010FileType\022\013\n\007UNKNOWN\020\000\022\n\n\006SOURCE\020\001\022\n\n\006" +
-      "BINARY\020\002\022\010\n\004TEXT\020\003\022\007\n\003XML\020\004\":\n\007Package\022\014" +
-      "\n\004name\030\001 \002(\t\022!\n\005types\030\002 \003(\0132\022.sizzle.typ" +
-      "es.Type\"\262\001\n\004Type\022\014\n\004name\030\001 \002(\t\022-\n\013annota",
-      "tions\030\002 \003(\0132\030.sizzle.types.Annotation\022!\n" +
-      "\005types\030\003 \003(\0132\022.sizzle.types.Type\022%\n\007meth" +
-      "ods\030\004 \003(\0132\024.sizzle.types.Method\022#\n\006field" +
-      "s\030\005 \003(\0132\023.sizzle.types.Field\"\320\001\n\006Method\022" +
-      "\014\n\004name\030\001 \002(\t\022-\n\013annotations\030\002 \003(\0132\030.siz" +
-      "zle.types.Annotation\022\'\n\013return_type\030\003 \002(" +
-      "\0132\022.sizzle.types.Type\022%\n\targ_types\030\004 \003(\013" +
-      "2\022.sizzle.types.Type\022\021\n\targ_names\030\005 \003(\t\022" +
-      "&\n\nexceptions\030\006 \003(\0132\022.sizzle.types.Type\"" +
-      "7\n\005Field\022\014\n\004name\030\001 \002(\t\022 \n\004type\030\002 \002(\0132\022.s",
-      "izzle.types.Type\"?\n\nAnnotation\022 \n\004type\030\001" +
-      " \002(\0132\022.sizzle.types.Type\022\017\n\007content\030\002 \002(" +
+      "\"\275\001\n\004File\022\014\n\004name\030\001 \002(\t\022\017\n\007content\030\002 \002(\t" +
+      "\022.\n\tfile_type\030\003 \002(\0162\033.sizzle.types.File." +
+      "FileType\022\"\n\003pkg\030\004 \002(\0132\025.sizzle.types.Pac" +
+      "kage\"B\n\010FileType\022\013\n\007UNKNOWN\020\000\022\n\n\006SOURCE\020" +
+      "\001\022\n\n\006BINARY\020\002\022\010\n\004TEXT\020\003\022\007\n\003XML\020\004\":\n\007Pack" +
+      "age\022\014\n\004name\030\001 \002(\t\022!\n\005types\030\002 \003(\0132\022.sizzl" +
+      "e.types.Type\"\217\001\n\004Type\022\014\n\004name\030\001 \002(\t\022-\n\013a",
+      "nnotations\030\002 \003(\0132\030.sizzle.types.Annotati" +
+      "on\022%\n\007methods\030\004 \003(\0132\024.sizzle.types.Metho" +
+      "d\022#\n\006fields\030\005 \003(\0132\023.sizzle.types.Field\"\224" +
+      "\001\n\006Method\022\014\n\004name\030\001 \002(\t\022-\n\013annotations\030\002" +
+      " \003(\0132\030.sizzle.types.Annotation\022\023\n\013return" +
+      "_type\030\003 \002(\t\022\021\n\targ_types\030\004 \003(\t\022\021\n\targ_na" +
+      "mes\030\005 \003(\t\022\022\n\nexceptions\030\006 \003(\t\"(\n\005Field\022\014" +
+      "\n\004name\030\001 \002(\t\022\021\n\ttype_name\030\002 \002(\t\"0\n\nAnnot" +
+      "ation\022\021\n\ttype_name\030\001 \002(\t\022\017\n\007content\030\002 \002(" +
       "\t\"\032\n\007Comment\022\017\n\007content\030\001 \002(\t"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
@@ -6933,7 +6126,7 @@ public final class Ast {
           internal_static_sizzle_types_File_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_sizzle_types_File_descriptor,
-              new java.lang.String[] { "Name", "Content", "Type", "Pkg", },
+              new java.lang.String[] { "Name", "Content", "FileType", "Pkg", },
               sizzle.types.Ast.File.class,
               sizzle.types.Ast.File.Builder.class);
           internal_static_sizzle_types_Package_descriptor =
@@ -6949,7 +6142,7 @@ public final class Ast {
           internal_static_sizzle_types_Type_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_sizzle_types_Type_descriptor,
-              new java.lang.String[] { "Name", "Annotations", "Types", "Methods", "Fields", },
+              new java.lang.String[] { "Name", "Annotations", "Methods", "Fields", },
               sizzle.types.Ast.Type.class,
               sizzle.types.Ast.Type.Builder.class);
           internal_static_sizzle_types_Method_descriptor =
@@ -6965,7 +6158,7 @@ public final class Ast {
           internal_static_sizzle_types_Field_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_sizzle_types_Field_descriptor,
-              new java.lang.String[] { "Name", "Type", },
+              new java.lang.String[] { "Name", "TypeName", },
               sizzle.types.Ast.Field.class,
               sizzle.types.Ast.Field.Builder.class);
           internal_static_sizzle_types_Annotation_descriptor =
@@ -6973,7 +6166,7 @@ public final class Ast {
           internal_static_sizzle_types_Annotation_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_sizzle_types_Annotation_descriptor,
-              new java.lang.String[] { "Type", "Content", },
+              new java.lang.String[] { "TypeName", "Content", },
               sizzle.types.Ast.Annotation.class,
               sizzle.types.Ast.Annotation.Builder.class);
           internal_static_sizzle_types_Comment_descriptor =
