@@ -29,8 +29,9 @@ message Package {
 message Type {
 	required string name = 1;
 	repeated Annotation annotations = 2;
-	repeated Method methods = 4;
-	repeated Field fields = 5;
+	repeated Method methods = 3;
+	repeated Field fields = 4;
+	repeated string referenced_types = 5;
 }
 
 message Method {

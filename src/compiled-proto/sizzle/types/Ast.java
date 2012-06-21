@@ -2361,7 +2361,7 @@ public final class Ast {
     sizzle.types.Ast.AnnotationOrBuilder getAnnotationsOrBuilder(
         int index);
     
-    // repeated .sizzle.types.Method methods = 4;
+    // repeated .sizzle.types.Method methods = 3;
     java.util.List<sizzle.types.Ast.Method> 
         getMethodsList();
     sizzle.types.Ast.Method getMethods(int index);
@@ -2371,7 +2371,7 @@ public final class Ast {
     sizzle.types.Ast.MethodOrBuilder getMethodsOrBuilder(
         int index);
     
-    // repeated .sizzle.types.Field fields = 5;
+    // repeated .sizzle.types.Field fields = 4;
     java.util.List<sizzle.types.Ast.Field> 
         getFieldsList();
     sizzle.types.Ast.Field getFields(int index);
@@ -2380,6 +2380,11 @@ public final class Ast {
         getFieldsOrBuilderList();
     sizzle.types.Ast.FieldOrBuilder getFieldsOrBuilder(
         int index);
+    
+    // repeated string referenced_types = 5;
+    java.util.List<String> getReferencedTypesList();
+    int getReferencedTypesCount();
+    String getReferencedTypes(int index);
   }
   public static final class Type extends
       com.google.protobuf.GeneratedMessage
@@ -2463,8 +2468,8 @@ public final class Ast {
       return annotations_.get(index);
     }
     
-    // repeated .sizzle.types.Method methods = 4;
-    public static final int METHODS_FIELD_NUMBER = 4;
+    // repeated .sizzle.types.Method methods = 3;
+    public static final int METHODS_FIELD_NUMBER = 3;
     private java.util.List<sizzle.types.Ast.Method> methods_;
     public java.util.List<sizzle.types.Ast.Method> getMethodsList() {
       return methods_;
@@ -2484,8 +2489,8 @@ public final class Ast {
       return methods_.get(index);
     }
     
-    // repeated .sizzle.types.Field fields = 5;
-    public static final int FIELDS_FIELD_NUMBER = 5;
+    // repeated .sizzle.types.Field fields = 4;
+    public static final int FIELDS_FIELD_NUMBER = 4;
     private java.util.List<sizzle.types.Ast.Field> fields_;
     public java.util.List<sizzle.types.Ast.Field> getFieldsList() {
       return fields_;
@@ -2505,11 +2510,26 @@ public final class Ast {
       return fields_.get(index);
     }
     
+    // repeated string referenced_types = 5;
+    public static final int REFERENCED_TYPES_FIELD_NUMBER = 5;
+    private com.google.protobuf.LazyStringList referencedTypes_;
+    public java.util.List<String>
+        getReferencedTypesList() {
+      return referencedTypes_;
+    }
+    public int getReferencedTypesCount() {
+      return referencedTypes_.size();
+    }
+    public String getReferencedTypes(int index) {
+      return referencedTypes_.get(index);
+    }
+    
     private void initFields() {
       name_ = "";
       annotations_ = java.util.Collections.emptyList();
       methods_ = java.util.Collections.emptyList();
       fields_ = java.util.Collections.emptyList();
+      referencedTypes_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2552,10 +2572,13 @@ public final class Ast {
         output.writeMessage(2, annotations_.get(i));
       }
       for (int i = 0; i < methods_.size(); i++) {
-        output.writeMessage(4, methods_.get(i));
+        output.writeMessage(3, methods_.get(i));
       }
       for (int i = 0; i < fields_.size(); i++) {
-        output.writeMessage(5, fields_.get(i));
+        output.writeMessage(4, fields_.get(i));
+      }
+      for (int i = 0; i < referencedTypes_.size(); i++) {
+        output.writeBytes(5, referencedTypes_.getByteString(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -2576,11 +2599,20 @@ public final class Ast {
       }
       for (int i = 0; i < methods_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, methods_.get(i));
+          .computeMessageSize(3, methods_.get(i));
       }
       for (int i = 0; i < fields_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, fields_.get(i));
+          .computeMessageSize(4, fields_.get(i));
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < referencedTypes_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(referencedTypes_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getReferencedTypesList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2729,6 +2761,8 @@ public final class Ast {
         } else {
           fieldsBuilder_.clear();
         }
+        referencedTypes_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       
@@ -2798,6 +2832,12 @@ public final class Ast {
         } else {
           result.fields_ = fieldsBuilder_.build();
         }
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          referencedTypes_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              referencedTypes_);
+          bitField0_ = (bitField0_ & ~0x00000010);
+        }
+        result.referencedTypes_ = referencedTypes_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2895,6 +2935,16 @@ public final class Ast {
             }
           }
         }
+        if (!other.referencedTypes_.isEmpty()) {
+          if (referencedTypes_.isEmpty()) {
+            referencedTypes_ = other.referencedTypes_;
+            bitField0_ = (bitField0_ & ~0x00000010);
+          } else {
+            ensureReferencedTypesIsMutable();
+            referencedTypes_.addAll(other.referencedTypes_);
+          }
+          onChanged();
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -2959,16 +3009,21 @@ public final class Ast {
               addAnnotations(subBuilder.buildPartial());
               break;
             }
-            case 34: {
+            case 26: {
               sizzle.types.Ast.Method.Builder subBuilder = sizzle.types.Ast.Method.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addMethods(subBuilder.buildPartial());
               break;
             }
-            case 42: {
+            case 34: {
               sizzle.types.Ast.Field.Builder subBuilder = sizzle.types.Ast.Field.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addFields(subBuilder.buildPartial());
+              break;
+            }
+            case 42: {
+              ensureReferencedTypesIsMutable();
+              referencedTypes_.add(input.readBytes());
               break;
             }
           }
@@ -3199,7 +3254,7 @@ public final class Ast {
         return annotationsBuilder_;
       }
       
-      // repeated .sizzle.types.Method methods = 4;
+      // repeated .sizzle.types.Method methods = 3;
       private java.util.List<sizzle.types.Ast.Method> methods_ =
         java.util.Collections.emptyList();
       private void ensureMethodsIsMutable() {
@@ -3385,7 +3440,7 @@ public final class Ast {
         return methodsBuilder_;
       }
       
-      // repeated .sizzle.types.Field fields = 5;
+      // repeated .sizzle.types.Field fields = 4;
       private java.util.List<sizzle.types.Ast.Field> fields_ =
         java.util.Collections.emptyList();
       private void ensureFieldsIsMutable() {
@@ -3569,6 +3624,62 @@ public final class Ast {
           fields_ = null;
         }
         return fieldsBuilder_;
+      }
+      
+      // repeated string referenced_types = 5;
+      private com.google.protobuf.LazyStringList referencedTypes_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureReferencedTypesIsMutable() {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          referencedTypes_ = new com.google.protobuf.LazyStringArrayList(referencedTypes_);
+          bitField0_ |= 0x00000010;
+         }
+      }
+      public java.util.List<String>
+          getReferencedTypesList() {
+        return java.util.Collections.unmodifiableList(referencedTypes_);
+      }
+      public int getReferencedTypesCount() {
+        return referencedTypes_.size();
+      }
+      public String getReferencedTypes(int index) {
+        return referencedTypes_.get(index);
+      }
+      public Builder setReferencedTypes(
+          int index, String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureReferencedTypesIsMutable();
+        referencedTypes_.set(index, value);
+        onChanged();
+        return this;
+      }
+      public Builder addReferencedTypes(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureReferencedTypesIsMutable();
+        referencedTypes_.add(value);
+        onChanged();
+        return this;
+      }
+      public Builder addAllReferencedTypes(
+          java.lang.Iterable<String> values) {
+        ensureReferencedTypesIsMutable();
+        super.addAll(values, referencedTypes_);
+        onChanged();
+        return this;
+      }
+      public Builder clearReferencedTypes() {
+        referencedTypes_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        onChanged();
+        return this;
+      }
+      void addReferencedTypes(com.google.protobuf.ByteString value) {
+        ensureReferencedTypesIsMutable();
+        referencedTypes_.add(value);
+        onChanged();
       }
       
       // @@protoc_insertion_point(builder_scope:sizzle.types.Type)
@@ -6096,17 +6207,18 @@ public final class Ast {
       "kage\"B\n\010FileType\022\013\n\007UNKNOWN\020\000\022\n\n\006SOURCE\020" +
       "\001\022\n\n\006BINARY\020\002\022\010\n\004TEXT\020\003\022\007\n\003XML\020\004\":\n\007Pack" +
       "age\022\014\n\004name\030\001 \002(\t\022!\n\005types\030\002 \003(\0132\022.sizzl" +
-      "e.types.Type\"\217\001\n\004Type\022\014\n\004name\030\001 \002(\t\022-\n\013a",
+      "e.types.Type\"\251\001\n\004Type\022\014\n\004name\030\001 \002(\t\022-\n\013a",
       "nnotations\030\002 \003(\0132\030.sizzle.types.Annotati" +
-      "on\022%\n\007methods\030\004 \003(\0132\024.sizzle.types.Metho" +
-      "d\022#\n\006fields\030\005 \003(\0132\023.sizzle.types.Field\"\224" +
-      "\001\n\006Method\022\014\n\004name\030\001 \002(\t\022-\n\013annotations\030\002" +
-      " \003(\0132\030.sizzle.types.Annotation\022\023\n\013return" +
-      "_type\030\003 \002(\t\022\021\n\targ_types\030\004 \003(\t\022\021\n\targ_na" +
-      "mes\030\005 \003(\t\022\022\n\nexceptions\030\006 \003(\t\"(\n\005Field\022\014" +
-      "\n\004name\030\001 \002(\t\022\021\n\ttype_name\030\002 \002(\t\"0\n\nAnnot" +
-      "ation\022\021\n\ttype_name\030\001 \002(\t\022\017\n\007content\030\002 \002(" +
-      "\t\"\032\n\007Comment\022\017\n\007content\030\001 \002(\t"
+      "on\022%\n\007methods\030\003 \003(\0132\024.sizzle.types.Metho" +
+      "d\022#\n\006fields\030\004 \003(\0132\023.sizzle.types.Field\022\030" +
+      "\n\020referenced_types\030\005 \003(\t\"\224\001\n\006Method\022\014\n\004n" +
+      "ame\030\001 \002(\t\022-\n\013annotations\030\002 \003(\0132\030.sizzle." +
+      "types.Annotation\022\023\n\013return_type\030\003 \002(\t\022\021\n" +
+      "\targ_types\030\004 \003(\t\022\021\n\targ_names\030\005 \003(\t\022\022\n\ne" +
+      "xceptions\030\006 \003(\t\"(\n\005Field\022\014\n\004name\030\001 \002(\t\022\021" +
+      "\n\ttype_name\030\002 \002(\t\"0\n\nAnnotation\022\021\n\ttype_" +
+      "name\030\001 \002(\t\022\017\n\007content\030\002 \002(\t\"\032\n\007Comment\022\017",
+      "\n\007content\030\001 \002(\t"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6142,7 +6254,7 @@ public final class Ast {
           internal_static_sizzle_types_Type_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_sizzle_types_Type_descriptor,
-              new java.lang.String[] { "Name", "Annotations", "Methods", "Fields", },
+              new java.lang.String[] { "Name", "Annotations", "Methods", "Fields", "ReferencedTypes", },
               sizzle.types.Ast.Type.class,
               sizzle.types.Ast.Type.Builder.class);
           internal_static_sizzle_types_Method_descriptor =
