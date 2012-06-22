@@ -279,7 +279,7 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 					if (f.hasName()) {
 						src = f.getName() + "(" + src + ")";
 					} else if (f.hasMacro()) {
-						src = CodeGeneratingVisitor.expand("X" + f.getMacro(), src.split(","));
+						src = CodeGeneratingVisitor.expand(f.getMacro(), src.split(","));
 					}
 				}
 
