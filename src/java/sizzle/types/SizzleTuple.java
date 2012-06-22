@@ -12,7 +12,7 @@ import java.util.Map;
  * @author anthonyu
  * 
  */
-public class SizzleTuple extends SizzleType {
+public class SizzleTuple extends SizzleScalar {
 	private final List<SizzleType> members;
 	private final Map<String, Integer> names;
 

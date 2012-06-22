@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import org.apache.hadoop.conf.Configurable;
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.BytesWritable;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.log4j.Logger;
 
@@ -18,7 +18,7 @@ import sizzle.io.EmitValue;
  * @author anthonyu
  * 
  */
-public abstract class SizzleMapper extends Mapper<LongWritable, Text, EmitKey, EmitValue> implements Configurable {
+public abstract class SizzleMapper extends Mapper<Text, BytesWritable, EmitKey, EmitValue> implements Configurable {
 	protected static final Logger LOG = Logger.getLogger(SizzleMapper.class);
 
 	private Configuration conf;
@@ -40,7 +40,7 @@ public abstract class SizzleMapper extends Mapper<LongWritable, Text, EmitKey, E
 
 	/** {@inheritDoc} */
 	@Override
-	protected void setup(final Mapper<LongWritable, Text, EmitKey, EmitValue>.Context context) throws IOException, InterruptedException {
+	protected void setup(final Mapper<Text, BytesWritable, EmitKey, EmitValue>.Context context) throws IOException, InterruptedException {
 		super.setup(context);
 
 		this.context = context;

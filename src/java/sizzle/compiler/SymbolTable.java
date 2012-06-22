@@ -30,6 +30,7 @@ import sizzle.types.SizzleFloat;
 import sizzle.types.SizzleFunction;
 import sizzle.types.SizzleInt;
 import sizzle.types.SizzleMap;
+import sizzle.types.SizzleProtoTuple;
 import sizzle.types.SizzleScalar;
 import sizzle.types.SizzleString;
 import sizzle.types.SizzleTable;
@@ -57,20 +58,13 @@ public class SymbolTable {
 
 	private String id;
 	private Operand operand;
+	private SizzleType operandType;
 
-	public SymbolTable() throws IOException {
-		this(new ArrayList<URL>(), new SizzleString());
+	private SymbolTable() throws IOException {
+		this(new ArrayList<URL>());
 	}
 
 	public SymbolTable(final List<URL> libs) throws IOException {
-		this(libs, new SizzleString());
-	}
-
-	public SymbolTable(final SizzleType input) throws IOException {
-		this(new ArrayList<URL>(), input);
-	}
-
-	public SymbolTable(final List<URL> libs, final SizzleType input) throws IOException {
 		this.strictCompatibility = true;
 
 		this.loader = Thread.currentThread().getContextClassLoader();
@@ -108,8 +102,6 @@ public class SymbolTable {
 
 		// variables with a global scope
 		this.globals = new HashMap<String, SizzleType>();
-		// set the type of the input
-		this.globals.put("input", input);
 		this.globals.put("true", new SizzleBool());
 		this.globals.put("false", new SizzleBool());
 		this.globals.put("PI", new SizzleFloat());
@@ -128,6 +120,7 @@ public class SymbolTable {
 
 		this.setFunction("def", new SizzleFunction(new SizzleBool(), new SizzleType[] { new SizzleAny() }, "${0} != null"));
 		this.setFunction("len", new SizzleFunction(new SizzleInt(), new SizzleType[] { new SizzleArray(new SizzleScalar()) }, "${0}.length"));
+		this.setFunction("len", new SizzleFunction(new SizzleInt(), new SizzleType[] { new SizzleArray(new SizzleAny()) }, "${0}.size()"));
 		this.setFunction("len", new SizzleFunction(new SizzleInt(), new SizzleType[] { new SizzleString() }, "${0}.length()"));
 		this.setFunction("len", new SizzleFunction(new SizzleInt(), new SizzleType[] { new SizzleBytes() }, "${0}.length"));
 		this.setFunction("len", new SizzleFunction(new SizzleInt(), new SizzleType[] { new SizzleMap(new SizzleScalar(), new SizzleScalar()) },
@@ -491,7 +484,7 @@ public class SymbolTable {
 				members.add(this.protomap.get(type));
 			}
 
-			this.idmap.put(c.getSimpleName(), new SizzleTuple(members, names));
+			this.idmap.put(c.getSimpleName(), new SizzleProtoTuple(members, names));
 			// TODO support protocol buffer casts
 		}
 	}
@@ -509,9 +502,7 @@ public class SymbolTable {
 	}
 
 	public SizzleFunction getFunction(final String id, final SizzleType[] formalParameters) {
-		final SizzleFunction func = this.functions.getFunction(id, formalParameters);
-
-		return func;
+		return this.functions.getFunction(id, formalParameters);
 	}
 
 	public void setFunction(final String id, final SizzleFunction sizzleFunction) {
@@ -546,6 +537,14 @@ public class SymbolTable {
 
 	public Operand getOperand() {
 		return this.operand;
+	}
+
+	public void setOperandType(final SizzleType operandType) {
+		this.operandType = operandType;
+	}
+
+	public SizzleType getOperandType() {
+		return this.operandType;
 	}
 
 	@Override

@@ -84,6 +84,7 @@ import sizzle.types.SizzleFunction;
 import sizzle.types.SizzleInt;
 import sizzle.types.SizzleMap;
 import sizzle.types.SizzleName;
+import sizzle.types.SizzleProtoTuple;
 import sizzle.types.SizzleScalar;
 import sizzle.types.SizzleString;
 import sizzle.types.SizzleTable;
@@ -276,7 +277,10 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 	/** {@inheritDoc} */
 	@Override
 	public SizzleType visit(final ProtoTupleType n, final SymbolTable argu) {
-		throw new RuntimeException("unimplemented");
+		if (n.f2.present())
+			return new SizzleProtoTuple(this.check((SimpleMemberList) n.f2.node, argu));
+		else
+			return new SizzleProtoTuple(new ArrayList<SizzleType>());
 	}
 
 	/** {@inheritDoc} */

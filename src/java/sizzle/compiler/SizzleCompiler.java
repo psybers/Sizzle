@@ -35,6 +35,8 @@ import org.scannotation.ClasspathUrlFinder;
 import sizzle.parser.ParseException;
 import sizzle.parser.SizzleParser;
 import sizzle.parser.syntaxtree.Start;
+import sizzle.types.SizzleBytes;
+import sizzle.types.SizzleString;
 
 public class SizzleCompiler {
 	private static Logger LOG = Logger.getLogger(SizzleCompiler.class);
@@ -170,6 +172,11 @@ public class SizzleCompiler {
 			final CodeGeneratingVisitor codeGenerator = new CodeGeneratingVisitor(name, stg);
 
 			final SymbolTable st = new SymbolTable(libs);
+			// FIXME rdyer
+			if (false)
+				st.set("input", new SizzleString(), true);
+			else
+				st.set("input", new SizzleBytes(), true);
 
 			final BufferedReader r = new BufferedReader(new FileReader(in));
 			

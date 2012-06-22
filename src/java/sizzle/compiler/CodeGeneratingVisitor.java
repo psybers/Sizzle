@@ -84,6 +84,7 @@ import sizzle.types.SizzleArray;
 import sizzle.types.SizzleBytes;
 import sizzle.types.SizzleFunction;
 import sizzle.types.SizzleMap;
+import sizzle.types.SizzleProtoTuple;
 import sizzle.types.SizzleString;
 import sizzle.types.SizzleTable;
 import sizzle.types.SizzleType;
@@ -185,12 +186,18 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 		final StringTemplate st = this.stg.getInstanceOf("Program");
 
 		st.setAttribute("name", this.name);
-		if (argu.get("input").equals(new SizzleString())) {
+		if (argu.get("input").equals(new SizzleBytes())) {
+			// FIXME rdyer
+			stg.getMap("identifierMap").put("input", "___inputStream");
+			st.setAttribute("inputStream", "java.io.ByteArrayInputStream ___inputStream = new java.io.ByteArrayInputStream(value.getBytes(), 0, value.getLength());");
+			st.setAttribute("inputFormatClass", "org.apache.hadoop.mapreduce.lib.input.SequenceFileInputFormat");
+			st.setAttribute("keyClass", "org.apache.hadoop.io.Text");
+			st.setAttribute("valueClass", "org.apache.hadoop.io.BytesWritable");
+		} else {
+			stg.getMap("identifierMap").put("input", "value.toString()");
 			st.setAttribute("inputFormatClass", "org.apache.hadoop.mapreduce.lib.input.TextInputFormat");
 			st.setAttribute("keyClass", "org.apache.hadoop.io.LongWritable");
 			st.setAttribute("valueClass", "org.apache.hadoop.io.Text");
-		} else if (argu.get("input").equals(new SizzleBytes())) {
-			throw new RuntimeException("unimplemented");
 		}
 
 		st.setAttribute("staticDeclarations", this.staticdeclarator.visit(n, argu));
@@ -712,10 +719,21 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 			final NodeChoice nodeChoice = (NodeChoice) n.f1.nodes.get(0);
 
 			switch (nodeChoice.which) {
+			case 0: // selector
 			case 1: // index
+				argu.setOperand(n.f0);
+				try {
+					argu.setOperandType(this.typechecker.visit(argu.getOperand(), argu.cloneNonLocals()));
+				} catch (final IOException e) {
+				}
+				String accept = n.f0.accept(this, argu) + n.f1.nodes.elementAt(0).accept(this, argu);
+				for (int i = 1; i < n.f1.nodes.size(); i++)
+					accept += n.f1.nodes.elementAt(i).accept(this, argu);
+				argu.setOperand(null);
+				return accept;
 			case 2: // call
 				argu.setOperand(n.f0);
-				final String accept = n.f1.nodes.elementAt(0).accept(this, argu);
+				accept = n.f1.nodes.elementAt(0).accept(this, argu);
 				argu.setOperand(null);
 				return accept;
 			default:
@@ -728,24 +746,36 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 
 	@Override
 	public String visit(final Selector n, final SymbolTable argu) {
-		throw new RuntimeException("unimplemented");
+		try {
+			if (!(argu.getOperandType() instanceof SizzleProtoTuple))
+				throw new RuntimeException("unimplemented");
+
+			SizzleProtoTuple tuple = (SizzleProtoTuple) argu.getOperandType();
+			String member = n.f1.f0.tokenImage;
+
+			argu.setOperandType(tuple.getMember(member));
+			if (tuple.getMember(member) instanceof SizzleArray)
+				return ".get" + camelCase(n.f1.f0.tokenImage) + "List()";
+			return ".get" + camelCase(n.f1.f0.tokenImage) + "()";
+		} catch (final TypeException e) {
+			throw new RuntimeException("unimplemented");
+		}
 	}
 
 	@Override
 	public String visit(final Index n, final SymbolTable argu) {
 		final StringTemplate st = this.stg.getInstanceOf("Index");
 
-		try {
-			final SizzleType t = this.typechecker.visit(argu.getOperand(), argu.cloneNonLocals());
-			if (t instanceof SizzleMap)
-				st.setAttribute("map", true);
-			else if (t instanceof SizzleArray)
-				st.setAttribute("map", false);
-		} catch (final IOException e) {
-			throw new RuntimeException(e.getClass().getSimpleName() + " caught", e);
+		final SizzleType t = argu.getOperandType();
+		if (t instanceof SizzleMap) {
+			argu.setOperandType(((SizzleMap) t).getType());
+			st.setAttribute("map", true);
+		} else if (t instanceof SizzleArray) {
+			argu.setOperandType(((SizzleArray) t).getType());
+			st.setAttribute("map", ((SizzleArray) t).getType() instanceof SizzleProtoTuple);
 		}
 
-		st.setAttribute("operand", argu.getOperand().accept(this, argu));
+		st.setAttribute("operand", "");
 
 		st.setAttribute("index", n.f1.accept(this, argu));
 
@@ -1458,4 +1488,26 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 	// public String visit(final WhileStatement n, final SymbolTable argu) {
 	// throw new RuntimeException("unimplemented");
 	// }
+
+	private static String camelCase(final String string) {
+		final StringBuilder camelized = new StringBuilder();
+
+		boolean lower = false;
+		for (final char c : string.toCharArray())
+			if (c == '_')
+				lower = false;
+			else if (Character.isDigit(c)) {
+				camelized.append(c);
+				lower = false;
+			} else if (Character.isLetter(c)) {
+				if (lower)
+					camelized.append(c);
+				else
+					camelized.append(Character.toUpperCase(c));
+
+				lower = true;
+			}
+
+		return camelized.toString();
+	}
 }
