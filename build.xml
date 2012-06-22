@@ -86,9 +86,9 @@
 				<patternset>
 					<include name="sizzle/" />
 					<exclude name="**/compiler/" />
-					<exclude name="**/types/" />
 				</patternset>
 			</fileset>
+			<zipfileset excludes="META-INF/" src="lib/protobuf-java-2.4.1.jar" />
 		</jar>
 		<jar destfile="dist/sizzle-compiler.jar">
 			<manifest>
