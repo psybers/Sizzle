@@ -170,7 +170,7 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 		if (n.f2.present()) {
 			lhs = n.f2.node.accept(this, argu);
 
-			if (rhs != null && !lhs.assigns(rhs) && !argu.hasCast(lhs, rhs))
+			if (rhs != null && !lhs.assigns(rhs) && !argu.hasCast(rhs, lhs))
 				throw new TypeException("incorrect type " + rhs + " for assignment to " + id + ':' + lhs);
 		} else {
 			if (rhs == null)
