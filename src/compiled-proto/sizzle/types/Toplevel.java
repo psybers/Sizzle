@@ -578,11 +578,62 @@ public final class Toplevel {
     boolean hasName();
     String getName();
     
-    // required string url = 2;
-    boolean hasUrl();
-    String getUrl();
+    // required string project_url = 2;
+    boolean hasProjectUrl();
+    String getProjectUrl();
     
-    // repeated .sizzle.types.CodeRepository code_repositories = 3;
+    // required string homepage_url = 3;
+    boolean hasHomepageUrl();
+    String getHomepageUrl();
+    
+    // required uint64 created_date = 4;
+    boolean hasCreatedDate();
+    long getCreatedDate();
+    
+    // required string id = 5;
+    boolean hasId();
+    String getId();
+    
+    // required string description = 6;
+    boolean hasDescription();
+    String getDescription();
+    
+    // repeated string programming_languages = 7;
+    java.util.List<String> getProgrammingLanguagesList();
+    int getProgrammingLanguagesCount();
+    String getProgrammingLanguages(int index);
+    
+    // repeated string licenses = 8;
+    java.util.List<String> getLicensesList();
+    int getLicensesCount();
+    String getLicenses(int index);
+    
+    // repeated string topics = 9;
+    java.util.List<String> getTopicsList();
+    int getTopicsCount();
+    String getTopics(int index);
+    
+    // repeated .sizzle.types.Person maintainers = 10;
+    java.util.List<sizzle.types.Shared.Person> 
+        getMaintainersList();
+    sizzle.types.Shared.Person getMaintainers(int index);
+    int getMaintainersCount();
+    java.util.List<? extends sizzle.types.Shared.PersonOrBuilder> 
+        getMaintainersOrBuilderList();
+    sizzle.types.Shared.PersonOrBuilder getMaintainersOrBuilder(
+        int index);
+    
+    // repeated .sizzle.types.Person developers = 11;
+    java.util.List<sizzle.types.Shared.Person> 
+        getDevelopersList();
+    sizzle.types.Shared.Person getDevelopers(int index);
+    int getDevelopersCount();
+    java.util.List<? extends sizzle.types.Shared.PersonOrBuilder> 
+        getDevelopersOrBuilderList();
+    sizzle.types.Shared.PersonOrBuilder getDevelopersOrBuilder(
+        int index);
+    
+    // repeated .sizzle.types.CodeRepository code_repositories = 12;
     java.util.List<sizzle.types.Code.CodeRepository> 
         getCodeRepositoriesList();
     sizzle.types.Code.CodeRepository getCodeRepositories(int index);
@@ -592,7 +643,7 @@ public final class Toplevel {
     sizzle.types.Code.CodeRepositoryOrBuilder getCodeRepositoriesOrBuilder(
         int index);
     
-    // repeated .sizzle.types.BugRepository bug_repositories = 4;
+    // repeated .sizzle.types.BugRepository bug_repositories = 13;
     java.util.List<sizzle.types.Bugs.BugRepository> 
         getBugRepositoriesList();
     sizzle.types.Bugs.BugRepository getBugRepositories(int index);
@@ -663,14 +714,14 @@ public final class Toplevel {
       }
     }
     
-    // required string url = 2;
-    public static final int URL_FIELD_NUMBER = 2;
-    private java.lang.Object url_;
-    public boolean hasUrl() {
+    // required string project_url = 2;
+    public static final int PROJECT_URL_FIELD_NUMBER = 2;
+    private java.lang.Object projectUrl_;
+    public boolean hasProjectUrl() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public String getUrl() {
-      java.lang.Object ref = url_;
+    public String getProjectUrl() {
+      java.lang.Object ref = projectUrl_;
       if (ref instanceof String) {
         return (String) ref;
       } else {
@@ -678,25 +729,215 @@ public final class Toplevel {
             (com.google.protobuf.ByteString) ref;
         String s = bs.toStringUtf8();
         if (com.google.protobuf.Internal.isValidUtf8(bs)) {
-          url_ = s;
+          projectUrl_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getUrlBytes() {
-      java.lang.Object ref = url_;
+    private com.google.protobuf.ByteString getProjectUrlBytes() {
+      java.lang.Object ref = projectUrl_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8((String) ref);
-        url_ = b;
+        projectUrl_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     
-    // repeated .sizzle.types.CodeRepository code_repositories = 3;
-    public static final int CODE_REPOSITORIES_FIELD_NUMBER = 3;
+    // required string homepage_url = 3;
+    public static final int HOMEPAGE_URL_FIELD_NUMBER = 3;
+    private java.lang.Object homepageUrl_;
+    public boolean hasHomepageUrl() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public String getHomepageUrl() {
+      java.lang.Object ref = homepageUrl_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          homepageUrl_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getHomepageUrlBytes() {
+      java.lang.Object ref = homepageUrl_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        homepageUrl_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // required uint64 created_date = 4;
+    public static final int CREATED_DATE_FIELD_NUMBER = 4;
+    private long createdDate_;
+    public boolean hasCreatedDate() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public long getCreatedDate() {
+      return createdDate_;
+    }
+    
+    // required string id = 5;
+    public static final int ID_FIELD_NUMBER = 5;
+    private java.lang.Object id_;
+    public boolean hasId() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public String getId() {
+      java.lang.Object ref = id_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          id_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getIdBytes() {
+      java.lang.Object ref = id_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        id_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // required string description = 6;
+    public static final int DESCRIPTION_FIELD_NUMBER = 6;
+    private java.lang.Object description_;
+    public boolean hasDescription() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public String getDescription() {
+      java.lang.Object ref = description_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          description_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getDescriptionBytes() {
+      java.lang.Object ref = description_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        description_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // repeated string programming_languages = 7;
+    public static final int PROGRAMMING_LANGUAGES_FIELD_NUMBER = 7;
+    private com.google.protobuf.LazyStringList programmingLanguages_;
+    public java.util.List<String>
+        getProgrammingLanguagesList() {
+      return programmingLanguages_;
+    }
+    public int getProgrammingLanguagesCount() {
+      return programmingLanguages_.size();
+    }
+    public String getProgrammingLanguages(int index) {
+      return programmingLanguages_.get(index);
+    }
+    
+    // repeated string licenses = 8;
+    public static final int LICENSES_FIELD_NUMBER = 8;
+    private com.google.protobuf.LazyStringList licenses_;
+    public java.util.List<String>
+        getLicensesList() {
+      return licenses_;
+    }
+    public int getLicensesCount() {
+      return licenses_.size();
+    }
+    public String getLicenses(int index) {
+      return licenses_.get(index);
+    }
+    
+    // repeated string topics = 9;
+    public static final int TOPICS_FIELD_NUMBER = 9;
+    private com.google.protobuf.LazyStringList topics_;
+    public java.util.List<String>
+        getTopicsList() {
+      return topics_;
+    }
+    public int getTopicsCount() {
+      return topics_.size();
+    }
+    public String getTopics(int index) {
+      return topics_.get(index);
+    }
+    
+    // repeated .sizzle.types.Person maintainers = 10;
+    public static final int MAINTAINERS_FIELD_NUMBER = 10;
+    private java.util.List<sizzle.types.Shared.Person> maintainers_;
+    public java.util.List<sizzle.types.Shared.Person> getMaintainersList() {
+      return maintainers_;
+    }
+    public java.util.List<? extends sizzle.types.Shared.PersonOrBuilder> 
+        getMaintainersOrBuilderList() {
+      return maintainers_;
+    }
+    public int getMaintainersCount() {
+      return maintainers_.size();
+    }
+    public sizzle.types.Shared.Person getMaintainers(int index) {
+      return maintainers_.get(index);
+    }
+    public sizzle.types.Shared.PersonOrBuilder getMaintainersOrBuilder(
+        int index) {
+      return maintainers_.get(index);
+    }
+    
+    // repeated .sizzle.types.Person developers = 11;
+    public static final int DEVELOPERS_FIELD_NUMBER = 11;
+    private java.util.List<sizzle.types.Shared.Person> developers_;
+    public java.util.List<sizzle.types.Shared.Person> getDevelopersList() {
+      return developers_;
+    }
+    public java.util.List<? extends sizzle.types.Shared.PersonOrBuilder> 
+        getDevelopersOrBuilderList() {
+      return developers_;
+    }
+    public int getDevelopersCount() {
+      return developers_.size();
+    }
+    public sizzle.types.Shared.Person getDevelopers(int index) {
+      return developers_.get(index);
+    }
+    public sizzle.types.Shared.PersonOrBuilder getDevelopersOrBuilder(
+        int index) {
+      return developers_.get(index);
+    }
+    
+    // repeated .sizzle.types.CodeRepository code_repositories = 12;
+    public static final int CODE_REPOSITORIES_FIELD_NUMBER = 12;
     private java.util.List<sizzle.types.Code.CodeRepository> codeRepositories_;
     public java.util.List<sizzle.types.Code.CodeRepository> getCodeRepositoriesList() {
       return codeRepositories_;
@@ -716,8 +957,8 @@ public final class Toplevel {
       return codeRepositories_.get(index);
     }
     
-    // repeated .sizzle.types.BugRepository bug_repositories = 4;
-    public static final int BUG_REPOSITORIES_FIELD_NUMBER = 4;
+    // repeated .sizzle.types.BugRepository bug_repositories = 13;
+    public static final int BUG_REPOSITORIES_FIELD_NUMBER = 13;
     private java.util.List<sizzle.types.Bugs.BugRepository> bugRepositories_;
     public java.util.List<sizzle.types.Bugs.BugRepository> getBugRepositoriesList() {
       return bugRepositories_;
@@ -739,7 +980,16 @@ public final class Toplevel {
     
     private void initFields() {
       name_ = "";
-      url_ = "";
+      projectUrl_ = "";
+      homepageUrl_ = "";
+      createdDate_ = 0L;
+      id_ = "";
+      description_ = "";
+      programmingLanguages_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      licenses_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      topics_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      maintainers_ = java.util.Collections.emptyList();
+      developers_ = java.util.Collections.emptyList();
       codeRepositories_ = java.util.Collections.emptyList();
       bugRepositories_ = java.util.Collections.emptyList();
     }
@@ -752,9 +1002,37 @@ public final class Toplevel {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasUrl()) {
+      if (!hasProjectUrl()) {
         memoizedIsInitialized = 0;
         return false;
+      }
+      if (!hasHomepageUrl()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCreatedDate()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasDescription()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      for (int i = 0; i < getMaintainersCount(); i++) {
+        if (!getMaintainers(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      for (int i = 0; i < getDevelopersCount(); i++) {
+        if (!getDevelopers(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
       }
       for (int i = 0; i < getCodeRepositoriesCount(); i++) {
         if (!getCodeRepositories(i).isInitialized()) {
@@ -779,13 +1057,40 @@ public final class Toplevel {
         output.writeBytes(1, getNameBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getUrlBytes());
+        output.writeBytes(2, getProjectUrlBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getHomepageUrlBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeUInt64(4, createdDate_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getIdBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, getDescriptionBytes());
+      }
+      for (int i = 0; i < programmingLanguages_.size(); i++) {
+        output.writeBytes(7, programmingLanguages_.getByteString(i));
+      }
+      for (int i = 0; i < licenses_.size(); i++) {
+        output.writeBytes(8, licenses_.getByteString(i));
+      }
+      for (int i = 0; i < topics_.size(); i++) {
+        output.writeBytes(9, topics_.getByteString(i));
+      }
+      for (int i = 0; i < maintainers_.size(); i++) {
+        output.writeMessage(10, maintainers_.get(i));
+      }
+      for (int i = 0; i < developers_.size(); i++) {
+        output.writeMessage(11, developers_.get(i));
       }
       for (int i = 0; i < codeRepositories_.size(); i++) {
-        output.writeMessage(3, codeRepositories_.get(i));
+        output.writeMessage(12, codeRepositories_.get(i));
       }
       for (int i = 0; i < bugRepositories_.size(); i++) {
-        output.writeMessage(4, bugRepositories_.get(i));
+        output.writeMessage(13, bugRepositories_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -802,15 +1107,66 @@ public final class Toplevel {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getUrlBytes());
+          .computeBytesSize(2, getProjectUrlBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getHomepageUrlBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(4, createdDate_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getIdBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, getDescriptionBytes());
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < programmingLanguages_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(programmingLanguages_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getProgrammingLanguagesList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < licenses_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(licenses_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getLicensesList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < topics_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(topics_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getTopicsList().size();
+      }
+      for (int i = 0; i < maintainers_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(10, maintainers_.get(i));
+      }
+      for (int i = 0; i < developers_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(11, developers_.get(i));
       }
       for (int i = 0; i < codeRepositories_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, codeRepositories_.get(i));
+          .computeMessageSize(12, codeRepositories_.get(i));
       }
       for (int i = 0; i < bugRepositories_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, bugRepositories_.get(i));
+          .computeMessageSize(13, bugRepositories_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -928,6 +1284,8 @@ public final class Toplevel {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getMaintainersFieldBuilder();
+          getDevelopersFieldBuilder();
           getCodeRepositoriesFieldBuilder();
           getBugRepositoriesFieldBuilder();
         }
@@ -940,17 +1298,43 @@ public final class Toplevel {
         super.clear();
         name_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        url_ = "";
+        projectUrl_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
+        homepageUrl_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        createdDate_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        id_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        description_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
+        programmingLanguages_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        licenses_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        topics_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        if (maintainersBuilder_ == null) {
+          maintainers_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000200);
+        } else {
+          maintainersBuilder_.clear();
+        }
+        if (developersBuilder_ == null) {
+          developers_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000400);
+        } else {
+          developersBuilder_.clear();
+        }
         if (codeRepositoriesBuilder_ == null) {
           codeRepositories_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000800);
         } else {
           codeRepositoriesBuilder_.clear();
         }
         if (bugRepositoriesBuilder_ == null) {
           bugRepositories_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00001000);
         } else {
           bugRepositoriesBuilder_.clear();
         }
@@ -999,20 +1383,72 @@ public final class Toplevel {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.url_ = url_;
+        result.projectUrl_ = projectUrl_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.homepageUrl_ = homepageUrl_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.createdDate_ = createdDate_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.id_ = id_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.description_ = description_;
+        if (((bitField0_ & 0x00000040) == 0x00000040)) {
+          programmingLanguages_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              programmingLanguages_);
+          bitField0_ = (bitField0_ & ~0x00000040);
+        }
+        result.programmingLanguages_ = programmingLanguages_;
+        if (((bitField0_ & 0x00000080) == 0x00000080)) {
+          licenses_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              licenses_);
+          bitField0_ = (bitField0_ & ~0x00000080);
+        }
+        result.licenses_ = licenses_;
+        if (((bitField0_ & 0x00000100) == 0x00000100)) {
+          topics_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              topics_);
+          bitField0_ = (bitField0_ & ~0x00000100);
+        }
+        result.topics_ = topics_;
+        if (maintainersBuilder_ == null) {
+          if (((bitField0_ & 0x00000200) == 0x00000200)) {
+            maintainers_ = java.util.Collections.unmodifiableList(maintainers_);
+            bitField0_ = (bitField0_ & ~0x00000200);
+          }
+          result.maintainers_ = maintainers_;
+        } else {
+          result.maintainers_ = maintainersBuilder_.build();
+        }
+        if (developersBuilder_ == null) {
+          if (((bitField0_ & 0x00000400) == 0x00000400)) {
+            developers_ = java.util.Collections.unmodifiableList(developers_);
+            bitField0_ = (bitField0_ & ~0x00000400);
+          }
+          result.developers_ = developers_;
+        } else {
+          result.developers_ = developersBuilder_.build();
+        }
         if (codeRepositoriesBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          if (((bitField0_ & 0x00000800) == 0x00000800)) {
             codeRepositories_ = java.util.Collections.unmodifiableList(codeRepositories_);
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000800);
           }
           result.codeRepositories_ = codeRepositories_;
         } else {
           result.codeRepositories_ = codeRepositoriesBuilder_.build();
         }
         if (bugRepositoriesBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          if (((bitField0_ & 0x00001000) == 0x00001000)) {
             bugRepositories_ = java.util.Collections.unmodifiableList(bugRepositories_);
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00001000);
           }
           result.bugRepositories_ = bugRepositories_;
         } else {
@@ -1037,14 +1473,108 @@ public final class Toplevel {
         if (other.hasName()) {
           setName(other.getName());
         }
-        if (other.hasUrl()) {
-          setUrl(other.getUrl());
+        if (other.hasProjectUrl()) {
+          setProjectUrl(other.getProjectUrl());
+        }
+        if (other.hasHomepageUrl()) {
+          setHomepageUrl(other.getHomepageUrl());
+        }
+        if (other.hasCreatedDate()) {
+          setCreatedDate(other.getCreatedDate());
+        }
+        if (other.hasId()) {
+          setId(other.getId());
+        }
+        if (other.hasDescription()) {
+          setDescription(other.getDescription());
+        }
+        if (!other.programmingLanguages_.isEmpty()) {
+          if (programmingLanguages_.isEmpty()) {
+            programmingLanguages_ = other.programmingLanguages_;
+            bitField0_ = (bitField0_ & ~0x00000040);
+          } else {
+            ensureProgrammingLanguagesIsMutable();
+            programmingLanguages_.addAll(other.programmingLanguages_);
+          }
+          onChanged();
+        }
+        if (!other.licenses_.isEmpty()) {
+          if (licenses_.isEmpty()) {
+            licenses_ = other.licenses_;
+            bitField0_ = (bitField0_ & ~0x00000080);
+          } else {
+            ensureLicensesIsMutable();
+            licenses_.addAll(other.licenses_);
+          }
+          onChanged();
+        }
+        if (!other.topics_.isEmpty()) {
+          if (topics_.isEmpty()) {
+            topics_ = other.topics_;
+            bitField0_ = (bitField0_ & ~0x00000100);
+          } else {
+            ensureTopicsIsMutable();
+            topics_.addAll(other.topics_);
+          }
+          onChanged();
+        }
+        if (maintainersBuilder_ == null) {
+          if (!other.maintainers_.isEmpty()) {
+            if (maintainers_.isEmpty()) {
+              maintainers_ = other.maintainers_;
+              bitField0_ = (bitField0_ & ~0x00000200);
+            } else {
+              ensureMaintainersIsMutable();
+              maintainers_.addAll(other.maintainers_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.maintainers_.isEmpty()) {
+            if (maintainersBuilder_.isEmpty()) {
+              maintainersBuilder_.dispose();
+              maintainersBuilder_ = null;
+              maintainers_ = other.maintainers_;
+              bitField0_ = (bitField0_ & ~0x00000200);
+              maintainersBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getMaintainersFieldBuilder() : null;
+            } else {
+              maintainersBuilder_.addAllMessages(other.maintainers_);
+            }
+          }
+        }
+        if (developersBuilder_ == null) {
+          if (!other.developers_.isEmpty()) {
+            if (developers_.isEmpty()) {
+              developers_ = other.developers_;
+              bitField0_ = (bitField0_ & ~0x00000400);
+            } else {
+              ensureDevelopersIsMutable();
+              developers_.addAll(other.developers_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.developers_.isEmpty()) {
+            if (developersBuilder_.isEmpty()) {
+              developersBuilder_.dispose();
+              developersBuilder_ = null;
+              developers_ = other.developers_;
+              bitField0_ = (bitField0_ & ~0x00000400);
+              developersBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getDevelopersFieldBuilder() : null;
+            } else {
+              developersBuilder_.addAllMessages(other.developers_);
+            }
+          }
         }
         if (codeRepositoriesBuilder_ == null) {
           if (!other.codeRepositories_.isEmpty()) {
             if (codeRepositories_.isEmpty()) {
               codeRepositories_ = other.codeRepositories_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000800);
             } else {
               ensureCodeRepositoriesIsMutable();
               codeRepositories_.addAll(other.codeRepositories_);
@@ -1057,7 +1587,7 @@ public final class Toplevel {
               codeRepositoriesBuilder_.dispose();
               codeRepositoriesBuilder_ = null;
               codeRepositories_ = other.codeRepositories_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000800);
               codeRepositoriesBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getCodeRepositoriesFieldBuilder() : null;
@@ -1070,7 +1600,7 @@ public final class Toplevel {
           if (!other.bugRepositories_.isEmpty()) {
             if (bugRepositories_.isEmpty()) {
               bugRepositories_ = other.bugRepositories_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00001000);
             } else {
               ensureBugRepositoriesIsMutable();
               bugRepositories_.addAll(other.bugRepositories_);
@@ -1083,7 +1613,7 @@ public final class Toplevel {
               bugRepositoriesBuilder_.dispose();
               bugRepositoriesBuilder_ = null;
               bugRepositories_ = other.bugRepositories_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00001000);
               bugRepositoriesBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getBugRepositoriesFieldBuilder() : null;
@@ -1101,9 +1631,37 @@ public final class Toplevel {
           
           return false;
         }
-        if (!hasUrl()) {
+        if (!hasProjectUrl()) {
           
           return false;
+        }
+        if (!hasHomepageUrl()) {
+          
+          return false;
+        }
+        if (!hasCreatedDate()) {
+          
+          return false;
+        }
+        if (!hasId()) {
+          
+          return false;
+        }
+        if (!hasDescription()) {
+          
+          return false;
+        }
+        for (int i = 0; i < getMaintainersCount(); i++) {
+          if (!getMaintainers(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        for (int i = 0; i < getDevelopersCount(); i++) {
+          if (!getDevelopers(i).isInitialized()) {
+            
+            return false;
+          }
         }
         for (int i = 0; i < getCodeRepositoriesCount(); i++) {
           if (!getCodeRepositories(i).isInitialized()) {
@@ -1150,16 +1708,63 @@ public final class Toplevel {
             }
             case 18: {
               bitField0_ |= 0x00000002;
-              url_ = input.readBytes();
+              projectUrl_ = input.readBytes();
               break;
             }
             case 26: {
+              bitField0_ |= 0x00000004;
+              homepageUrl_ = input.readBytes();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              createdDate_ = input.readUInt64();
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000010;
+              id_ = input.readBytes();
+              break;
+            }
+            case 50: {
+              bitField0_ |= 0x00000020;
+              description_ = input.readBytes();
+              break;
+            }
+            case 58: {
+              ensureProgrammingLanguagesIsMutable();
+              programmingLanguages_.add(input.readBytes());
+              break;
+            }
+            case 66: {
+              ensureLicensesIsMutable();
+              licenses_.add(input.readBytes());
+              break;
+            }
+            case 74: {
+              ensureTopicsIsMutable();
+              topics_.add(input.readBytes());
+              break;
+            }
+            case 82: {
+              sizzle.types.Shared.Person.Builder subBuilder = sizzle.types.Shared.Person.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addMaintainers(subBuilder.buildPartial());
+              break;
+            }
+            case 90: {
+              sizzle.types.Shared.Person.Builder subBuilder = sizzle.types.Shared.Person.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addDevelopers(subBuilder.buildPartial());
+              break;
+            }
+            case 98: {
               sizzle.types.Code.CodeRepository.Builder subBuilder = sizzle.types.Code.CodeRepository.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addCodeRepositories(subBuilder.buildPartial());
               break;
             }
-            case 34: {
+            case 106: {
               sizzle.types.Bugs.BugRepository.Builder subBuilder = sizzle.types.Bugs.BugRepository.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addBugRepositories(subBuilder.buildPartial());
@@ -1207,49 +1812,718 @@ public final class Toplevel {
         onChanged();
       }
       
-      // required string url = 2;
-      private java.lang.Object url_ = "";
-      public boolean hasUrl() {
+      // required string project_url = 2;
+      private java.lang.Object projectUrl_ = "";
+      public boolean hasProjectUrl() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public String getUrl() {
-        java.lang.Object ref = url_;
+      public String getProjectUrl() {
+        java.lang.Object ref = projectUrl_;
         if (!(ref instanceof String)) {
           String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          url_ = s;
+          projectUrl_ = s;
           return s;
         } else {
           return (String) ref;
         }
       }
-      public Builder setUrl(String value) {
+      public Builder setProjectUrl(String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-        url_ = value;
+        projectUrl_ = value;
         onChanged();
         return this;
       }
-      public Builder clearUrl() {
+      public Builder clearProjectUrl() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        url_ = getDefaultInstance().getUrl();
+        projectUrl_ = getDefaultInstance().getProjectUrl();
         onChanged();
         return this;
       }
-      void setUrl(com.google.protobuf.ByteString value) {
+      void setProjectUrl(com.google.protobuf.ByteString value) {
         bitField0_ |= 0x00000002;
-        url_ = value;
+        projectUrl_ = value;
         onChanged();
       }
       
-      // repeated .sizzle.types.CodeRepository code_repositories = 3;
+      // required string homepage_url = 3;
+      private java.lang.Object homepageUrl_ = "";
+      public boolean hasHomepageUrl() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public String getHomepageUrl() {
+        java.lang.Object ref = homepageUrl_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          homepageUrl_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setHomepageUrl(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        homepageUrl_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearHomepageUrl() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        homepageUrl_ = getDefaultInstance().getHomepageUrl();
+        onChanged();
+        return this;
+      }
+      void setHomepageUrl(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000004;
+        homepageUrl_ = value;
+        onChanged();
+      }
+      
+      // required uint64 created_date = 4;
+      private long createdDate_ ;
+      public boolean hasCreatedDate() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public long getCreatedDate() {
+        return createdDate_;
+      }
+      public Builder setCreatedDate(long value) {
+        bitField0_ |= 0x00000008;
+        createdDate_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearCreatedDate() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        createdDate_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // required string id = 5;
+      private java.lang.Object id_ = "";
+      public boolean hasId() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public String getId() {
+        java.lang.Object ref = id_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          id_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setId(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearId() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        id_ = getDefaultInstance().getId();
+        onChanged();
+        return this;
+      }
+      void setId(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000010;
+        id_ = value;
+        onChanged();
+      }
+      
+      // required string description = 6;
+      private java.lang.Object description_ = "";
+      public boolean hasDescription() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public String getDescription() {
+        java.lang.Object ref = description_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          description_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setDescription(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        description_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearDescription() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        description_ = getDefaultInstance().getDescription();
+        onChanged();
+        return this;
+      }
+      void setDescription(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000020;
+        description_ = value;
+        onChanged();
+      }
+      
+      // repeated string programming_languages = 7;
+      private com.google.protobuf.LazyStringList programmingLanguages_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureProgrammingLanguagesIsMutable() {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
+          programmingLanguages_ = new com.google.protobuf.LazyStringArrayList(programmingLanguages_);
+          bitField0_ |= 0x00000040;
+         }
+      }
+      public java.util.List<String>
+          getProgrammingLanguagesList() {
+        return java.util.Collections.unmodifiableList(programmingLanguages_);
+      }
+      public int getProgrammingLanguagesCount() {
+        return programmingLanguages_.size();
+      }
+      public String getProgrammingLanguages(int index) {
+        return programmingLanguages_.get(index);
+      }
+      public Builder setProgrammingLanguages(
+          int index, String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureProgrammingLanguagesIsMutable();
+        programmingLanguages_.set(index, value);
+        onChanged();
+        return this;
+      }
+      public Builder addProgrammingLanguages(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureProgrammingLanguagesIsMutable();
+        programmingLanguages_.add(value);
+        onChanged();
+        return this;
+      }
+      public Builder addAllProgrammingLanguages(
+          java.lang.Iterable<String> values) {
+        ensureProgrammingLanguagesIsMutable();
+        super.addAll(values, programmingLanguages_);
+        onChanged();
+        return this;
+      }
+      public Builder clearProgrammingLanguages() {
+        programmingLanguages_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        onChanged();
+        return this;
+      }
+      void addProgrammingLanguages(com.google.protobuf.ByteString value) {
+        ensureProgrammingLanguagesIsMutable();
+        programmingLanguages_.add(value);
+        onChanged();
+      }
+      
+      // repeated string licenses = 8;
+      private com.google.protobuf.LazyStringList licenses_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureLicensesIsMutable() {
+        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
+          licenses_ = new com.google.protobuf.LazyStringArrayList(licenses_);
+          bitField0_ |= 0x00000080;
+         }
+      }
+      public java.util.List<String>
+          getLicensesList() {
+        return java.util.Collections.unmodifiableList(licenses_);
+      }
+      public int getLicensesCount() {
+        return licenses_.size();
+      }
+      public String getLicenses(int index) {
+        return licenses_.get(index);
+      }
+      public Builder setLicenses(
+          int index, String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureLicensesIsMutable();
+        licenses_.set(index, value);
+        onChanged();
+        return this;
+      }
+      public Builder addLicenses(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureLicensesIsMutable();
+        licenses_.add(value);
+        onChanged();
+        return this;
+      }
+      public Builder addAllLicenses(
+          java.lang.Iterable<String> values) {
+        ensureLicensesIsMutable();
+        super.addAll(values, licenses_);
+        onChanged();
+        return this;
+      }
+      public Builder clearLicenses() {
+        licenses_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        onChanged();
+        return this;
+      }
+      void addLicenses(com.google.protobuf.ByteString value) {
+        ensureLicensesIsMutable();
+        licenses_.add(value);
+        onChanged();
+      }
+      
+      // repeated string topics = 9;
+      private com.google.protobuf.LazyStringList topics_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureTopicsIsMutable() {
+        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+          topics_ = new com.google.protobuf.LazyStringArrayList(topics_);
+          bitField0_ |= 0x00000100;
+         }
+      }
+      public java.util.List<String>
+          getTopicsList() {
+        return java.util.Collections.unmodifiableList(topics_);
+      }
+      public int getTopicsCount() {
+        return topics_.size();
+      }
+      public String getTopics(int index) {
+        return topics_.get(index);
+      }
+      public Builder setTopics(
+          int index, String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureTopicsIsMutable();
+        topics_.set(index, value);
+        onChanged();
+        return this;
+      }
+      public Builder addTopics(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureTopicsIsMutable();
+        topics_.add(value);
+        onChanged();
+        return this;
+      }
+      public Builder addAllTopics(
+          java.lang.Iterable<String> values) {
+        ensureTopicsIsMutable();
+        super.addAll(values, topics_);
+        onChanged();
+        return this;
+      }
+      public Builder clearTopics() {
+        topics_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        onChanged();
+        return this;
+      }
+      void addTopics(com.google.protobuf.ByteString value) {
+        ensureTopicsIsMutable();
+        topics_.add(value);
+        onChanged();
+      }
+      
+      // repeated .sizzle.types.Person maintainers = 10;
+      private java.util.List<sizzle.types.Shared.Person> maintainers_ =
+        java.util.Collections.emptyList();
+      private void ensureMaintainersIsMutable() {
+        if (!((bitField0_ & 0x00000200) == 0x00000200)) {
+          maintainers_ = new java.util.ArrayList<sizzle.types.Shared.Person>(maintainers_);
+          bitField0_ |= 0x00000200;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          sizzle.types.Shared.Person, sizzle.types.Shared.Person.Builder, sizzle.types.Shared.PersonOrBuilder> maintainersBuilder_;
+      
+      public java.util.List<sizzle.types.Shared.Person> getMaintainersList() {
+        if (maintainersBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(maintainers_);
+        } else {
+          return maintainersBuilder_.getMessageList();
+        }
+      }
+      public int getMaintainersCount() {
+        if (maintainersBuilder_ == null) {
+          return maintainers_.size();
+        } else {
+          return maintainersBuilder_.getCount();
+        }
+      }
+      public sizzle.types.Shared.Person getMaintainers(int index) {
+        if (maintainersBuilder_ == null) {
+          return maintainers_.get(index);
+        } else {
+          return maintainersBuilder_.getMessage(index);
+        }
+      }
+      public Builder setMaintainers(
+          int index, sizzle.types.Shared.Person value) {
+        if (maintainersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMaintainersIsMutable();
+          maintainers_.set(index, value);
+          onChanged();
+        } else {
+          maintainersBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setMaintainers(
+          int index, sizzle.types.Shared.Person.Builder builderForValue) {
+        if (maintainersBuilder_ == null) {
+          ensureMaintainersIsMutable();
+          maintainers_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          maintainersBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addMaintainers(sizzle.types.Shared.Person value) {
+        if (maintainersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMaintainersIsMutable();
+          maintainers_.add(value);
+          onChanged();
+        } else {
+          maintainersBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addMaintainers(
+          int index, sizzle.types.Shared.Person value) {
+        if (maintainersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMaintainersIsMutable();
+          maintainers_.add(index, value);
+          onChanged();
+        } else {
+          maintainersBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addMaintainers(
+          sizzle.types.Shared.Person.Builder builderForValue) {
+        if (maintainersBuilder_ == null) {
+          ensureMaintainersIsMutable();
+          maintainers_.add(builderForValue.build());
+          onChanged();
+        } else {
+          maintainersBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addMaintainers(
+          int index, sizzle.types.Shared.Person.Builder builderForValue) {
+        if (maintainersBuilder_ == null) {
+          ensureMaintainersIsMutable();
+          maintainers_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          maintainersBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllMaintainers(
+          java.lang.Iterable<? extends sizzle.types.Shared.Person> values) {
+        if (maintainersBuilder_ == null) {
+          ensureMaintainersIsMutable();
+          super.addAll(values, maintainers_);
+          onChanged();
+        } else {
+          maintainersBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearMaintainers() {
+        if (maintainersBuilder_ == null) {
+          maintainers_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000200);
+          onChanged();
+        } else {
+          maintainersBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeMaintainers(int index) {
+        if (maintainersBuilder_ == null) {
+          ensureMaintainersIsMutable();
+          maintainers_.remove(index);
+          onChanged();
+        } else {
+          maintainersBuilder_.remove(index);
+        }
+        return this;
+      }
+      public sizzle.types.Shared.Person.Builder getMaintainersBuilder(
+          int index) {
+        return getMaintainersFieldBuilder().getBuilder(index);
+      }
+      public sizzle.types.Shared.PersonOrBuilder getMaintainersOrBuilder(
+          int index) {
+        if (maintainersBuilder_ == null) {
+          return maintainers_.get(index);  } else {
+          return maintainersBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends sizzle.types.Shared.PersonOrBuilder> 
+           getMaintainersOrBuilderList() {
+        if (maintainersBuilder_ != null) {
+          return maintainersBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(maintainers_);
+        }
+      }
+      public sizzle.types.Shared.Person.Builder addMaintainersBuilder() {
+        return getMaintainersFieldBuilder().addBuilder(
+            sizzle.types.Shared.Person.getDefaultInstance());
+      }
+      public sizzle.types.Shared.Person.Builder addMaintainersBuilder(
+          int index) {
+        return getMaintainersFieldBuilder().addBuilder(
+            index, sizzle.types.Shared.Person.getDefaultInstance());
+      }
+      public java.util.List<sizzle.types.Shared.Person.Builder> 
+           getMaintainersBuilderList() {
+        return getMaintainersFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          sizzle.types.Shared.Person, sizzle.types.Shared.Person.Builder, sizzle.types.Shared.PersonOrBuilder> 
+          getMaintainersFieldBuilder() {
+        if (maintainersBuilder_ == null) {
+          maintainersBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              sizzle.types.Shared.Person, sizzle.types.Shared.Person.Builder, sizzle.types.Shared.PersonOrBuilder>(
+                  maintainers_,
+                  ((bitField0_ & 0x00000200) == 0x00000200),
+                  getParentForChildren(),
+                  isClean());
+          maintainers_ = null;
+        }
+        return maintainersBuilder_;
+      }
+      
+      // repeated .sizzle.types.Person developers = 11;
+      private java.util.List<sizzle.types.Shared.Person> developers_ =
+        java.util.Collections.emptyList();
+      private void ensureDevelopersIsMutable() {
+        if (!((bitField0_ & 0x00000400) == 0x00000400)) {
+          developers_ = new java.util.ArrayList<sizzle.types.Shared.Person>(developers_);
+          bitField0_ |= 0x00000400;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          sizzle.types.Shared.Person, sizzle.types.Shared.Person.Builder, sizzle.types.Shared.PersonOrBuilder> developersBuilder_;
+      
+      public java.util.List<sizzle.types.Shared.Person> getDevelopersList() {
+        if (developersBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(developers_);
+        } else {
+          return developersBuilder_.getMessageList();
+        }
+      }
+      public int getDevelopersCount() {
+        if (developersBuilder_ == null) {
+          return developers_.size();
+        } else {
+          return developersBuilder_.getCount();
+        }
+      }
+      public sizzle.types.Shared.Person getDevelopers(int index) {
+        if (developersBuilder_ == null) {
+          return developers_.get(index);
+        } else {
+          return developersBuilder_.getMessage(index);
+        }
+      }
+      public Builder setDevelopers(
+          int index, sizzle.types.Shared.Person value) {
+        if (developersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDevelopersIsMutable();
+          developers_.set(index, value);
+          onChanged();
+        } else {
+          developersBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setDevelopers(
+          int index, sizzle.types.Shared.Person.Builder builderForValue) {
+        if (developersBuilder_ == null) {
+          ensureDevelopersIsMutable();
+          developers_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          developersBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addDevelopers(sizzle.types.Shared.Person value) {
+        if (developersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDevelopersIsMutable();
+          developers_.add(value);
+          onChanged();
+        } else {
+          developersBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addDevelopers(
+          int index, sizzle.types.Shared.Person value) {
+        if (developersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDevelopersIsMutable();
+          developers_.add(index, value);
+          onChanged();
+        } else {
+          developersBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addDevelopers(
+          sizzle.types.Shared.Person.Builder builderForValue) {
+        if (developersBuilder_ == null) {
+          ensureDevelopersIsMutable();
+          developers_.add(builderForValue.build());
+          onChanged();
+        } else {
+          developersBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addDevelopers(
+          int index, sizzle.types.Shared.Person.Builder builderForValue) {
+        if (developersBuilder_ == null) {
+          ensureDevelopersIsMutable();
+          developers_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          developersBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllDevelopers(
+          java.lang.Iterable<? extends sizzle.types.Shared.Person> values) {
+        if (developersBuilder_ == null) {
+          ensureDevelopersIsMutable();
+          super.addAll(values, developers_);
+          onChanged();
+        } else {
+          developersBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearDevelopers() {
+        if (developersBuilder_ == null) {
+          developers_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000400);
+          onChanged();
+        } else {
+          developersBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeDevelopers(int index) {
+        if (developersBuilder_ == null) {
+          ensureDevelopersIsMutable();
+          developers_.remove(index);
+          onChanged();
+        } else {
+          developersBuilder_.remove(index);
+        }
+        return this;
+      }
+      public sizzle.types.Shared.Person.Builder getDevelopersBuilder(
+          int index) {
+        return getDevelopersFieldBuilder().getBuilder(index);
+      }
+      public sizzle.types.Shared.PersonOrBuilder getDevelopersOrBuilder(
+          int index) {
+        if (developersBuilder_ == null) {
+          return developers_.get(index);  } else {
+          return developersBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends sizzle.types.Shared.PersonOrBuilder> 
+           getDevelopersOrBuilderList() {
+        if (developersBuilder_ != null) {
+          return developersBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(developers_);
+        }
+      }
+      public sizzle.types.Shared.Person.Builder addDevelopersBuilder() {
+        return getDevelopersFieldBuilder().addBuilder(
+            sizzle.types.Shared.Person.getDefaultInstance());
+      }
+      public sizzle.types.Shared.Person.Builder addDevelopersBuilder(
+          int index) {
+        return getDevelopersFieldBuilder().addBuilder(
+            index, sizzle.types.Shared.Person.getDefaultInstance());
+      }
+      public java.util.List<sizzle.types.Shared.Person.Builder> 
+           getDevelopersBuilderList() {
+        return getDevelopersFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          sizzle.types.Shared.Person, sizzle.types.Shared.Person.Builder, sizzle.types.Shared.PersonOrBuilder> 
+          getDevelopersFieldBuilder() {
+        if (developersBuilder_ == null) {
+          developersBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              sizzle.types.Shared.Person, sizzle.types.Shared.Person.Builder, sizzle.types.Shared.PersonOrBuilder>(
+                  developers_,
+                  ((bitField0_ & 0x00000400) == 0x00000400),
+                  getParentForChildren(),
+                  isClean());
+          developers_ = null;
+        }
+        return developersBuilder_;
+      }
+      
+      // repeated .sizzle.types.CodeRepository code_repositories = 12;
       private java.util.List<sizzle.types.Code.CodeRepository> codeRepositories_ =
         java.util.Collections.emptyList();
       private void ensureCodeRepositoriesIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (!((bitField0_ & 0x00000800) == 0x00000800)) {
           codeRepositories_ = new java.util.ArrayList<sizzle.types.Code.CodeRepository>(codeRepositories_);
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000800;
          }
       }
       
@@ -1365,7 +2639,7 @@ public final class Toplevel {
       public Builder clearCodeRepositories() {
         if (codeRepositoriesBuilder_ == null) {
           codeRepositories_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000800);
           onChanged();
         } else {
           codeRepositoriesBuilder_.clear();
@@ -1421,7 +2695,7 @@ public final class Toplevel {
           codeRepositoriesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               sizzle.types.Code.CodeRepository, sizzle.types.Code.CodeRepository.Builder, sizzle.types.Code.CodeRepositoryOrBuilder>(
                   codeRepositories_,
-                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  ((bitField0_ & 0x00000800) == 0x00000800),
                   getParentForChildren(),
                   isClean());
           codeRepositories_ = null;
@@ -1429,13 +2703,13 @@ public final class Toplevel {
         return codeRepositoriesBuilder_;
       }
       
-      // repeated .sizzle.types.BugRepository bug_repositories = 4;
+      // repeated .sizzle.types.BugRepository bug_repositories = 13;
       private java.util.List<sizzle.types.Bugs.BugRepository> bugRepositories_ =
         java.util.Collections.emptyList();
       private void ensureBugRepositoriesIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField0_ & 0x00001000) == 0x00001000)) {
           bugRepositories_ = new java.util.ArrayList<sizzle.types.Bugs.BugRepository>(bugRepositories_);
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00001000;
          }
       }
       
@@ -1551,7 +2825,7 @@ public final class Toplevel {
       public Builder clearBugRepositories() {
         if (bugRepositoriesBuilder_ == null) {
           bugRepositories_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00001000);
           onChanged();
         } else {
           bugRepositoriesBuilder_.clear();
@@ -1607,7 +2881,7 @@ public final class Toplevel {
           bugRepositoriesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               sizzle.types.Bugs.BugRepository, sizzle.types.Bugs.BugRepository.Builder, sizzle.types.Bugs.BugRepositoryOrBuilder>(
                   bugRepositories_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  ((bitField0_ & 0x00001000) == 0x00001000),
                   getParentForChildren(),
                   isClean());
           bugRepositories_ = null;
@@ -1645,13 +2919,19 @@ public final class Toplevel {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016toplevel.proto\022\014sizzle.types\032\ncode.pro" +
-      "to\032\nbugs.proto\"5\n\nRepository\022\'\n\010projects" +
-      "\030\001 \003(\0132\025.sizzle.types.Project\"\224\001\n\007Projec" +
-      "t\022\014\n\004name\030\001 \002(\t\022\013\n\003url\030\002 \002(\t\0227\n\021code_rep" +
-      "ositories\030\003 \003(\0132\034.sizzle.types.CodeRepos" +
-      "itory\0225\n\020bug_repositories\030\004 \003(\0132\033.sizzle" +
-      ".types.BugRepository"
+      "\n\016toplevel.proto\022\014sizzle.types\032\014shared.p" +
+      "roto\032\ncode.proto\032\nbugs.proto\"5\n\nReposito" +
+      "ry\022\'\n\010projects\030\001 \003(\0132\025.sizzle.types.Proj" +
+      "ect\"\377\002\n\007Project\022\014\n\004name\030\001 \002(\t\022\023\n\013project" +
+      "_url\030\002 \002(\t\022\024\n\014homepage_url\030\003 \002(\t\022\024\n\014crea" +
+      "ted_date\030\004 \002(\004\022\n\n\002id\030\005 \002(\t\022\023\n\013descriptio" +
+      "n\030\006 \002(\t\022\035\n\025programming_languages\030\007 \003(\t\022\020" +
+      "\n\010licenses\030\010 \003(\t\022\016\n\006topics\030\t \003(\t\022)\n\013main" +
+      "tainers\030\n \003(\0132\024.sizzle.types.Person\022(\n\nd" +
+      "evelopers\030\013 \003(\0132\024.sizzle.types.Person\0227\n",
+      "\021code_repositories\030\014 \003(\0132\034.sizzle.types." +
+      "CodeRepository\0225\n\020bug_repositories\030\r \003(\013" +
+      "2\033.sizzle.types.BugRepository"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1671,7 +2951,7 @@ public final class Toplevel {
           internal_static_sizzle_types_Project_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_sizzle_types_Project_descriptor,
-              new java.lang.String[] { "Name", "Url", "CodeRepositories", "BugRepositories", },
+              new java.lang.String[] { "Name", "ProjectUrl", "HomepageUrl", "CreatedDate", "Id", "Description", "ProgrammingLanguages", "Licenses", "Topics", "Maintainers", "Developers", "CodeRepositories", "BugRepositories", },
               sizzle.types.Toplevel.Project.class,
               sizzle.types.Toplevel.Project.Builder.class);
           return null;
@@ -1680,6 +2960,7 @@ public final class Toplevel {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          sizzle.types.Shared.getDescriptor(),
           sizzle.types.Code.getDescriptor(),
           sizzle.types.Bugs.getDescriptor(),
         }, assigner);
