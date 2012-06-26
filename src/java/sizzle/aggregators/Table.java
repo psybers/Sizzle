@@ -3,10 +3,10 @@ package sizzle.aggregators;
 import java.io.IOException;
 
 import org.apache.hadoop.io.NullWritable;
-import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer.Context;
 
 import sizzle.io.EmitKey;
+import sizzle.io.EmitValue;
 
 /**
  * A container for one or more Sizzle aggregators.
@@ -67,14 +67,14 @@ public class Table {
 	@SuppressWarnings("unchecked")
 	public void finish() throws IOException, InterruptedException {
 		if (this.aggregators.length > 1) {
-			final StringBuilder sb = new StringBuilder(this.key + " = { ");
+			final StringBuilder sb = new StringBuilder("{ ");
 
 			for (final Aggregator a : this.aggregators)
 				sb.append(a.getResult().getData()[0] + ", ");
 
 			final String out = sb.toString();
 
-			this.context.write(new Text(out.substring(0, out.length() - 2) + " }"), NullWritable.get());
+			this.context.write(this.key, new EmitValue(out.substring(0, out.length() - 2) + " }"));
 		} else {
 			this.aggregators[0].finish();
 		}

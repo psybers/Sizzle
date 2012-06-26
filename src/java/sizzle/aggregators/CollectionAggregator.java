@@ -2,6 +2,8 @@ package sizzle.aggregators;
 
 import java.io.IOException;
 
+import sizzle.io.EmitValue;
+
 /**
  * A Sizzle aggregator to output all of the values in a dataset.
  * 
@@ -10,11 +12,24 @@ import java.io.IOException;
  */
 @AggregatorSpec(name = "collection")
 public class CollectionAggregator extends Aggregator {
+	private String data;
+
 	/** {@inheritDoc} */
 	@Override
 	public void aggregate(final String data, final String metadata) throws IOException, InterruptedException {
-		// just pass it through
-		this.collect(data);
+		this.data = data;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void finish() throws IOException, InterruptedException {
+		this.collect(this.data);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public EmitValue getResult() {
+		return new EmitValue(this.data);
 	}
 
 	/** {@inheritDoc} */
