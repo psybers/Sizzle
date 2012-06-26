@@ -36,15 +36,13 @@ public class <name> extends sizzle.runtime.SizzleRunner {
 		<endif>
 		/** {@inheritDoc} */
 		@Override
-		protected void map(<keyClass> key, <valueClass> value, org.apache.hadoop.mapreduce.Mapper\<<keyClass>, <valueClass>, sizzle.io.EmitKey, sizzle.io.EmitValue\>.Context context) throws java.io.IOException, InterruptedException {
+		protected void map(<keyClass> key, <valueClass> value, org.apache.hadoop.mapreduce.Mapper\<<keyClass>, <valueClass>, sizzle.io.EmitKey, sizzle.io.EmitValue\>.Context context) throws java.io.IOException {
 			try {
 				<if(inputStream)>
 				<inputStream>
 				<endif>
 				<statements:{ <it><\n> }>
 			} catch (java.io.IOException e) {
-				throw e;
-			} catch (InterruptedException e) {
 				throw e;
 			} catch (RuntimeException e) {
 				if (this.robust)

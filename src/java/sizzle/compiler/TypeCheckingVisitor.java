@@ -689,9 +689,6 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 					if (!(soperand instanceof SizzleTuple))
 						throw new TypeException("invalid operand type " + soperand + " for member selection");
 
-					// final SizzleType selector = ((Selector)
-					// nodeChoice.choice).accept(this, argu);
-
 					return ((SizzleTuple) soperand).getMember(((Selector) nodeChoice.choice).f1.f0.tokenImage);
 				case 1: // index
 					final SizzleType ioperand = n.f0.accept(this, argu);
@@ -714,15 +711,7 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 				case 2: // call
 					final List<SizzleType> formalParameters = this.check((Call) nodeChoice.choice, argu);
 
-					final SizzleFunction f = new FunctionFindingVisitor(formalParameters).visit(n.f0, argu);
-
-					// if (f.countParameters() != formalParameters.size())
-					// for (int i = 0; i < formalParameters.size(); i++)
-					// if (!f.getParameter(i).assigns(formalParameters.get(i)))
-					// throw new TypeException("invalid args " +
-					// formalParameters + " for call to " + f);
-
-					return f;
+					return new FunctionFindingVisitor(formalParameters).visit(n.f0, argu);
 				default:
 					throw new RuntimeException("unexpected choice " + nodeChoice.which + " is " + nodeChoice.choice.getClass());
 				}
@@ -735,7 +724,7 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 	/** {@inheritDoc} */
 	@Override
 	public SizzleType visit(final Selector n, final SymbolTable argu) {
-		return null;
+		throw new RuntimeException("unimplemented");
 	}
 
 	/** {@inheritDoc} */

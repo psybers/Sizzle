@@ -267,32 +267,79 @@ public class NameFindingVisitor extends GJNoArguDepthFirst<Set<String>> {
 
 	@Override
 	public Set<String> visit(final Expression n) {
-		throw new RuntimeException("unimplemented");
+		final HashSet<String> set = new HashSet<String>();
+
+		set.addAll(n.f0.accept(this));
+
+		if (n.f1.present())
+			for (final Node node : n.f1.nodes)
+				set.addAll(node.accept(this));
+
+		return set;
 	}
 
 	@Override
 	public Set<String> visit(final Conjunction n) {
-		throw new RuntimeException("unimplemented");
+		final HashSet<String> set = new HashSet<String>();
+
+		set.addAll(n.f0.accept(this));
+
+		if (n.f1.present())
+			for (final Node node : n.f1.nodes)
+				set.addAll(node.accept(this));
+
+		return set;
 	}
 
 	@Override
 	public Set<String> visit(final Comparison n) {
-		throw new RuntimeException("unimplemented");
+		final HashSet<String> set = new HashSet<String>();
+
+		set.addAll(n.f0.accept(this));
+
+		if (n.f1.present())
+			set.addAll(n.f1.node.accept(this));
+
+		return set;
 	}
 
 	@Override
 	public Set<String> visit(final SimpleExpr n) {
-		throw new RuntimeException("unimplemented");
+		final HashSet<String> set = new HashSet<String>();
+
+		set.addAll(n.f0.accept(this));
+
+		if (n.f1.present())
+			for (final Node node : n.f1.nodes)
+				set.addAll(node.accept(this));
+
+		return set;
 	}
 
 	@Override
 	public Set<String> visit(final Term n) {
-		throw new RuntimeException("unimplemented");
+		final HashSet<String> set = new HashSet<String>();
+
+		set.addAll(n.f0.accept(this));
+
+		if (n.f1.present())
+			for (final Node node : n.f1.nodes)
+				set.addAll(node.accept(this));
+
+		return set;
 	}
 
 	@Override
 	public Set<String> visit(final Factor n) {
-		throw new RuntimeException("unimplemented");
+		final HashSet<String> set = new HashSet<String>();
+
+		set.addAll(n.f0.accept(this));
+
+		if (n.f1.present())
+			for (final Node node : n.f1.nodes)
+				set.addAll(node.accept(this));
+
+		return set;
 	}
 
 	@Override

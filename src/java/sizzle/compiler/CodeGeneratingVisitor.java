@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.Vector;
 
 import org.antlr.stringtemplate.StringTemplate;
@@ -153,6 +154,7 @@ class TableDescription {
 public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 	private final TypeCheckingVisitor typechecker;
 	private final NameFindingVisitor namefinder;
+	private final IndexeeFindingVisitor indexeefinder;
 	private final StaticDeclarationCodeGeneratingVisitor staticdeclarator;
 	private final StaticInitializationCodeGeneratingVisitor staticinitializer;
 
@@ -161,9 +163,12 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 	private final String name;
 	private final StringTemplateGroup stg;
 
+	private boolean skipIndex = false;
+
 	public CodeGeneratingVisitor(final String name, final StringTemplateGroup stg) throws IOException {
 		this.typechecker = new TypeCheckingVisitor();
 		this.namefinder = new NameFindingVisitor();
+		this.indexeefinder = new IndexeeFindingVisitor(this, namefinder);
 		this.staticdeclarator = new StaticDeclarationCodeGeneratingVisitor(this);
 		this.staticinitializer = new StaticInitializationCodeGeneratingVisitor(this);
 
@@ -174,6 +179,11 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 
 		this.name = name;
 		this.stg = stg;
+	}
+
+	public void setSkipIndex(final boolean skipIndex)
+	{
+		this.skipIndex = skipIndex;
 	}
 
 	@Override
@@ -564,6 +574,59 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 	public String visit(final WhenStatement n, final SymbolTable argu) {
 		final StringTemplate st = this.stg.getInstanceOf("WhenStatement");
 
+		SymbolTable localArgu;
+		try {
+			localArgu = argu.cloneNonLocals();
+		} catch (final IOException e) {
+			throw new RuntimeException(e.getClass().getSimpleName() + " caught", e);
+		}
+
+		for (final Node node : n.f2.nodes) {
+			switch (((NodeChoice)((NodeSequence)node).nodes.get(2)).which) {
+			case 0:
+				st.setAttribute("all", "true");
+				break;
+			case 1:
+				break;
+			case 2:
+				st.setAttribute("some", "true");
+				break;
+			default:
+				throw new RuntimeException("unexpected choice " +
+						((NodeChoice)((NodeSequence)node).nodes.get(2)).which + " is " +
+						((NodeChoice)((NodeSequence)node).nodes.get(2)).choice.getClass());
+			}
+
+			final SizzleType type = localArgu.getType(((Identifier)((Type) ((NodeSequence) node).nodes.get(3)).f0.choice).f0.tokenImage);
+
+			final Set<String> ids = this.namefinder.visit((IdentifierList)((NodeSequence) node).nodes.get(0));
+
+			for (final String id : ids) {
+				localArgu.set(id, type);
+				st.setAttribute("type", type.toJavaType());
+				st.setAttribute("index", id);
+			}
+
+			for (final String id : ids) {
+				this.indexeefinder.setSymbolTable(argu);
+				final Set<String> indexees = this.indexeefinder.visit(n.f3, id);
+			
+				if (indexees.size() > 0) {
+					final List<String> array = new ArrayList<String>(indexees);
+					String src = "";
+					for (int i = 0; i < array.size(); i++) {
+						String func = ".size()";
+						if (src.length() > 0)
+							src = "min(" + array.get(i) + func + ", " + src + ")";
+						else
+							src = array.get(i) + func;
+					}
+
+					st.setAttribute("len", src);
+				}
+			}
+		}
+
 		st.setAttribute("expression", n.f3.accept(this, argu));
 		st.setAttribute("statement", n.f5.accept(this, argu));
 
@@ -764,6 +827,9 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 
 	@Override
 	public String visit(final Index n, final SymbolTable argu) {
+		if (this.skipIndex)
+			return "";
+
 		final StringTemplate st = this.stg.getInstanceOf("Index");
 
 		final SizzleType t = argu.getOperandType();

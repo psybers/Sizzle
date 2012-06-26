@@ -108,7 +108,6 @@ public class SymbolTable {
 		this.idmap.put("string", new SizzleString());
 		this.idmap.put("bytes", new SizzleBytes());
 
-		// FIXME rdyer
 		this.idmap.put("Annotation", new AnnotationProtoTuple());
 		this.idmap.put("Bug", new BugProtoTuple());
 		this.idmap.put("BugRepository", new BugRepositoryProtoTuple());
