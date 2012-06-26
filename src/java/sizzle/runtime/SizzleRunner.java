@@ -9,6 +9,8 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.hadoop.io.compress.GzipCodec;
+import org.apache.hadoop.io.compress.CompressionCodec;
 
 import sizzle.io.EmitKey;
 import sizzle.io.EmitValue;
@@ -36,6 +38,10 @@ public abstract class SizzleRunner {
 
 		configuration.setBoolean("sizzle.runtime.robust", robust);
 
+		// map output compression
+		configuration.setBoolean("mapred.compress.map.output", true);
+		configuration.setClass("mapred.map.output.compression.codec", GzipCodec.class, CompressionCodec.class);
+
 		final Job job = new Job(configuration);
 
 		for (final Path in : ins)
@@ -44,8 +50,6 @@ public abstract class SizzleRunner {
 
 		job.setMapOutputKeyClass(EmitKey.class);
 		job.setMapOutputValueClass(EmitValue.class);
-
-		// TODO: get map output compression working again
 
 		// TODO: support protobufs/sequence files/avro here
 		job.setOutputKeyClass(Text.class);
