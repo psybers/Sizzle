@@ -619,8 +619,8 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 			}
 		}
 
-		st.setAttribute("expression", n.f3.accept(this, argu));
-		st.setAttribute("statement", n.f5.accept(this, argu));
+		st.setAttribute("expression", n.f3.accept(this, localArgu));
+		st.setAttribute("statement", n.f5.accept(this, localArgu));
 
 		return st.toString();
 	}
