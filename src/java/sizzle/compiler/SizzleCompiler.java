@@ -172,11 +172,6 @@ public class SizzleCompiler {
 			final CodeGeneratingVisitor codeGenerator = new CodeGeneratingVisitor(name, stg);
 
 			final SymbolTable st = new SymbolTable(libs);
-			// FIXME rdyer
-			if (false)
-				st.set("input", new SizzleString(), true);
-			else
-				st.set("input", new SizzleBytes(), true);
 
 			final BufferedReader r = new BufferedReader(new FileReader(in));
 			

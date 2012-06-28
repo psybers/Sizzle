@@ -1,6 +1,6 @@
 group SizzleJavaHadoop : SizzleJava;
 
-Program(name, inputStream, inputFormatClass, keyClass, valueClass, staticDeclarations, staticStatements, statements, tables) ::= <<
+Program(name, inputFormatClass, keyClass, valueClass, staticDeclarations, staticStatements, statements, tables) ::= <<
 package sizzle;
 
 public class <name> extends sizzle.runtime.SizzleRunner {
@@ -38,10 +38,9 @@ public class <name> extends sizzle.runtime.SizzleRunner {
 		@Override
 		protected void map(<keyClass> key, <valueClass> value, org.apache.hadoop.mapreduce.Mapper\<<keyClass>, <valueClass>, sizzle.io.EmitKey, sizzle.io.EmitValue\>.Context context) throws java.io.IOException {
 			try {
-				<if(inputStream)>
-				<inputStream>
-				<endif>
-				<statements:{ <it><\n> }>
+				java.io.ByteArrayInputStream _inputStream = new java.io.ByteArrayInputStream(value.getBytes(), 0, value.getLength());
+				<statements:{<it><\n>}>
+				_inputStream.close();
 			} catch (java.io.IOException e) {
 				throw e;
 			} catch (RuntimeException e) {

@@ -13,7 +13,8 @@ identifierMap ::= [
 		"MINUTE" : "(60 * 1000 * 1000)",
 		"MIN" : "(60 * 1000 * 1000)",
 		"HOUR" : "(60 * 60 * 1000 * 1000)",
-		"HR" : "(60 * 60 * 1000 * 1000)"
+		"HR" : "(60 * 60 * 1000 * 1000)",
+		"input" : "_inputStream"
 ]
 		
 VarDecl(type, id, initializer) ::= "<type> ___<id><if(initializer)> = <initializer><endif>;"

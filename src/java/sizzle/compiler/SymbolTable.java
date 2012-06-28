@@ -135,6 +135,7 @@ public class SymbolTable {
 
 		// variables with a global scope
 		this.globals = new HashMap<String, SizzleType>();
+		this.globals.put("input", new SizzleBytes());
 		this.globals.put("true", new SizzleBool());
 		this.globals.put("false", new SizzleBool());
 		this.globals.put("PI", new SizzleFloat());

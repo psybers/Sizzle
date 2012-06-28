@@ -197,19 +197,10 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 		final StringTemplate st = this.stg.getInstanceOf("Program");
 
 		st.setAttribute("name", this.name);
-		if (argu.get("input").equals(new SizzleBytes())) {
-			// FIXME rdyer
-			stg.getMap("identifierMap").put("input", "___inputStream");
-			st.setAttribute("inputStream", "java.io.ByteArrayInputStream ___inputStream = new java.io.ByteArrayInputStream(value.getBytes(), 0, value.getLength());");
-			st.setAttribute("inputFormatClass", "org.apache.hadoop.mapreduce.lib.input.SequenceFileInputFormat");
-			st.setAttribute("keyClass", "org.apache.hadoop.io.Text");
-			st.setAttribute("valueClass", "org.apache.hadoop.io.BytesWritable");
-		} else {
-			stg.getMap("identifierMap").put("input", "value.toString()");
-			st.setAttribute("inputFormatClass", "org.apache.hadoop.mapreduce.lib.input.TextInputFormat");
-			st.setAttribute("keyClass", "org.apache.hadoop.io.LongWritable");
-			st.setAttribute("valueClass", "org.apache.hadoop.io.Text");
-		}
+
+		st.setAttribute("inputFormatClass", "org.apache.hadoop.mapreduce.lib.input.SequenceFileInputFormat");
+		st.setAttribute("keyClass", "org.apache.hadoop.io.Text");
+		st.setAttribute("valueClass", "org.apache.hadoop.io.BytesWritable");
 
 		st.setAttribute("staticDeclarations", this.staticdeclarator.visit(n, argu));
 		st.setAttribute("staticStatements", this.staticinitializer.visit(n, argu));
