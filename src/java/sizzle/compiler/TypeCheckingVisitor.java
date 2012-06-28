@@ -677,35 +677,39 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 	/** {@inheritDoc} */
 	@Override
 	public SizzleType visit(final Factor n, final SymbolTable argu) {
+		SizzleType type = null;
+
 		if (n.f1.present()) {
 			for (final Node node : n.f1.nodes) {
 				final NodeChoice nodeChoice = (NodeChoice) node;
 				switch (nodeChoice.which) {
-				case 0: // member
-					final SizzleType soperand = n.f0.accept(this, argu);
+				case 0: // selector
+					if (type == null)
+						type = n.f0.accept(this, argu);
+					if (!(type instanceof SizzleTuple))
+						throw new TypeException("invalid operand type " + type + " for member selection");
 
-					if (!(soperand instanceof SizzleTuple))
-						throw new TypeException("invalid operand type " + soperand + " for member selection");
-
-					return ((SizzleTuple) soperand).getMember(((Selector) nodeChoice.choice).f1.f0.tokenImage);
+					type = ((SizzleTuple) type).getMember(((Selector) nodeChoice.choice).f1.f0.tokenImage);
+					break;
 				case 1: // index
-					final SizzleType ioperand = n.f0.accept(this, argu);
-
+					if (type == null)
+						type = n.f0.accept(this, argu);
 					final SizzleType index = ((Index) nodeChoice.choice).accept(this, argu);
 
-					if (ioperand instanceof SizzleArray) {
+					if (type instanceof SizzleArray) {
 						if (!(index instanceof SizzleInt))
 							throw new TypeException("invalid operand type " + index + " for indexing into array");
 
-						return ((SizzleArray) ioperand).getType();
-					} else if (ioperand instanceof SizzleMap) {
-						if (!((SizzleMap) ioperand).getIndexType().assigns(index))
-							throw new TypeException("invalid operand type " + index + " for indexing into " + ioperand);
+						type = ((SizzleArray) type).getType();
+					} else if (type instanceof SizzleMap) {
+						if (!((SizzleMap) type).getIndexType().assigns(index))
+							throw new TypeException("invalid operand type " + index + " for indexing into " + type);
 
-						return ((SizzleMap) ioperand).getType();
+						type = ((SizzleMap) type).getType();
 					} else {
-						throw new TypeException("invalid operand type " + ioperand + " for indexing expression");
+						throw new TypeException("invalid operand type " + type + " for indexing expression");
 					}
+					break;
 				case 2: // call
 					final List<SizzleType> formalParameters = this.check((Call) nodeChoice.choice, argu);
 
@@ -714,9 +718,11 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 					throw new RuntimeException("unexpected choice " + nodeChoice.which + " is " + nodeChoice.choice.getClass());
 				}
 			}
+		} else {
+			type = n.f0.accept(this, argu);
 		}
 
-		return n.f0.accept(this, argu);
+		return type;
 	}
 
 	/** {@inheritDoc} */
