@@ -20,7 +20,7 @@ public class PackageProtoTuple extends SizzleProtoTuple {
 		members.add(new SizzleString());
 
 		names.put("types", 0);
-		members.add(new SizzleArray(new TypeProtoTuple()));
+		members.add(new SizzleProtoList(new TypeProtoTuple()));
 	}
 
 	/**

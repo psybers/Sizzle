@@ -20,19 +20,19 @@ public class MethodProtoTuple extends SizzleProtoTuple {
 		members.add(new SizzleString());
 
 		names.put("annotations", 1);
-		members.add(new SizzleArray(new AnnotationProtoTuple()));
+		members.add(new SizzleProtoList(new AnnotationProtoTuple()));
 
 		names.put("return_type", 2);
 		members.add(new SizzleString());
 
 		names.put("arg_types", 3);
-		members.add(new SizzleArray(new SizzleString()));
+		members.add(new SizzleProtoList(new SizzleString()));
 
 		names.put("arg_names", 4);
-		members.add(new SizzleArray(new SizzleString()));
+		members.add(new SizzleProtoList(new SizzleString()));
 
 		names.put("exceptions", 5);
-		members.add(new SizzleArray(new SizzleString()));
+		members.add(new SizzleProtoList(new SizzleString()));
 	}
 
 	/**

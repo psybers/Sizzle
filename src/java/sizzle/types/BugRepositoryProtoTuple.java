@@ -20,7 +20,7 @@ public class BugRepositoryProtoTuple extends SizzleProtoTuple {
 		members.add(new SizzleString());
 
 		names.put("bugs", 1);
-		members.add(new SizzleArray(new BugProtoTuple()));
+		members.add(new SizzleProtoList(new BugProtoTuple()));
 	}
 
 	/**

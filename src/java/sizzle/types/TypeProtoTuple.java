@@ -20,13 +20,13 @@ public class TypeProtoTuple extends SizzleProtoTuple {
 		members.add(new SizzleString());
 
 		names.put("annotations", 1);
-		members.add(new SizzleArray(new AnnotationProtoTuple()));
+		members.add(new SizzleProtoList(new AnnotationProtoTuple()));
 
 		names.put("methods", 3);
-		members.add(new SizzleArray(new MethodProtoTuple()));
+		members.add(new SizzleProtoList(new MethodProtoTuple()));
 
 		names.put("fields", 4);
-		members.add(new SizzleArray(new FieldProtoTuple()));
+		members.add(new SizzleProtoList(new FieldProtoTuple()));
 	}
 
 	/**

@@ -32,10 +32,10 @@ public class RevisionProtoTuple extends SizzleProtoTuple {
 		members.add(new SizzleString());
 
 		names.put("files", 5);
-		members.add(new SizzleArray(new FileProtoTuple()));
+		members.add(new SizzleProtoList(new FileProtoTuple()));
 
 		names.put("libraries", 6);
-		members.add(new SizzleArray(new LibraryProtoTuple()));
+		members.add(new SizzleProtoList(new LibraryProtoTuple()));
 	}
 
 	/**

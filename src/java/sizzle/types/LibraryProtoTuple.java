@@ -26,7 +26,7 @@ public class LibraryProtoTuple extends SizzleProtoTuple {
 		members.add(new SizzleString());
 
 		names.put("files", 3);
-		members.add(new SizzleArray(new FileProtoTuple()));
+		members.add(new SizzleProtoList(new FileProtoTuple()));
 	}
 
 	/**

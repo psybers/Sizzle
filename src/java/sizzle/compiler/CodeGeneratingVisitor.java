@@ -85,6 +85,7 @@ import sizzle.types.SizzleArray;
 import sizzle.types.SizzleBytes;
 import sizzle.types.SizzleFunction;
 import sizzle.types.SizzleMap;
+import sizzle.types.SizzleProtoList;
 import sizzle.types.SizzleProtoTuple;
 import sizzle.types.SizzleString;
 import sizzle.types.SizzleTable;
@@ -836,9 +837,11 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 		if (t instanceof SizzleMap) {
 			argu.setOperandType(((SizzleMap) t).getType());
 			st.setAttribute("map", true);
+		} else if (t instanceof SizzleProtoList) {
+			argu.setOperandType(((SizzleArray) t).getType());
+			st.setAttribute("map", true);
 		} else if (t instanceof SizzleArray) {
 			argu.setOperandType(((SizzleArray) t).getType());
-			st.setAttribute("map", ((SizzleArray) t).getType() instanceof SizzleProtoTuple);
 		}
 
 		st.setAttribute("operand", "");
