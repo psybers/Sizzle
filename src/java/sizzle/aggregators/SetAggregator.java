@@ -18,6 +18,16 @@ public class SetAggregator extends Aggregator {
 
 	/**
 	 * Construct a SetAggregator.
+	 */
+	public SetAggregator() {
+		super();
+
+		// allow all values
+		this.max = Long.MAX_VALUE;
+	}
+
+	/**
+	 * Construct a SetAggregator.
 	 * 
 	 * @param n
 	 *            A long representing the number of values to return
