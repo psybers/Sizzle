@@ -34,6 +34,7 @@ import sizzle.parser.syntaxtree.Index;
 import sizzle.parser.syntaxtree.IntegerLiteral;
 import sizzle.parser.syntaxtree.MapType;
 import sizzle.parser.syntaxtree.Node;
+import sizzle.parser.syntaxtree.NodeSequence;
 import sizzle.parser.syntaxtree.Operand;
 import sizzle.parser.syntaxtree.OutputType;
 import sizzle.parser.syntaxtree.Pair;
@@ -206,7 +207,7 @@ public class IndexeeFindingVisitor extends GJDepthFirst<Set<String>, String> {
 
 		if (n.f1.present())
 			for (final Node node : n.f1.nodes)
-				indexees.addAll(node.accept(this, argu));
+				indexees.addAll(((NodeSequence)node).nodes.get(1).accept(this, argu));
 
 		return indexees;
 	}
@@ -349,7 +350,7 @@ public class IndexeeFindingVisitor extends GJDepthFirst<Set<String>, String> {
 		indexees.addAll(n.f0.accept(this, argu));
 
 		if (n.f1.present())
-			indexees.addAll(n.f1.node.accept(this, argu));
+			indexees.addAll(((NodeSequence)n.f1.node).nodes.get(1).accept(this, argu));
 
 		return indexees;
 	}
@@ -409,14 +410,12 @@ public class IndexeeFindingVisitor extends GJDepthFirst<Set<String>, String> {
 	public Set<String> visit(final Index n, final String argu) {
 		final HashSet<String> set = new HashSet<String>();
 
-		for (final String s : this.namefinder.visit(n.f1))
-			if (s.equals(argu)) {
-				// FIXME
-				codegen.setSkipIndex(true);
-				String str = last_factor.accept(codegen, symtab);
-				codegen.setSkipIndex(false);
-				set.add(str);
-			}
+		if (this.namefinder.visit(n.f1).contains(argu)) {
+			// FIXME rdyer
+			codegen.setSkipIndex(argu);
+			set.add(last_factor.accept(codegen, symtab));
+			codegen.setSkipIndex("");
+		}
 
 		return set;
 	}
@@ -487,42 +486,42 @@ public class IndexeeFindingVisitor extends GJDepthFirst<Set<String>, String> {
 	/** {@inheritDoc} */
 	@Override
 	public Set<String> visit(final IntegerLiteral n, final String argu) {
-		throw new RuntimeException("unimplemented");
+		return new HashSet<String>();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Set<String> visit(final FingerprintLiteral n, final String argu) {
-		throw new RuntimeException("unimplemented");
+		return new HashSet<String>();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Set<String> visit(final FloatingPointLiteral n, final String argu) {
-		throw new RuntimeException("unimplemented");
+		return new HashSet<String>();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Set<String> visit(final CharLiteral n, final String argu) {
-		throw new RuntimeException("unimplemented");
+		return new HashSet<String>();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Set<String> visit(final StringLiteral n, final String argu) {
-		throw new RuntimeException("unimplemented");
+		return new HashSet<String>();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Set<String> visit(final BytesLiteral n, final String argu) {
-		throw new RuntimeException("unimplemented");
+		return new HashSet<String>();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Set<String> visit(final TimeLiteral n, final String argu) {
-		throw new RuntimeException("unimplemented");
+		return new HashSet<String>();
 	}
 }

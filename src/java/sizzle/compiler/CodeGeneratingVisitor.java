@@ -164,7 +164,8 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 	private final String name;
 	private final StringTemplateGroup stg;
 
-	private boolean skipIndex = false;
+	private String skipIndex = "";
+	private boolean abortGeneration = false;
 
 	public CodeGeneratingVisitor(final String name, final StringTemplateGroup stg) throws IOException {
 		this.typechecker = new TypeCheckingVisitor();
@@ -182,7 +183,7 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 		this.stg = stg;
 	}
 
-	public void setSkipIndex(final boolean skipIndex)
+	public void setSkipIndex(final String skipIndex)
 	{
 		this.skipIndex = skipIndex;
 	}
@@ -779,10 +780,10 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 				argu.setOperand(n.f0);
 				try {
 					argu.setOperandType(this.typechecker.visit(argu.getOperand(), argu.cloneNonLocals()));
-				} catch (final IOException e) {
-				}
-				String accept = n.f0.accept(this, argu) + n.f1.nodes.elementAt(0).accept(this, argu);
-				for (int i = 1; i < n.f1.nodes.size(); i++)
+				} catch (final IOException e) { }
+				String accept = n.f0.accept(this, argu);
+				abortGeneration = false;
+				for (int i = 0; !abortGeneration && i < n.f1.nodes.size(); i++)
 					accept += n.f1.nodes.elementAt(i).accept(this, argu);
 				argu.setOperand(null);
 				return accept;
@@ -802,10 +803,13 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 	@Override
 	public String visit(final Selector n, final SymbolTable argu) {
 		try {
-			if (!(argu.getOperandType() instanceof SizzleProtoTuple))
+			SizzleProtoTuple tuple;
+			if (argu.getOperandType() instanceof SizzleProtoTuple)
+				tuple = (SizzleProtoTuple) argu.getOperandType();
+			else if (argu.getOperandType() instanceof SizzleProtoList)
+				tuple = (SizzleProtoTuple) ((SizzleProtoList) argu.getOperandType()).getType();
+			else
 				throw new RuntimeException("unimplemented");
-
-			SizzleProtoTuple tuple = (SizzleProtoTuple) argu.getOperandType();
 			String member = n.f1.f0.tokenImage;
 
 			argu.setOperandType(tuple.getMember(member));
@@ -819,8 +823,10 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 
 	@Override
 	public String visit(final Index n, final SymbolTable argu) {
-		if (this.skipIndex)
+		if (this.namefinder.visit(n.f1).contains(this.skipIndex)) {
+			abortGeneration = true;
 			return "";
+		}
 
 		final StringTemplate st = this.stg.getInstanceOf("Index");
 
