@@ -38,9 +38,8 @@ public class <name> extends sizzle.runtime.SizzleRunner {
 		@Override
 		protected void map(<keyClass> key, <valueClass> value, org.apache.hadoop.mapreduce.Mapper\<<keyClass>, <valueClass>, sizzle.io.EmitKey, sizzle.io.EmitValue\>.Context context) throws java.io.IOException {
 			try {
-				java.io.ByteArrayInputStream _inputStream = new java.io.ByteArrayInputStream(value.getBytes(), 0, value.getLength());
+				com.google.protobuf.CodedInputStream _inputStream = com.google.protobuf.CodedInputStream.newInstance(value.getBytes(), 0, value.getLength());
 				<statements:{<it><\n>}>
-				_inputStream.close();
 			} catch (java.io.IOException e) {
 				throw e;
 			} catch (RuntimeException e) {
