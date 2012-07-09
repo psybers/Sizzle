@@ -844,7 +844,7 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 	/** {@inheritDoc} */
 	@Override
 	public SizzleType visit(final Proto n, final SymbolTable argu) {
-		final String tokenImage = n.f1.f0.tokenImage;
+		final String tokenImage = ((NodeToken) n.f1.f0.choice).tokenImage;
 
 		argu.importProto(tokenImage.substring(1, tokenImage.length() - 1));
 

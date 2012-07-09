@@ -121,6 +121,7 @@ TOKEN : /* LITERALS */
       )
     )
     "'" >
+| < REGEX_LITERAL : "`" (~[ "`", "\n", "\r" ])* "`" >
 | < STRING_LITERAL :
     "\""
     (
@@ -916,6 +917,7 @@ void StringLiteral() :
 {}
 {
   < STRING_LITERAL >
+  | < REGEX_LITERAL >
 }
 
 // bytes = 'B' string | 'X' hex_string.

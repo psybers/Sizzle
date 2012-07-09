@@ -984,7 +984,16 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 
 	@Override
 	public String visit(final StringLiteral n, final SymbolTable argu) {
-		return n.f0.tokenImage;
+		switch (n.f0.which) {
+		case 0: // STRING
+			return ((NodeToken) n.f0.choice).tokenImage;
+		case 1: // REGEX
+			String s = ((NodeToken) n.f0.choice).tokenImage;
+			s = "\"" + s.substring(1, s.length() - 1).replace("\\", "\\\\") + "\"";
+			return s;
+		default:
+			throw new RuntimeException("unimplemented");
+		}
 	}
 
 	@Override
