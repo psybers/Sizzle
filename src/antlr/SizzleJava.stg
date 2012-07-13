@@ -60,4 +60,5 @@ Composite(type, pairlist, exprlist) ::= "<if(exprlist)>new <type> { <exprlist> }
 PairList(pairs) ::= "<pairs:{<it>;<\n>}>"
 Pair(map, key, value) ::= "<map>.put(<key>, <value>)"
 Identifier(id) ::= "<if(identifierMap.(id))><identifierMap.(id)><else>___<id><endif>"
+Assignment(lhs, rhs) ::= "<lhs> = <rhs>;"
 
