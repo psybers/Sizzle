@@ -22,7 +22,14 @@ public class <name> extends sizzle.runtime.SizzleRunner {
 	public static void main(String[] args) throws java.io.IOException, InterruptedException, ClassNotFoundException {
 		<name> runner = new <name>();
 		
-		runner.job(new org.apache.hadoop.fs.Path[] { new org.apache.hadoop.fs.Path(args[0]) }, new org.apache.hadoop.fs.Path(args[1]), args.length > 2).submit();
+		final boolean robust = args[0].equals("-robust");
+		
+		final int offset = robust ? 1 : 0;
+		final org.apache.hadoop.fs.Path[] ins = new org.apache.hadoop.fs.Path[args.length - offset - 1];
+		for (int i = 0; i \< ins.length; i++)
+			ins[i] = new org.apache.hadoop.fs.Path(args[i + offset]);
+		
+		runner.job(ins, new org.apache.hadoop.fs.Path(args[args.length - 1]), robust).submit();
 	}
 	
 	static class <name>SizzleMapper extends sizzle.runtime.SizzleMapper {
