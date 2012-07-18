@@ -17,10 +17,11 @@ message Project {
 	required string description = 6;
 	repeated string operating_systems = 7;
 	repeated string programming_languages = 8;
-	repeated string licenses = 9;
-	repeated string topics = 10;
-	repeated Person maintainers = 11;
-	repeated Person developers = 12;
-	repeated CodeRepository code_repositories = 13;
-	repeated BugRepository bug_repositories = 14;
+	repeated string databases = 9;
+	repeated string licenses = 10;
+	repeated string topics = 11;
+	repeated Person maintainers = 12;
+	repeated Person developers = 13;
+	repeated CodeRepository code_repositories = 14;
+	repeated BugRepository bug_repositories = 15;
 }
