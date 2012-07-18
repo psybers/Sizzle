@@ -34,25 +34,28 @@ public class ProjectProtoTuple extends SizzleProtoTuple {
 		names.put("description", 5);
 		members.add(new SizzleString());
 
-		names.put("programming_languages", 6);
+		names.put("operating_systems", 6);
 		members.add(new SizzleProtoList(new SizzleString()));
 
-		names.put("licenses", 7);
+		names.put("programming_languages", 7);
 		members.add(new SizzleProtoList(new SizzleString()));
 
-		names.put("topics", 8);
+		names.put("licenses", 8);
 		members.add(new SizzleProtoList(new SizzleString()));
 
-		names.put("maintainers", 9);
+		names.put("topics", 9);
+		members.add(new SizzleProtoList(new SizzleString()));
+
+		names.put("maintainers", 10);
 		members.add(new SizzleProtoList(new PersonProtoTuple()));
 
-		names.put("developers", 10);
+		names.put("developers", 11);
 		members.add(new SizzleProtoList(new PersonProtoTuple()));
 
-		names.put("code_repositories", 11);
+		names.put("code_repositories", 12);
 		members.add(new SizzleProtoList(new CodeRepositoryProtoTuple()));
 
-		names.put("bug_repositories", 12);
+		names.put("bug_repositories", 13);
 		members.add(new SizzleProtoList(new BugRepositoryProtoTuple()));
 	}
 

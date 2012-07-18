@@ -15,11 +15,12 @@ message Project {
 	required uint64 created_date = 4;
 	required string id = 5;
 	required string description = 6;
-	repeated string programming_languages = 7;
-	repeated string licenses = 8;
-	repeated string topics = 9;
-	repeated Person maintainers = 10;
-	repeated Person developers = 11;
-	repeated CodeRepository code_repositories = 12;
-	repeated BugRepository bug_repositories = 13;
+	repeated string operating_systems = 7;
+	repeated string programming_languages = 8;
+	repeated string licenses = 9;
+	repeated string topics = 10;
+	repeated Person maintainers = 11;
+	repeated Person developers = 12;
+	repeated CodeRepository code_repositories = 13;
+	repeated BugRepository bug_repositories = 14;
 }
