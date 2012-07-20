@@ -19,9 +19,12 @@ message Project {
 	repeated string programming_languages = 8;
 	repeated string databases = 9;
 	repeated string licenses = 10;
-	repeated string topics = 11;
-	repeated Person maintainers = 12;
-	repeated Person developers = 13;
-	repeated CodeRepository code_repositories = 14;
-	repeated BugRepository bug_repositories = 15;
+	repeated string interfaces = 11;
+	repeated string audiences = 12;
+	repeated string topics = 13;
+	required bool donations = 14;
+	repeated Person maintainers = 15;
+	repeated Person developers = 16;
+	repeated CodeRepository code_repositories = 17;
+	repeated BugRepository bug_repositories = 18;
 }
