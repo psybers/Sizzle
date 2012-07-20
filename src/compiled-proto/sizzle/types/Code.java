@@ -15,7 +15,11 @@ public final class Code {
     boolean hasUrl();
     String getUrl();
     
-    // repeated .sizzle.types.Revision revisions = 2;
+    // required .sizzle.types.CodeRepository.RepositoryType repository_type = 2;
+    boolean hasRepositoryType();
+    sizzle.types.Code.CodeRepository.RepositoryType getRepositoryType();
+    
+    // repeated .sizzle.types.Revision revisions = 3;
     java.util.List<sizzle.types.Code.Revision> 
         getRevisionsList();
     sizzle.types.Code.Revision getRevisions(int index);
@@ -53,6 +57,87 @@ public final class Code {
       return sizzle.types.Code.internal_static_sizzle_types_CodeRepository_fieldAccessorTable;
     }
     
+    public enum RepositoryType
+        implements com.google.protobuf.ProtocolMessageEnum {
+      UNKNOWN(0, 1),
+      SVN(1, 2),
+      CVS(2, 3),
+      GIT(3, 4),
+      HG(4, 5),
+      BZR(5, 6),
+      ;
+      
+      public static final int UNKNOWN_VALUE = 1;
+      public static final int SVN_VALUE = 2;
+      public static final int CVS_VALUE = 3;
+      public static final int GIT_VALUE = 4;
+      public static final int HG_VALUE = 5;
+      public static final int BZR_VALUE = 6;
+      
+      
+      public final int getNumber() { return value; }
+      
+      public static RepositoryType valueOf(int value) {
+        switch (value) {
+          case 1: return UNKNOWN;
+          case 2: return SVN;
+          case 3: return CVS;
+          case 4: return GIT;
+          case 5: return HG;
+          case 6: return BZR;
+          default: return null;
+        }
+      }
+      
+      public static com.google.protobuf.Internal.EnumLiteMap<RepositoryType>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<RepositoryType>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<RepositoryType>() {
+              public RepositoryType findValueByNumber(int number) {
+                return RepositoryType.valueOf(number);
+              }
+            };
+      
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return sizzle.types.Code.CodeRepository.getDescriptor().getEnumTypes().get(0);
+      }
+      
+      private static final RepositoryType[] VALUES = {
+        UNKNOWN, SVN, CVS, GIT, HG, BZR, 
+      };
+      
+      public static RepositoryType valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+      
+      private final int index;
+      private final int value;
+      
+      private RepositoryType(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+      
+      // @@protoc_insertion_point(enum_scope:sizzle.types.CodeRepository.RepositoryType)
+    }
+    
     private int bitField0_;
     // required string url = 1;
     public static final int URL_FIELD_NUMBER = 1;
@@ -86,8 +171,18 @@ public final class Code {
       }
     }
     
-    // repeated .sizzle.types.Revision revisions = 2;
-    public static final int REVISIONS_FIELD_NUMBER = 2;
+    // required .sizzle.types.CodeRepository.RepositoryType repository_type = 2;
+    public static final int REPOSITORY_TYPE_FIELD_NUMBER = 2;
+    private sizzle.types.Code.CodeRepository.RepositoryType repositoryType_;
+    public boolean hasRepositoryType() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public sizzle.types.Code.CodeRepository.RepositoryType getRepositoryType() {
+      return repositoryType_;
+    }
+    
+    // repeated .sizzle.types.Revision revisions = 3;
+    public static final int REVISIONS_FIELD_NUMBER = 3;
     private java.util.List<sizzle.types.Code.Revision> revisions_;
     public java.util.List<sizzle.types.Code.Revision> getRevisionsList() {
       return revisions_;
@@ -109,6 +204,7 @@ public final class Code {
     
     private void initFields() {
       url_ = "";
+      repositoryType_ = sizzle.types.Code.CodeRepository.RepositoryType.UNKNOWN;
       revisions_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -117,6 +213,10 @@ public final class Code {
       if (isInitialized != -1) return isInitialized == 1;
       
       if (!hasUrl()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasRepositoryType()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -136,8 +236,11 @@ public final class Code {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeBytes(1, getUrlBytes());
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeEnum(2, repositoryType_.getNumber());
+      }
       for (int i = 0; i < revisions_.size(); i++) {
-        output.writeMessage(2, revisions_.get(i));
+        output.writeMessage(3, revisions_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -152,9 +255,13 @@ public final class Code {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(1, getUrlBytes());
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, repositoryType_.getNumber());
+      }
       for (int i = 0; i < revisions_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, revisions_.get(i));
+          .computeMessageSize(3, revisions_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -283,9 +390,11 @@ public final class Code {
         super.clear();
         url_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
+        repositoryType_ = sizzle.types.Code.CodeRepository.RepositoryType.UNKNOWN;
+        bitField0_ = (bitField0_ & ~0x00000002);
         if (revisionsBuilder_ == null) {
           revisions_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000004);
         } else {
           revisionsBuilder_.clear();
         }
@@ -331,10 +440,14 @@ public final class Code {
           to_bitField0_ |= 0x00000001;
         }
         result.url_ = url_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.repositoryType_ = repositoryType_;
         if (revisionsBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
             revisions_ = java.util.Collections.unmodifiableList(revisions_);
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000004);
           }
           result.revisions_ = revisions_;
         } else {
@@ -359,11 +472,14 @@ public final class Code {
         if (other.hasUrl()) {
           setUrl(other.getUrl());
         }
+        if (other.hasRepositoryType()) {
+          setRepositoryType(other.getRepositoryType());
+        }
         if (revisionsBuilder_ == null) {
           if (!other.revisions_.isEmpty()) {
             if (revisions_.isEmpty()) {
               revisions_ = other.revisions_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000004);
             } else {
               ensureRevisionsIsMutable();
               revisions_.addAll(other.revisions_);
@@ -376,7 +492,7 @@ public final class Code {
               revisionsBuilder_.dispose();
               revisionsBuilder_ = null;
               revisions_ = other.revisions_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000004);
               revisionsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getRevisionsFieldBuilder() : null;
@@ -391,6 +507,10 @@ public final class Code {
       
       public final boolean isInitialized() {
         if (!hasUrl()) {
+          
+          return false;
+        }
+        if (!hasRepositoryType()) {
           
           return false;
         }
@@ -431,7 +551,18 @@ public final class Code {
               url_ = input.readBytes();
               break;
             }
-            case 18: {
+            case 16: {
+              int rawValue = input.readEnum();
+              sizzle.types.Code.CodeRepository.RepositoryType value = sizzle.types.Code.CodeRepository.RepositoryType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                repositoryType_ = value;
+              }
+              break;
+            }
+            case 26: {
               sizzle.types.Code.Revision.Builder subBuilder = sizzle.types.Code.Revision.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addRevisions(subBuilder.buildPartial());
@@ -479,13 +610,37 @@ public final class Code {
         onChanged();
       }
       
-      // repeated .sizzle.types.Revision revisions = 2;
+      // required .sizzle.types.CodeRepository.RepositoryType repository_type = 2;
+      private sizzle.types.Code.CodeRepository.RepositoryType repositoryType_ = sizzle.types.Code.CodeRepository.RepositoryType.UNKNOWN;
+      public boolean hasRepositoryType() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public sizzle.types.Code.CodeRepository.RepositoryType getRepositoryType() {
+        return repositoryType_;
+      }
+      public Builder setRepositoryType(sizzle.types.Code.CodeRepository.RepositoryType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        repositoryType_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearRepositoryType() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        repositoryType_ = sizzle.types.Code.CodeRepository.RepositoryType.UNKNOWN;
+        onChanged();
+        return this;
+      }
+      
+      // repeated .sizzle.types.Revision revisions = 3;
       private java.util.List<sizzle.types.Code.Revision> revisions_ =
         java.util.Collections.emptyList();
       private void ensureRevisionsIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
           revisions_ = new java.util.ArrayList<sizzle.types.Code.Revision>(revisions_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000004;
          }
       }
       
@@ -601,7 +756,7 @@ public final class Code {
       public Builder clearRevisions() {
         if (revisionsBuilder_ == null) {
           revisions_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000004);
           onChanged();
         } else {
           revisionsBuilder_.clear();
@@ -657,7 +812,7 @@ public final class Code {
           revisionsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               sizzle.types.Code.Revision, sizzle.types.Code.Revision.Builder, sizzle.types.Code.RevisionOrBuilder>(
                   revisions_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  ((bitField0_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
                   isClean());
           revisions_ = null;
@@ -2097,14 +2252,18 @@ public final class Code {
   static {
     java.lang.String[] descriptorData = {
       "\n\ncode.proto\022\014sizzle.types\032\tast.proto\032\014s" +
-      "hared.proto\"H\n\016CodeRepository\022\013\n\003url\030\001 \002" +
-      "(\t\022)\n\trevisions\030\002 \003(\0132\026.sizzle.types.Rev" +
-      "ision\"\324\001\n\010Revision\022\n\n\002id\030\001 \002(\005\022$\n\006author" +
-      "\030\002 \002(\0132\024.sizzle.types.Person\022\'\n\tcommitte" +
-      "r\030\003 \002(\0132\024.sizzle.types.Person\022\023\n\013commit_" +
-      "date\030\004 \002(\004\022\013\n\003log\030\005 \002(\t\022!\n\005files\030\006 \003(\0132\022" +
-      ".sizzle.types.File\022(\n\tlibraries\030\007 \003(\0132\025." +
-      "sizzle.types.Library"
+      "hared.proto\"\331\001\n\016CodeRepository\022\013\n\003url\030\001 " +
+      "\002(\t\022D\n\017repository_type\030\002 \002(\0162+.sizzle.ty" +
+      "pes.CodeRepository.RepositoryType\022)\n\trev" +
+      "isions\030\003 \003(\0132\026.sizzle.types.Revision\"I\n\016" +
+      "RepositoryType\022\013\n\007UNKNOWN\020\001\022\007\n\003SVN\020\002\022\007\n\003" +
+      "CVS\020\003\022\007\n\003GIT\020\004\022\006\n\002HG\020\005\022\007\n\003BZR\020\006\"\324\001\n\010Revi" +
+      "sion\022\n\n\002id\030\001 \002(\005\022$\n\006author\030\002 \002(\0132\024.sizzl" +
+      "e.types.Person\022\'\n\tcommitter\030\003 \002(\0132\024.sizz" +
+      "le.types.Person\022\023\n\013commit_date\030\004 \002(\004\022\013\n\003",
+      "log\030\005 \002(\t\022!\n\005files\030\006 \003(\0132\022.sizzle.types." +
+      "File\022(\n\tlibraries\030\007 \003(\0132\025.sizzle.types.L" +
+      "ibrary"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2116,7 +2275,7 @@ public final class Code {
           internal_static_sizzle_types_CodeRepository_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_sizzle_types_CodeRepository_descriptor,
-              new java.lang.String[] { "Url", "Revisions", },
+              new java.lang.String[] { "Url", "RepositoryType", "Revisions", },
               sizzle.types.Code.CodeRepository.class,
               sizzle.types.Code.CodeRepository.Builder.class);
           internal_static_sizzle_types_Revision_descriptor =
