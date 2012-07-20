@@ -699,6 +699,11 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 			final NodeChoice nodeChoice = (NodeChoice) nodes.elementAt(0);
 			switch (nodeChoice.which) {
 			case 0:
+				if (n.f0.accept(this.typechecker, argu) instanceof SizzleString) {
+					operators.add(".equals(" + nodes.elementAt(1).accept(this, argu) + ")");
+					operands.add("");
+					break;
+				}
 				operators.add(" == ");
 				break;
 			case 1:
@@ -719,7 +724,8 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 			default:
 				throw new RuntimeException("unexpected choice " + nodeChoice.which + " is " + nodeChoice.choice.getClass());
 			}
-			operands.add(nodes.elementAt(1).accept(this, argu));
+			if (operands.size() == 0)
+				operands.add(nodes.elementAt(1).accept(this, argu));
 
 			st.setAttribute("operators", operators);
 			st.setAttribute("operands", operands);
