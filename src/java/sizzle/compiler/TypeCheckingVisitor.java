@@ -181,42 +181,6 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 		}
 
 		argu.set(id, lhs);
-
-		// switch (n.f2.which) {
-		// case 0: // identifier
-		// final SizzleType ittype = argu.getType(((Identifier)
-		// n.f2.choice).f0.tokenImage);
-		//
-		// if (n.f3.present()) {
-		// final SizzleType ietype = ((Initializer) ((NodeSequence)
-		// n.f3.node).nodes.get(1)).accept(this, argu);
-		//
-		// if (!ittype.assigns(ietype) && !argu.hasCast(ittype, ietype))
-		// throw new TypeException("incorrect type " + ietype +
-		// " for assignment to " + id + ':' + ittype);
-		//
-		// argu.set(id, ittype, false);
-		// } else
-		// argu.set(id, ittype);
-		// break;
-		// case 1: // map
-		// final NodeSequence seq = (NodeSequence) n.f2.choice;
-		// final SizzleType mvtype = new SizzleMap((SizzleScalar)
-		// argu.getType(((Identifier) seq.elementAt(2)).f0.tokenImage),
-		// (SizzleScalar) argu.getType(((Identifier)
-		// seq.elementAt(5)).f0.tokenImage));
-		//
-		// if (n.f3.present()) {
-		// final SizzleType mitype = ((Initializer) ((NodeSequence)
-		// n.f3.node).nodes.get(1)).accept(this, argu);
-		//
-		// if (!mvtype.assigns(mitype))
-		// throw new TypeException("incorrect type " + mitype +
-		// " for assignment to " + id + ':' + mvtype);
-		// }
-		//
-		// argu.set(id, mvtype);
-		// break;
 		return null;
 	}
 
