@@ -68,9 +68,8 @@ TOKEN :
 | < EACH : "each" >
 | < WHEN : "when" >
 | < SKIP_ : "skip" >
-| < EMIT : "emit" >
 | < REST : "rest" >
-| < TABLE : "table" >
+| < OUTPUT : "output" >
 | < WHILE : "while" >
 | < BREAK : "break" >
 | < PROTO : "proto" >
@@ -352,7 +351,7 @@ void MapType() :
 void OutputType() :
 {}
 {
-  "table" Identifier() [ "(" ExprList() ")" ]
+  "output" Identifier() [ "(" ExprList() ")" ]
   (
     "[" Component() "]"
   )*
@@ -465,9 +464,9 @@ void DoStatement() :
 void EmitStatement() :
 {}
 {
-  "emit" Identifier() (
+  Identifier() (
     "[" Expression() "]"
-  )* "<-" Expression() [ "weight" Expression() ] ";"
+  )* "<<" Expression() [ "weight" Expression() ] ";"
 }
 
 // ExprStatement = Expression [ '++' | '--' ] ';'.

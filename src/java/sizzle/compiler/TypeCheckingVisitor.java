@@ -417,16 +417,16 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 	/** {@inheritDoc} */
 	@Override
 	public SizzleType visit(final EmitStatement n, final SymbolTable argu) {
-		final String id = n.f1.f0.tokenImage;
+		final String id = n.f0.f0.tokenImage;
 
 		final SizzleTable t = (SizzleTable) argu.get(id);
 
 		if (t == null)
 			throw new TypeException("emitting to undeclared table " + id);
 
-		if (n.f2.present()) {
+		if (n.f1.present()) {
 			final List<SizzleType> indices = new ArrayList<SizzleType>();
-			for (final Node node : n.f2.nodes)
+			for (final Node node : n.f1.nodes)
 				indices.add(((NodeSequence) node).nodes.get(1).accept(this, argu));
 
 			if (indices.size() != t.countIndices())
@@ -438,15 +438,15 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 		} else if (t.countIndices() > 0)
 			throw new TypeException("indices missing from emit");
 
-		final SizzleType expression = n.f4.accept(this, argu);
+		final SizzleType expression = n.f3.accept(this, argu);
 		if (!t.accepts(expression))
 			throw new TypeException("incorrect type " + expression + " for " + id + ":" + t);
 
-		if (n.f5.present()) {
+		if (n.f4.present()) {
 			if (t.getWeightType() == null)
 				throw new TypeException("unexpected weight specified by emit");
 
-			final SizzleType wtype = ((NodeSequence) n.f5.node).nodes.get(1).accept(this, argu);
+			final SizzleType wtype = ((NodeSequence) n.f4.node).nodes.get(1).accept(this, argu);
 
 			if (!t.acceptsWeight(wtype))
 				throw new TypeException("incorrect type " + wtype + " for weight of " + id + ":" + t.getWeightType());

@@ -463,21 +463,21 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 	public String visit(final EmitStatement n, final SymbolTable argu) {
 		final StringTemplate st = this.stg.getInstanceOf("EmitStatement");
 
-		if (n.f2.present()) {
+		if (n.f1.present()) {
 			final List<String> indices = new ArrayList<String>();
 
-			for (final Node node : n.f2.nodes)
+			for (final Node node : n.f1.nodes)
 				indices.add(((NodeSequence) node).elementAt(1).accept(this, argu));
 
 			st.setAttribute("indices", indices);
 		}
 
-		st.setAttribute("id", Character.toString('"') + n.f1.f0.tokenImage + '"');
+		st.setAttribute("id", Character.toString('"') + n.f0.f0.tokenImage + '"');
 
-		st.setAttribute("expression", n.f4.f0.accept(this, argu));
+		st.setAttribute("expression", n.f3.f0.accept(this, argu));
 
-		if (n.f5.present())
-			st.setAttribute("weight", ((NodeSequence) n.f5.node).elementAt(1).accept(this, argu));
+		if (n.f4.present())
+			st.setAttribute("weight", ((NodeSequence) n.f4.node).elementAt(1).accept(this, argu));
 
 		return st.toString();
 	}
