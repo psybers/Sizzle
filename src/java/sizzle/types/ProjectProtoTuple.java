@@ -26,7 +26,7 @@ public class ProjectProtoTuple extends SizzleProtoTuple {
 		members.add(new SizzleString());
 
 		names.put("created_date", 3);
-		members.add(new SizzleInt());
+		members.add(new SizzleTime());
 
 		names.put("id", 4);
 		members.add(new SizzleString());

@@ -26,7 +26,7 @@ public class RevisionProtoTuple extends SizzleProtoTuple {
 		members.add(new PersonProtoTuple());
 
 		names.put("commit_date", 3);
-		members.add(new SizzleInt());
+		members.add(new SizzleTime());
 
 		names.put("log", 4);
 		members.add(new SizzleString());

@@ -23,10 +23,10 @@ public class BugProtoTuple extends SizzleProtoTuple {
 		members.add(new PersonProtoTuple());
 
 		names.put("reported_date", 2);
-		members.add(new SizzleInt());
+		members.add(new SizzleTime());
 
 		names.put("closed_date", 3);
-		members.add(new SizzleInt());
+		members.add(new SizzleTime());
 
 		names.put("summary", 4);
 		members.add(new SizzleString());
