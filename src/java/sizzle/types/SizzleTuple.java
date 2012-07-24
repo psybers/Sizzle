@@ -57,6 +57,17 @@ public class SizzleTuple extends SizzleScalar {
 	}
 
 	/**
+	 * 
+	 * @param member
+	 *            A {@link String} containing the name of the member
+	 * 
+	 * @return true if a member exists in this tuple with the given name
+	 */
+	public boolean hasMember(final String member) {
+		return this.names.containsKey(member);
+	}
+
+	/**
 	 * Return the type of the member identified by a given index.
 	 * 
 	 * @param index

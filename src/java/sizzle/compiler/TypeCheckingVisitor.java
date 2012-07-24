@@ -653,7 +653,11 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 					if (!(type instanceof SizzleTuple))
 						throw new TypeException("invalid operand type " + type + " for member selection");
 
-					type = ((SizzleTuple) type).getMember(((Selector) nodeChoice.choice).f1.f0.tokenImage);
+					final String selector = ((Selector) nodeChoice.choice).f1.f0.tokenImage;
+					if (!((SizzleTuple) type).hasMember(selector))
+						throw new TypeException(type + " has no member named '" + selector + "'");
+
+					type = ((SizzleTuple) type).getMember(selector);
 					break;
 				case 1: // index
 					if (type == null)
