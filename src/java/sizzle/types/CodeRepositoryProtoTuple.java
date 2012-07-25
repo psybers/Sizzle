@@ -20,7 +20,7 @@ public class CodeRepositoryProtoTuple extends SizzleProtoTuple {
 		members.add(new SizzleString());
 
 		names.put("repository_type", 1);
-		members.add(new RepositoryTypeProtoMap());
+		members.add(new SizzleInt());
 
 		names.put("revisions", 2);
 		members.add(new SizzleProtoList(new RevisionProtoTuple()));

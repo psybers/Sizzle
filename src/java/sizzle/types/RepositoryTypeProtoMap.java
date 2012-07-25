@@ -1,16 +1,20 @@
 package sizzle.types;
 
 /**
- * A {@link SizzleProtoTuple}.
+ * A {@link RepositoryTypeProtoMap}.
  * 
  * @author rdyer
  * 
  */
-public class RepositoryTypeProtoMap extends SizzleMap {
+public class RepositoryTypeProtoMap extends SizzleProtoMap {
 	/**
-	 * Construct a ProjectProtoTuple.
+	 * Construct a RepositoryTypeProtoMap.
 	 */
 	public RepositoryTypeProtoMap() {
-		super(new SizzleInt(), new SizzleString());
+	}
+
+	@Override
+	public String toJavaType() {
+		return "sizzle.types.Code.CodeRepository.RepositoryType";
 	}
 }

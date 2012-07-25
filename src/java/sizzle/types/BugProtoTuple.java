@@ -35,7 +35,7 @@ public class BugProtoTuple extends SizzleProtoTuple {
 		members.add(new SizzleString());
 
 		names.put("status", 6);
-		members.add(new BugStatusProtoMap());
+		members.add(new SizzleInt());
 
 		names.put("severity", 7);
 		members.add(new SizzleString());

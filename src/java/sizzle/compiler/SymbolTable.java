@@ -35,6 +35,7 @@ import sizzle.types.MethodProtoTuple;
 import sizzle.types.PackageProtoTuple;
 import sizzle.types.PersonProtoTuple;
 import sizzle.types.ProjectProtoTuple;
+import sizzle.types.RepositoryTypeProtoMap;
 import sizzle.types.RevisionProtoTuple;
 import sizzle.types.SizzleAny;
 import sizzle.types.SizzleArray;
@@ -122,6 +123,7 @@ public class SymbolTable {
 		this.idmap.put("Package", new PackageProtoTuple());
 		this.idmap.put("Person", new PersonProtoTuple());
 		this.idmap.put("Project", new ProjectProtoTuple());
+		this.idmap.put("RepositoryType", new RepositoryTypeProtoMap());
 		this.idmap.put("Revision", new RevisionProtoTuple());
 		this.idmap.put("Type", new TypeProtoTuple());
 

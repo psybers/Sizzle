@@ -1,16 +1,20 @@
 package sizzle.types;
 
 /**
- * A {@link SizzleProtoTuple}.
+ * A {@link FileTypeProtoMap}.
  * 
  * @author rdyer
  * 
  */
 public class FileTypeProtoMap extends SizzleMap {
 	/**
-	 * Construct a ProjectProtoTuple.
+	 * Construct a FileTypeProtoMap.
 	 */
 	public FileTypeProtoMap() {
-		super(new SizzleInt(), new SizzleString());
+	}
+
+	@Override
+	public String toJavaType() {
+		return "sizzle.types.Ast.File.FileType";
 	}
 }

@@ -86,6 +86,7 @@ import sizzle.types.SizzleBytes;
 import sizzle.types.SizzleFunction;
 import sizzle.types.SizzleMap;
 import sizzle.types.SizzleProtoList;
+import sizzle.types.SizzleProtoMap;
 import sizzle.types.SizzleProtoTuple;
 import sizzle.types.SizzleString;
 import sizzle.types.SizzleTable;
@@ -814,14 +815,17 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 	@Override
 	public String visit(final Selector n, final SymbolTable argu) {
 		try {
-			SizzleProtoTuple tuple;
+			final SizzleProtoTuple tuple;
 			if (argu.getOperandType() instanceof SizzleProtoTuple)
 				tuple = (SizzleProtoTuple) argu.getOperandType();
 			else if (argu.getOperandType() instanceof SizzleProtoList)
 				tuple = (SizzleProtoTuple) ((SizzleProtoList) argu.getOperandType()).getType();
+			else if (argu.getOperandType() instanceof SizzleProtoMap)
+				return "." + n.f1.f0.tokenImage;
 			else
 				throw new RuntimeException("unimplemented");
-			String member = n.f1.f0.tokenImage;
+
+			final String member = n.f1.f0.tokenImage;
 
 			argu.setOperandType(tuple.getMember(member));
 			if (tuple.getMember(member) instanceof SizzleArray)
@@ -965,11 +969,10 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 
 	@Override
 	public String visit(final Identifier n, final SymbolTable argu) {
-		// TODO: support protobufs/sequence files/avro here
 		final String id = n.f0.tokenImage;
 
 		if (argu.hasType(id))
-			return argu.getType(id).toString();
+			return argu.getType(id).toJavaType();
 
 		// otherwise return the identifier template
 		final StringTemplate st = this.stg.getInstanceOf("Identifier");

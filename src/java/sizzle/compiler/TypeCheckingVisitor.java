@@ -84,6 +84,7 @@ import sizzle.types.SizzleFunction;
 import sizzle.types.SizzleInt;
 import sizzle.types.SizzleMap;
 import sizzle.types.SizzleName;
+import sizzle.types.SizzleProtoMap;
 import sizzle.types.SizzleProtoTuple;
 import sizzle.types.SizzleScalar;
 import sizzle.types.SizzleString;
@@ -650,15 +651,27 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 				case 0: // selector
 					if (type == null)
 						type = n.f0.accept(this, argu);
-					if (!(type instanceof SizzleTuple))
-						throw new TypeException("invalid operand type " + type + " for member selection");
 
 					final String selector = ((Selector) nodeChoice.choice).f1.f0.tokenImage;
-					if (!((SizzleTuple) type).hasMember(selector))
-						throw new TypeException(type + " has no member named '" + selector + "'");
 
-					type = ((SizzleTuple) type).getMember(selector);
-					break;
+					if (type instanceof SizzleProtoMap) {
+						// FIXME rdyer how do we verify the enum value exists?
+//						if (!((SizzleTuple) type).hasMember(selector))
+//							throw new TypeException(type + " has no member named '" + selector + "'");
+
+						type = new SizzleInt();
+						break;
+					}
+
+					if (type instanceof SizzleTuple) {
+						if (!((SizzleTuple) type).hasMember(selector))
+							throw new TypeException(type + " has no member named '" + selector + "'");
+
+						type = ((SizzleTuple) type).getMember(selector);
+						break;
+					}
+
+					throw new TypeException("invalid operand type " + type + " for member selection");
 				case 1: // index
 					if (type == null)
 						type = n.f0.accept(this, argu);

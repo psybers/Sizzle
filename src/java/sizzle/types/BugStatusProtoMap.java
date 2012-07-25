@@ -1,16 +1,20 @@
 package sizzle.types;
 
 /**
- * A {@link SizzleProtoTuple}.
+ * A {@link BugStatusProtoMap}.
  * 
  * @author rdyer
  * 
  */
 public class BugStatusProtoMap extends SizzleMap {
 	/**
-	 * Construct a ProjectProtoTuple.
+	 * Construct a BugStatusProtoMap.
 	 */
 	public BugStatusProtoMap() {
-		super(new SizzleInt(), new SizzleString());
+	}
+
+	@Override
+	public String toJavaType() {
+		return "sizzle.types.Bugs.Bug.BugStatus";
 	}
 }

@@ -23,7 +23,7 @@ public class FileProtoTuple extends SizzleProtoTuple {
 		members.add(new SizzleString());
 
 		names.put("file_type", 2);
-		members.add(new FileTypeProtoMap());
+		members.add(new SizzleInt());
 
 		names.put("pkg", 3);
 		members.add(new PackageProtoTuple());
