@@ -63,6 +63,7 @@ public class SizzleProtoTuple extends SizzleTuple {
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
-		return "proto " + super.toString();
+		String type = toJavaType();
+		return type.substring(1 + type.lastIndexOf('.'));
 	}
 }
