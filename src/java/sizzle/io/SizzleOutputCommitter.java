@@ -40,7 +40,7 @@ public class SizzleOutputCommitter extends FileOutputCommitter {
 			con = DriverManager.getConnection(url, user, password);
 			PreparedStatement ps = null;
 			try {
-				ps = con.prepareStatement("UPDATE boa_jobs SET hadoop_status=?, hadoop_result=? WHERE id=" + jobId);
+				ps = con.prepareStatement("UPDATE boa_jobs SET hadoop_end=CURRENT_TIMESTAMP(), hadoop_status=?, hadoop_result=? WHERE id=" + jobId);
 				if (error)
 					ps.setInt(1, -1);
 				else
