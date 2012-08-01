@@ -23,13 +23,23 @@ public class <name> extends sizzle.runtime.SizzleRunner {
 		<name> runner = new <name>();
 		
 		final boolean robust = args[0].equals("-robust");
+		int id = 0;
+		if (args[0].startsWith("-job"))
+			id = Integer.parseInt(args[0].substring(4));
 		
-		final int offset = robust ? 1 : 0;
+		final int offset = robust || id != 0 ? 1 : 0;
 		final org.apache.hadoop.fs.Path[] ins = new org.apache.hadoop.fs.Path[args.length - offset - 1];
 		for (int i = 0; i \< ins.length; i++)
 			ins[i] = new org.apache.hadoop.fs.Path(args[i + offset]);
 		
-		runner.job(ins, new org.apache.hadoop.fs.Path(args[args.length - 1]), robust).submit();
+		org.apache.hadoop.mapreduce.Job jb = runner.job(ins, new org.apache.hadoop.fs.Path(args[args.length - 1]), robust);
+		if (id > 0) {
+			jb.getConfiguration().setInt("boa.hadoop.jobid", id);
+			jb.getConfiguration().set("boa.hadoop.output", args[args.length - 1]);
+		}
+		jb.submit();
+		if (id > 0)
+			sizzle.io.SizzleOutputCommitter.setJobID(jb.getJobID().toString(), id);
 	}
 	
 	static class <name>SizzleMapper extends sizzle.runtime.SizzleMapper {

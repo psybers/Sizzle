@@ -12,6 +12,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.io.compress.GzipCodec;
 import org.apache.hadoop.io.compress.CompressionCodec;
 
+import sizzle.io.SizzleOutputFormat;
 import sizzle.io.EmitKey;
 import sizzle.io.EmitValue;
 
@@ -52,6 +53,7 @@ public abstract class SizzleRunner {
 		job.setMapOutputValueClass(EmitValue.class);
 
 		// TODO: support protobufs/sequence files/avro here
+		job.setOutputFormatClass(SizzleOutputFormat.class);
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(NullWritable.class);
 
