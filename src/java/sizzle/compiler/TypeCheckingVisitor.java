@@ -269,7 +269,7 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 	/** {@inheritDoc} */
 	@Override
 	public SizzleType visit(final MapType n, final SymbolTable argu) {
-		return new SizzleMap(n.f2.accept(this, argu), n.f5.accept(this, argu));
+		return new SizzleMap(n.f5.accept(this, argu), n.f2.accept(this, argu));
 	}
 
 	/** {@inheritDoc} */
