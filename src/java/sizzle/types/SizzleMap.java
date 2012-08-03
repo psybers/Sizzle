@@ -68,11 +68,11 @@ public class SizzleMap extends SizzleType {
 			return false;
 
 		// if that index type is not equivalent this this's, forget it
-		if (!((SizzleMap) that).indexType.accepts(this.indexType))
+		if (!this.indexType.accepts(((SizzleMap) that).indexType))
 			return false;
 
 		// same for the value type
-		if (!((SizzleMap) that).type.accepts(this.type))
+		if (!this.type.accepts(((SizzleMap) that).type))
 			return false;
 
 		// ok
@@ -108,7 +108,7 @@ public class SizzleMap extends SizzleType {
 	/** {@inheritDoc} */
 	@Override
 	public String toJavaType() {
-		return "java.util.HashMap<" + this.indexType.toJavaType() + ", " + this.type.toJavaType() + ">";
+		return "java.util.HashMap<" + this.indexType.toBoxedJavaType() + ", " + this.type.toBoxedJavaType() + ">";
 	}
 
 	/** {@inheritDoc} */

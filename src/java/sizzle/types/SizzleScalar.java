@@ -33,7 +33,6 @@ public class SizzleScalar extends SizzleType {
 		if (!(that instanceof SizzleScalar))
 			return false;
 
-		// check that the classes match
 		return true;
 	}
 

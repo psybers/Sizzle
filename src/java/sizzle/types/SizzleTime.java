@@ -37,4 +37,10 @@ public class SizzleTime extends SizzleScalar {
 	public String toJavaType() {
 		return "long";
 	}
+
+	/** {@inheritDoc} */
+	@Override
+	public String toBoxedJavaType() {
+		return "Long";
+	}
 }

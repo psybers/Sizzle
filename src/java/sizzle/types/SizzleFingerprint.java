@@ -30,6 +30,12 @@ public class SizzleFingerprint extends SizzleScalar {
 
 	/** {@inheritDoc} */
 	@Override
+	public String toBoxedJavaType() {
+		return "Long";
+	}
+
+	/** {@inheritDoc} */
+	@Override
 	public String toString() {
 		return "fingerprint";
 	}

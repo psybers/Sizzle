@@ -18,24 +18,22 @@ public class FunctionTrie {
 
 	private SizzleFunction getFunction(final Object[] ids) {
 		if (this.trie.containsKey(ids[0])) {
-			if (ids[0].equals("")) {
+			if (ids[0].equals(""))
 				return (SizzleFunction) this.trie.get("");
-			} else {
-				final SizzleFunction function = ((FunctionTrie) this.trie.get(ids[0])).getFunction(Arrays.copyOfRange(ids, 1, ids.length));
-
-				if (function != null)
-					return function;
-			}
+			else
+				return ((FunctionTrie) this.trie.get(ids[0])).getFunction(Arrays.copyOfRange(ids, 1, ids.length));
 		} else {
-			for (final Object o : this.trie.keySet())
-				if (o instanceof SizzleVarargs && ((SizzleVarargs) o).accepts((SizzleType) ids[0])) {
+			for (final Object o : this.trie.keySet()) {
+				if (o instanceof SizzleVarargs && ((SizzleVarargs) o).accepts((SizzleType) ids[0]))
 					return ((FunctionTrie) this.trie.get(o)).getFunction();
-				} else if (o instanceof SizzleType && ((SizzleType) o).accepts((SizzleType) ids[0])) {
+
+				if (o instanceof SizzleType && ((SizzleType) o).accepts((SizzleType) ids[0])) {
 					final SizzleFunction function = ((FunctionTrie) this.trie.get(o)).getFunction(Arrays.copyOfRange(ids, 1, ids.length));
 
 					if (function != null)
 						return function;
 				}
+			}
 		}
 
 		return null;

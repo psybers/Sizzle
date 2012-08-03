@@ -21,6 +21,12 @@ public class SizzleBytes extends SizzleScalar {
 
 	/** {@inheritDoc} */
 	@Override
+	public String toBoxedJavaType() {
+		return "Byte[]";
+	}
+
+	/** {@inheritDoc} */
+	@Override
 	public String toString() {
 		return "bytes";
 	}

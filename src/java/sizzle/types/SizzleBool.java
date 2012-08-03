@@ -21,6 +21,12 @@ public class SizzleBool extends SizzleScalar {
 
 	/** {@inheritDoc} */
 	@Override
+	public String toBoxedJavaType() {
+		return "Boolean";
+	}
+
+	/** {@inheritDoc} */
+	@Override
 	public String toString() {
 		return "boolean";
 	}

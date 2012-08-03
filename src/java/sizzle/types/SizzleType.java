@@ -71,6 +71,17 @@ public abstract class SizzleType {
 		throw new TypeException("no java equivalent for type " + this.toString());
 	}
 
+	/**
+	 * Returns a string representation of the boxed Java equivalent of this Sizzle
+	 * type.
+	 * 
+	 * @return A String containing the name of the boxed Java type equivalent to this
+	 *         Sizzle type
+	 */
+	public String toBoxedJavaType() {
+		return toJavaType();
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public boolean equals(final Object that) {

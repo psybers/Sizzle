@@ -50,6 +50,12 @@ public class SizzleFloat extends SizzleScalar {
 
 	/** {@inheritDoc} */
 	@Override
+	public String toBoxedJavaType() {
+		return "Double";
+	}
+
+	/** {@inheritDoc} */
+	@Override
 	public String toString() {
 		return "float";
 	}

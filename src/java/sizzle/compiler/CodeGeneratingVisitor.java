@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Vector;
+import java.util.regex.Pattern;
 
 import org.antlr.stringtemplate.StringTemplate;
 import org.antlr.stringtemplate.StringTemplateGroup;
@@ -254,10 +255,13 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 	public String visit(final VarDecl n, final SymbolTable argu) {
 		final SizzleType type = argu.get(n.f0.f0.tokenImage);
 
+		final String lhsType;
 		if (n.f2.present()) {
 			argu.setId(n.f0.f0.tokenImage);
-			n.f2.node.accept(this, argu);
+			lhsType = n.f2.node.accept(this, argu);
 			argu.setId(null);
+		} else {
+			lhsType = null;
 		}
 
 		if (type instanceof SizzleTable)
@@ -299,6 +303,8 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 			default:
 				throw new RuntimeException("unexpected choice " + nodeChoice.which + " is a " + nodeChoice.choice.getClass().getSimpleName().toString());
 			}
+		} else if (lhsType != null) {
+			st.setAttribute("initializer", lhsType);
 		}
 
 		return st.toString();
@@ -368,9 +374,10 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 	public String visit(final MapType n, final SymbolTable argu) {
 		final StringTemplate st = this.stg.getInstanceOf("MapType");
 
+		argu.setNeedsBoxing(true);
 		st.setAttribute("key", n.f2.accept(this, argu));
-
-		st.setAttribute("value", n.f2.accept(this, argu));
+		st.setAttribute("value", n.f5.accept(this, argu));
+		argu.setNeedsBoxing(false);
 
 		return st.toString();
 	}
@@ -424,8 +431,17 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 	public String visit(final Assignment n, final SymbolTable argu) {
 		final StringTemplate st = this.stg.getInstanceOf("Assignment");
 
-		st.setAttribute("lhs", n.f0.accept(this, argu));
-		st.setAttribute("rhs", n.f2.accept(this, argu));
+		final String lhs = n.f0.accept(this, argu);
+		final String rhs = n.f2.accept(this, argu);
+
+		// FIXME rdyer hack to fix assigning to maps
+		if (lhs.contains(".get(")) {
+			final String s = lhs.replaceFirst(Pattern.quote(".get((int)"), ".put(");
+			return s.substring(0, s.lastIndexOf(')')) + ", " + rhs + s.substring(s.lastIndexOf(')')) + ";";
+		}
+
+		st.setAttribute("lhs", lhs);
+		st.setAttribute("rhs", rhs);
 
 		return st.toString();
 	}
@@ -971,8 +987,11 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 	public String visit(final Identifier n, final SymbolTable argu) {
 		final String id = n.f0.tokenImage;
 
-		if (argu.hasType(id))
+		if (argu.hasType(id)) {
+			if (argu.getNeedsBoxing())
+				return argu.getType(id).toBoxedJavaType();
 			return argu.getType(id).toJavaType();
+		}
 
 		// otherwise return the identifier template
 		final StringTemplate st = this.stg.getInstanceOf("Identifier");

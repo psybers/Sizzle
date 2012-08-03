@@ -76,6 +76,7 @@ public class SymbolTable {
 	private String id;
 	private Operand operand;
 	private SizzleType operandType;
+	private boolean needsBoxing;
 
 	private SymbolTable() throws IOException {
 		this(new ArrayList<URL>());
@@ -154,13 +155,14 @@ public class SymbolTable {
 		// these generic functions require more finagling than can currently be
 		// (easily) done with a static method, so they are handled with macros
 
+		// FIXME rdyer - def(protolist[i]) should generate "i < protolist.size()"
 		this.setFunction("def", new SizzleFunction(new SizzleBool(), new SizzleType[] { new SizzleAny() }, "${0} != null"));
 		this.setFunction("len", new SizzleFunction(new SizzleInt(), new SizzleType[] { new SizzleArray(new SizzleScalar()) }, "${0}.length"));
 		this.setFunction("len", new SizzleFunction(new SizzleInt(), new SizzleType[] { new SizzleArray(new SizzleAny()) }, "${0}.size()"));
-		this.setFunction("len", new SizzleFunction(new SizzleInt(), new SizzleType[] { new SizzleString() }, "${0}.length()"));
-		this.setFunction("len", new SizzleFunction(new SizzleInt(), new SizzleType[] { new SizzleBytes() }, "${0}.length"));
 		this.setFunction("len", new SizzleFunction(new SizzleInt(), new SizzleType[] { new SizzleMap(new SizzleScalar(), new SizzleScalar()) },
 				"${0}.keySet().size()"));
+		this.setFunction("len", new SizzleFunction(new SizzleInt(), new SizzleType[] { new SizzleString() }, "${0}.length()"));
+		this.setFunction("len", new SizzleFunction(new SizzleInt(), new SizzleType[] { new SizzleBytes() }, "${0}.length"));
 		this.setFunction("haskey", new SizzleFunction(new SizzleBool(), new SizzleType[] { new SizzleMap(new SizzleScalar(), new SizzleScalar()),
 				new SizzleScalar() }, "${0}.containsKey(${1})"));
 		this.setFunction("keys", new SizzleFunction(new SizzleArray(new SizzleScalar()), new SizzleType[] { new SizzleMap(new SizzleScalar(),
@@ -596,6 +598,14 @@ public class SymbolTable {
 
 	public SizzleType getOperandType() {
 		return this.operandType;
+	}
+
+	public void setNeedsBoxing(final boolean needsBoxing) {
+		this.needsBoxing = needsBoxing;
+	}
+
+	public boolean getNeedsBoxing() {
+		return this.needsBoxing;
 	}
 
 	@Override

@@ -349,7 +349,7 @@ public class NameFindingVisitor extends GJNoArguDepthFirst<Set<String>> {
 
 	@Override
 	public Set<String> visit(final Index n) {
-		throw new RuntimeException("unimplemented");
+		return new HashSet<String>();
 	}
 
 	@Override
@@ -372,6 +372,10 @@ public class NameFindingVisitor extends GJNoArguDepthFirst<Set<String>> {
 		switch (n.f0.which) {
 		case 0: // identifier
 			return n.f0.accept(this);
+		case 1: // string literal
+		case 2: // int literal
+		case 3: // float literal
+			return new HashSet<String>();
 		default:
 			throw new RuntimeException("unexpected choice " + n.f0.which + " is " + n.f0.choice.getClass());
 		}
