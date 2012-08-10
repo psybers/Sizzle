@@ -43,13 +43,20 @@ WhenStatement(all, some, len, type, index, expression, statement) ::= <<
 		<statement>
 	}
 	<else>
-	for (<type> ___<index> = 0; ___<index> \< <len>; ___<index>++)
+	for (<type> ___<index> = 0; ___<index> \< <len>; ___<index>++) {
+		<if(some)>
+		boolean _stop_<index> = false;
+		<endif>
 		if (<expression>) {
-			<statement>
 			<if(some)>
-			break;
+			_stop_<index> = true;
 			<endif>
+			<statement>
 		}
+		<if(some)>
+		if (_stop_<index>) break;
+		<endif>
+	}
 	<endif>
 }
 >>
