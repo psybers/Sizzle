@@ -41,4 +41,19 @@ public class BoaIntrinsics {
 
 		return false;
 	}
+
+	/**
+	 * Does a Revision contain a file of the specified type? This only compares based on file extension.
+	 * 
+	 * @param rev the Revision to examine
+	 * @param ext the file extension to look for
+	 * @return true if the Revision contains at least 1 file with the specified extension
+	 */
+	@FunctionSpec(name = "hasfiletype", returnType = "bool", formalParameters = { "Revision", "string" })
+	public static boolean hasfile(final sizzle.types.Code.Revision rev, String ext) {
+		for (int i = 0; i < rev.getFilesCount(); i++)
+			if (rev.getFiles(i).getName().toLowerCase().endsWith("." + ext.toLowerCase()))
+				return true;
+		return false;
+	}
 }
