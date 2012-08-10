@@ -916,17 +916,24 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 		final SizzleFunction f = argu.getFunction(this.namefinder.visit(argu.getOperand()).toArray()[0].toString(), this.typechecker.check(n, argu));
 
 		if (f.hasMacro()) {
-			st.setAttribute("call", CodeGeneratingVisitor.expand(f.getMacro(), ((ExprList) n.f1.node).accept(this, argu).split(",")));
+			List<String> parts = new ArrayList<String>();
+			ExprList list = (ExprList) n.f1.node;
+			parts.add(list.f0.accept(this, argu));
+			if (list.f1.present())
+				for (Node node : list.f1.nodes)
+					if (node instanceof Expression)
+						parts.add(((Expression) node).accept(this, argu));
+			st.setAttribute("call", CodeGeneratingVisitor.expand(f.getMacro(), parts.toArray(new String[]{})));
 		} else if (f.hasName()) {
 			st.setAttribute("operand", f.getName());
 
 			if (n.f1.present())
-				st.setAttribute("parameters", n.f1.node.accept(this, argu));
+				st.setAttribute("parameters", ((ExprList) n.f1.node).accept(this, argu));
 		} else {
 			st.setAttribute("operand", argu.getOperand().accept(this, argu) + ".invoke");
 
 			if (n.f1.present())
-				st.setAttribute("parameters", "new Object[] {" + n.f1.node.accept(this, argu) + "}");
+				st.setAttribute("parameters", "new Object[] {" + ((ExprList) n.f1.node).accept(this, argu) + "}");
 		}
 
 		return st.toString();
