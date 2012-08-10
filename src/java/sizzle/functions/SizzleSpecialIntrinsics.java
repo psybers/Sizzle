@@ -220,17 +220,17 @@ public class SizzleSpecialIntrinsics {
 		return result.toArray(new String[result.size()]);
 	}
 
-	@FunctionSpec(name = "saw", returnType = "array of string", formalParameters = { "string", "string..." })
+	@FunctionSpec(name = "split", returnType = "array of string", formalParameters = { "string", "string..." })
 	public static String[] saw(final String string, final String... regexes) {
 		return SizzleSpecialIntrinsics.saw(1, string, regexes);
 	}
 
-	@FunctionSpec(name = "sawn", returnType = "array of string", formalParameters = { "int", "string", "string..." })
+	@FunctionSpec(name = "splitn", returnType = "array of string", formalParameters = { "int", "string", "string..." })
 	public static String[] sawn(final int n, final String string, final String... regexes) {
 		return SizzleSpecialIntrinsics.saw(n, string, regexes);
 	}
 
-	@FunctionSpec(name = "sawzall", returnType = "array of string", formalParameters = { "string", "string..." })
+	@FunctionSpec(name = "splitall", returnType = "array of string", formalParameters = { "string", "string..." })
 	public static String[] sawzall(final String string, final String... regexes) {
 		// will someone ever trigger this obscure bug?
 		return SizzleSpecialIntrinsics.saw(Integer.MAX_VALUE, string, regexes);
