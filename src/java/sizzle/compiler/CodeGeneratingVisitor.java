@@ -577,7 +577,12 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 
 	@Override
 	public String visit(final ReturnStatement n, final SymbolTable argu) {
-		throw new RuntimeException("unimplemented");
+		final StringTemplate st = this.stg.getInstanceOf("Return");
+
+		if (n.f1.present())
+			st.setAttribute("expr", n.f1.node.accept(this, argu));
+
+		return st.toString();
 	}
 
 	@Override
