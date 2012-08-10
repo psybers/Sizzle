@@ -92,6 +92,7 @@ import sizzle.types.SizzleProtoMap;
 import sizzle.types.SizzleProtoTuple;
 import sizzle.types.SizzleString;
 import sizzle.types.SizzleTable;
+import sizzle.types.SizzleTuple;
 import sizzle.types.SizzleType;
 
 class TableDescription {
@@ -334,12 +335,12 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 
 	@Override
 	public String visit(final TupleType n, final SymbolTable argu) {
-		throw new RuntimeException("unimplemented");
+		return n.f0.accept(this, argu);
 	}
 
 	@Override
 	public String visit(final SimpleTupleType n, final SymbolTable argu) {
-		throw new RuntimeException("unimplemented");
+		return "";
 	}
 
 	@Override
@@ -838,22 +839,37 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 	@Override
 	public String visit(final Selector n, final SymbolTable argu) {
 		try {
-			final SizzleProtoTuple tuple;
-			if (argu.getOperandType() instanceof SizzleProtoTuple)
-				tuple = (SizzleProtoTuple) argu.getOperandType();
-			else if (argu.getOperandType() instanceof SizzleProtoList)
-				tuple = (SizzleProtoTuple) ((SizzleProtoList) argu.getOperandType()).getType();
-			else if (argu.getOperandType() instanceof SizzleProtoMap)
+			SizzleType opType = argu.getOperandType();
+			if (opType instanceof SizzleName)
+				opType = ((SizzleName) opType).getType();
+
+			// operand is a proto map (aka enum)
+			if (opType instanceof SizzleProtoMap)
 				return "." + n.f1.f0.tokenImage;
-			else
-				throw new RuntimeException("unimplemented");
 
 			final String member = n.f1.f0.tokenImage;
 
-			argu.setOperandType(tuple.getMember(member));
-			if (tuple.getMember(member) instanceof SizzleArray)
-				return ".get" + camelCase(n.f1.f0.tokenImage) + "List()";
-			return ".get" + camelCase(n.f1.f0.tokenImage) + "()";
+			// operand is a proto tuple
+			if (opType instanceof SizzleProtoTuple) {
+				final SizzleProtoTuple tuple;
+				if (opType instanceof SizzleProtoTuple)
+					tuple = (SizzleProtoTuple) opType;
+				else if (argu.getOperandType() instanceof SizzleProtoList)
+					tuple = (SizzleProtoTuple) ((SizzleProtoList) opType).getType();
+				else
+					throw new RuntimeException("unimplemented");
+	
+				argu.setOperandType(tuple.getMember(member));
+				if (tuple.getMember(member) instanceof SizzleArray)
+					return ".get" + camelCase(n.f1.f0.tokenImage) + "List()";
+				return ".get" + camelCase(n.f1.f0.tokenImage) + "()";
+			}
+
+			// operand is a tuple
+			if (opType instanceof SizzleTuple)
+				return "[" + ((SizzleTuple) opType).getMemberIndex(member) + "]";
+
+			throw new RuntimeException("unimplemented");
 		} catch (final TypeException e) {
 			throw new RuntimeException("unimplemented");
 		}
@@ -938,12 +954,15 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 				st.setAttribute("pairlist", nodeChoice.choice.accept(this, argu));
 				break;
 			case 1: // expression list
-				final SizzleType t;
+				SizzleType t;
 				try {
 					t = this.typechecker.visit((ExprList) nodeChoice.choice, argu.cloneNonLocals());
 				} catch (final IOException e) {
 					throw new RuntimeException(e.getClass().getSimpleName() + " caught", e);
 				}
+
+				if (argu.getOperandType() instanceof SizzleArray && t instanceof SizzleTuple)
+					t = new SizzleArray(((SizzleTuple)t).getMember(0));
 
 				st.setAttribute("type", t.toJavaType());
 				st.setAttribute("exprlist", nodeChoice.choice.accept(this, argu));

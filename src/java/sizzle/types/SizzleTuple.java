@@ -26,7 +26,13 @@ public class SizzleTuple extends SizzleScalar {
 	 * 
 	 */
 	public SizzleTuple(final List<SizzleType> members) {
-		this(members, new HashMap<String, Integer>());
+		this.members = members;
+		this.names = new HashMap<String, Integer>();
+		for (int i = 0; i < this.members.size(); i++) {
+			SizzleType t = this.members.get(i);
+			if (t instanceof SizzleName)
+				this.names.put(((SizzleName) t).getId(), i);
+		}
 	}
 
 	public SizzleTuple(final List<SizzleType> members, final Map<String, Integer> names) {
@@ -39,6 +45,16 @@ public class SizzleTuple extends SizzleScalar {
 	public boolean assigns(final SizzleType that) {
 		if (that instanceof SizzleFunction)
 			return this.assigns(((SizzleFunction) that).getType());
+
+		if (that instanceof SizzleArray) {
+			SizzleType type = ((SizzleArray) that).getType();
+			if (type instanceof SizzleName)
+				type = ((SizzleName) type).getType();
+			for (SizzleType t : this.members)
+				if (!t.assigns(type))
+					return false;
+			return true;
+		}
 
 		// have to construct it somehow
 		if (that instanceof SizzleBytes)
@@ -91,6 +107,10 @@ public class SizzleTuple extends SizzleScalar {
 	 */
 	public SizzleType getMember(final String member) {
 		return this.members.get(this.names.get(member));
+	}
+
+	public int getMemberIndex(final String member) {
+		return this.names.get(member);
 	}
 
 	public List<SizzleType> getTypes() {

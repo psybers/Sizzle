@@ -35,6 +35,13 @@ public class SizzleArray extends SizzleType {
 		if (that instanceof SizzleFunction)
 			return this.assigns(((SizzleFunction) that).getType());
 
+		if (that instanceof SizzleTuple) {
+			for (SizzleType t : ((SizzleTuple) that).getTypes())
+				if (!this.type.assigns(t))
+					return false;
+			return true;
+		}
+
 		// otherwise, if it's not an array, forget it
 		if (!(that instanceof SizzleArray))
 			return false;

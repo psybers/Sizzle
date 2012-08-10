@@ -174,6 +174,9 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 		if (n.f2.present()) {
 			lhs = n.f2.node.accept(this, argu);
 
+			if (lhs instanceof SizzleArray && rhs instanceof SizzleTuple)
+				rhs = new SizzleArray(((SizzleTuple)rhs).getMember(0));
+
 			if (rhs != null && !lhs.assigns(rhs) && !argu.hasCast(rhs, lhs))
 				throw new TypeException("incorrect type " + rhs + " for assignment to " + id + ':' + lhs);
 		} else {
@@ -383,8 +386,9 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 		final SizzleType lhs = n.f0.accept(this, argu);
 		final SizzleType rhs = n.f2.accept(this, argu);
 
-		if (!lhs.assigns(rhs))
-			throw new TypeException("invalid type " + rhs + " for assignment to " + lhs);
+		if (!(lhs instanceof SizzleArray && rhs instanceof SizzleTuple))
+			if (!lhs.assigns(rhs))
+				throw new TypeException("invalid type " + rhs + " for assignment to " + lhs);
 
 		return null;
 	}
@@ -692,6 +696,9 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 				case 0: // selector
 					if (type == null)
 						type = n.f0.accept(this, argu);
+
+					if (type instanceof SizzleName)
+						type = ((SizzleName) type).getType();
 
 					final String selector = ((Selector) nodeChoice.choice).f1.f0.tokenImage;
 
