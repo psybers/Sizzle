@@ -638,11 +638,15 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 					final List<String> array = new ArrayList<String>(indexees);
 					String src = "";
 					for (int i = 0; i < array.size(); i++) {
+						String indexee = array.get(i);
+						// FIXME rdyer
+//						SizzleType indexeeType = this.typechecker.visit(indexee, argu.cloneNonLocals());
+//						String func = indexeeType instanceof SizzleArray) ? ".length()" : ".size()";
 						String func = ".size()";
 						if (src.length() > 0)
-							src = "min(" + array.get(i) + func + ", " + src + ")";
+							src = "min(" + indexee + func + ", " + src + ")";
 						else
-							src = array.get(i) + func;
+							src = indexee + func;
 					}
 
 					st.setAttribute("len", src);
