@@ -17,9 +17,15 @@ public class SizzleName extends SizzleScalar {
 		return this.type;
 	}
 
+	public String getId() {
+		return this.id;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public boolean assigns(final SizzleType that) {
+		if (that instanceof SizzleName)
+			return this.type.assigns(((SizzleName) that).getType());
 		return this.type.assigns(that);
 	}
 

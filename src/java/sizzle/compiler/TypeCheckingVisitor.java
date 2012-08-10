@@ -39,6 +39,7 @@ import sizzle.parser.syntaxtree.IntegerLiteral;
 import sizzle.parser.syntaxtree.MapType;
 import sizzle.parser.syntaxtree.Node;
 import sizzle.parser.syntaxtree.NodeChoice;
+import sizzle.parser.syntaxtree.NodeListOptional;
 import sizzle.parser.syntaxtree.NodeSequence;
 import sizzle.parser.syntaxtree.NodeToken;
 import sizzle.parser.syntaxtree.Operand;
@@ -75,6 +76,7 @@ import sizzle.parser.syntaxtree.VarDecl;
 import sizzle.parser.syntaxtree.WhenStatement;
 import sizzle.parser.syntaxtree.WhileStatement;
 import sizzle.parser.visitor.GJDepthFirst;
+import sizzle.types.SizzleAny;
 import sizzle.types.SizzleArray;
 import sizzle.types.SizzleBool;
 import sizzle.types.SizzleBytes;
@@ -194,6 +196,7 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 		case 2: // map
 		case 3: // tuple
 		case 4: // table
+		case 5: // function
 			return n.f0.choice.accept(this, argu);
 		default:
 			throw new RuntimeException("unexpected choice " + n.f0.which + " is " + n.f0.choice.getClass());
@@ -203,6 +206,8 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 	/** {@inheritDoc} */
 	@Override
 	public SizzleType visit(final Component n, final SymbolTable argu) {
+		if (n.f0.present())
+			return new SizzleName(n.f1.accept(this, argu), ((Identifier) ((NodeSequence) n.f0.node).elementAt(0)).f0.tokenImage);
 		return n.f1.accept(this, argu);
 	}
 
@@ -318,19 +323,52 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 	public SizzleType visit(final ExprList n, final SymbolTable argu) {
 		final List<SizzleType> types = this.check(n, argu);
 
-		final SizzleType t = types.get(0);
+//		final SizzleType t = types.get(0);
 
-		for (int i = 1; i < types.size(); i++)
-			if (!t.assigns(types.get(i)))
+//		for (int i = 1; i < types.size(); i++)
+//			if (!t.assigns(types.get(i)))
 				return new SizzleTuple(types);
 
-		return new SizzleArray(t);
+//		return new SizzleArray(t);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public SizzleType visit(final FunctionType n, final SymbolTable argu) {
-		throw new RuntimeException("unimplemented");
+		final SizzleType[] params;
+		if (n.f2.present()) {
+			final List<String> idents = new ArrayList<String>();
+			final List<SizzleType> types = new ArrayList<SizzleType>();
+
+			final NodeSequence nodes = (NodeSequence)n.f2.node;
+
+			idents.add(((Identifier)nodes.elementAt(0)).f0.tokenImage);
+			types.add(nodes.elementAt(2).accept(this, argu));
+			
+			final NodeListOptional paramList = (NodeListOptional)nodes.elementAt(3);
+			if (paramList.present())
+				for (Node paramNodes : paramList.nodes) {
+					idents.add(((Identifier)((NodeSequence)paramNodes).elementAt(1)).f0.tokenImage);
+					types.add(((NodeSequence)paramNodes).elementAt(1).accept(this, argu));
+				}
+
+			params = new SizzleType[idents.size()];
+
+			for (int i = 0; i < params.length; i++) {
+				params[i] = new SizzleName(types.get(i), idents.get(i));
+				argu.set(idents.get(i), types.get(i));
+			}
+		} else {
+			params = null;
+		}
+
+		final SizzleType ret;
+		if (n.f4.present())
+			ret = ((NodeSequence)n.f4.node).elementAt(1).accept(this, argu);
+		else
+			ret = new SizzleAny();
+
+		return new SizzleFunction(ret, params);
 	}
 
 	/** {@inheritDoc} */
@@ -498,7 +536,10 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 	/** {@inheritDoc} */
 	@Override
 	public SizzleType visit(final ReturnStatement n, final SymbolTable argu) {
-		throw new RuntimeException("unimplemented");
+		// FIXME rdyer need to check return type matches function declaration's return
+		if (n.f1.present())
+			return n.f1.accept(this, argu);
+		return new SizzleAny();
 	}
 
 	/** {@inheritDoc} */
@@ -763,7 +804,10 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 		case 2: // integer literal
 		case 3: // floating point literal
 		case 4: // composite
+		case 5: // function
+		case 8: // statement expression
 			return n.f0.choice.accept(this, argu);
+		case 6: // unary operator
 		case 9: // parenthetical
 			return ((NodeSequence) n.f0.choice).nodes.elementAt(1).accept(this, argu);
 		default:
@@ -813,7 +857,17 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 	/** {@inheritDoc} */
 	@Override
 	public SizzleType visit(final Function n, final SymbolTable argu) {
-		throw new RuntimeException("unimplemented");
+		SymbolTable st;
+		try {
+			st = argu.cloneNonLocals();
+		} catch (final IOException e) {
+			throw new RuntimeException(e.getClass().getSimpleName() + " caught", e);
+		}
+
+		SizzleType type = n.f0.accept(this, st);
+		n.f1.accept(this, st);
+
+		return type;
 	}
 
 	/** {@inheritDoc} */

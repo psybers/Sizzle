@@ -86,6 +86,7 @@ import sizzle.types.SizzleArray;
 import sizzle.types.SizzleBytes;
 import sizzle.types.SizzleFunction;
 import sizzle.types.SizzleMap;
+import sizzle.types.SizzleName;
 import sizzle.types.SizzleProtoList;
 import sizzle.types.SizzleProtoMap;
 import sizzle.types.SizzleProtoTuple;
@@ -279,8 +280,9 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 
 			switch (nodeChoice.which) {
 			case 0: // initializer
-				SizzleType t;
+				final SizzleType t;
 				try {
+					argu.setOperandType(type);
 					t = this.typechecker.visit((Expression) ((NodeSequence) nodeChoice.choice).elementAt(1), argu.cloneNonLocals());
 				} catch (final IOException e) {
 					throw new RuntimeException(e.getClass().getSimpleName() + " caught", e);
@@ -900,10 +902,14 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 
 			if (n.f1.present())
 				st.setAttribute("parameters", n.f1.node.accept(this, argu));
+		} else {
+			st.setAttribute("operand", argu.getOperand().accept(this, argu) + ".invoke");
+
+			if (n.f1.present())
+				st.setAttribute("parameters", "new Object[] {" + n.f1.node.accept(this, argu) + "}");
 		}
 
 		return st.toString();
-
 	}
 
 	@Override
@@ -980,7 +986,40 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 
 	@Override
 	public String visit(final Function n, final SymbolTable argu) {
-		throw new RuntimeException("unimplemented");
+		final StringTemplate st = this.stg.getInstanceOf("Function");
+
+		final SizzleType t;
+		try {
+			t = this.typechecker.visit(n.f0, argu.cloneNonLocals());
+		} catch (final IOException e) {
+			throw new RuntimeException(e.getClass().getSimpleName() + " caught", e);
+		}
+
+		if (!(t instanceof SizzleFunction))
+			throw new RuntimeException("type " + t + " no a function type");
+		final SizzleFunction funcType = ((SizzleFunction) t);
+
+		SymbolTable funcArgu = null;
+		try {
+			funcArgu = argu.cloneNonLocals();
+		} catch (Exception e) { }
+
+		SizzleType[] paramTypes = funcType.getFormalParameters();
+		List<String> castParams = new ArrayList<String>();
+		List<String> params = new ArrayList<String>();
+
+		for (int i = 0; i < paramTypes.length; i++) {
+			castParams.add("(" + paramTypes[i].toBoxedJavaType() + ")args[" + i + "]");
+			params.add(paramTypes[i].toBoxedJavaType() + " ___" + ((SizzleName) paramTypes[i]).getId());
+			funcArgu.set(((SizzleName) paramTypes[i]).getId(), paramTypes[i]);
+		}
+
+		st.setAttribute("ret", funcType.getType().toBoxedJavaType());
+		st.setAttribute("cast_parameters", castParams);
+		st.setAttribute("parameters", params);
+		st.setAttribute("body", n.f1.accept(this, funcArgu));
+
+		return st.toString();
 	}
 
 	@Override

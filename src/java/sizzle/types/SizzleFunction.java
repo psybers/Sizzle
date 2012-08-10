@@ -2,6 +2,8 @@ package sizzle.types;
 
 import java.util.Arrays;
 
+import sizzle.compiler.TypeException;
+
 /**
  * A {@link SizzleType} that represents a function, its return value, and its
  * formal parameters.
@@ -86,7 +88,20 @@ public class SizzleFunction extends SizzleType {
 	/** {@inheritDoc} */
 	@Override
 	public boolean assigns(final SizzleType that) {
-		return false;
+		if (!(that instanceof SizzleFunction))
+			return false;
+
+		if (!((SizzleFunction) that).getType().assigns(this.getType()))
+			return false;
+
+		if (((SizzleFunction) that).getFormalParameters().length != this.getFormalParameters().length)
+			return false;
+
+		for (int i = 0; i < this.getFormalParameters().length; i++)
+			if (!((SizzleFunction) that).getParameter(i).assigns(this.getParameter(i)))
+				return false;
+
+		return true;
 	}
 
 	/** {@inheritDoc} */
@@ -204,6 +219,12 @@ public class SizzleFunction extends SizzleType {
 
 	public void setMacro(final String macro) {
 		this.macro = macro;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public String toJavaType() {
+		return "sizzle.runtime.SizzleFunc<" + type.toBoxedJavaType() + ">";
 	}
 
 	/** {@inheritDoc} */

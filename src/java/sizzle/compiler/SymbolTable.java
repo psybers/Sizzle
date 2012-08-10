@@ -355,6 +355,9 @@ public class SymbolTable {
 		if (this.idmap.containsKey(id))
 			throw new TypeException(id + " already declared as " + this.idmap.get(id));
 
+		if (type instanceof SizzleFunction)
+			this.setFunction(id, (SizzleFunction) type);
+
 		if (global)
 			this.globals.put(id, type);
 		else
