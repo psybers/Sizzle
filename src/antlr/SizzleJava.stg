@@ -68,12 +68,10 @@ PairList(pairs) ::= "<pairs:{<it>;<\n>}>"
 Pair(map, key, value) ::= "<map>.put(<key>, <value>)"
 Identifier(id) ::= "<if(identifierMap.(id))><identifierMap.(id)><else>___<id><endif>"
 Assignment(lhs, rhs) ::= "<lhs> = <rhs>;"
-Function(ret, cast_parameters, parameters, body) ::= <<
+Function(ret, parameters, body) ::= <<
 new sizzle.runtime.SizzleFunc\<<ret>\>() {
 	public <ret> invoke(Object[] args) {
-		return internal_invoke(<cast_parameters>);
-	}
-	<ret> internal_invoke(<parameters>) {
+		<parameters>
 		<body>
 	}
 }

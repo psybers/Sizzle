@@ -1035,17 +1035,14 @@ public class CodeGeneratingVisitor extends GJDepthFirst<String, SymbolTable> {
 		} catch (Exception e) { }
 
 		SizzleType[] paramTypes = funcType.getFormalParameters();
-		List<String> castParams = new ArrayList<String>();
 		List<String> params = new ArrayList<String>();
 
 		for (int i = 0; i < paramTypes.length; i++) {
-			castParams.add("(" + paramTypes[i].toBoxedJavaType() + ")args[" + i + "]");
-			params.add(paramTypes[i].toBoxedJavaType() + " ___" + ((SizzleName) paramTypes[i]).getId());
+			params.add(paramTypes[i].toBoxedJavaType() + " ___" + ((SizzleName) paramTypes[i]).getId() + " = (" + paramTypes[i].toBoxedJavaType() + ")args[" + i + "];");
 			funcArgu.set(((SizzleName) paramTypes[i]).getId(), paramTypes[i]);
 		}
 
 		st.setAttribute("ret", funcType.getType().toBoxedJavaType());
-		st.setAttribute("cast_parameters", castParams);
 		st.setAttribute("parameters", params);
 		st.setAttribute("body", n.f1.accept(this, funcArgu));
 
