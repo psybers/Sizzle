@@ -956,13 +956,19 @@ public class TypeCheckingVisitor extends GJDepthFirst<SizzleType, SymbolTable> {
 	private List<SizzleType> check(final ExprList e, final SymbolTable argu) {
 		final List<SizzleType> types = new ArrayList<SizzleType>();
 
-		types.add(e.f0.accept(this, argu));
+		types.add(assignableType(e.f0.accept(this, argu)));
 
 		if (e.f1.present())
 			for (final Node node : e.f1.nodes)
-				types.add(((NodeSequence) node).elementAt(1).accept(this, argu));
+				types.add(assignableType(((NodeSequence) node).elementAt(1).accept(this, argu)));
 
 		return types;
+	}
+
+	private SizzleType assignableType(SizzleType t) {
+		if (t instanceof SizzleFunction)
+			return ((SizzleFunction) t).getType();
+		return t;
 	}
 
 	private List<SizzleType> check(final SimpleMemberList e, final SymbolTable argu) {
