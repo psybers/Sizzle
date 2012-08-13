@@ -46,6 +46,7 @@ import sizzle.types.SizzleFloat;
 import sizzle.types.SizzleFunction;
 import sizzle.types.SizzleInt;
 import sizzle.types.SizzleMap;
+import sizzle.types.SizzleProtoList;
 import sizzle.types.SizzleProtoTuple;
 import sizzle.types.SizzleScalar;
 import sizzle.types.SizzleString;
@@ -157,8 +158,8 @@ public class SymbolTable {
 
 		// FIXME rdyer - def(protolist[i]) should generate "i < protolist.size()"
 		this.setFunction("def", new SizzleFunction(new SizzleBool(), new SizzleType[] { new SizzleAny() }, "${0} != null"));
+		this.setFunction("len", new SizzleFunction(new SizzleInt(), new SizzleType[] { new SizzleProtoList(new SizzleScalar()) }, "${0}.size()"));
 		this.setFunction("len", new SizzleFunction(new SizzleInt(), new SizzleType[] { new SizzleArray(new SizzleScalar()) }, "${0}.length"));
-		this.setFunction("len", new SizzleFunction(new SizzleInt(), new SizzleType[] { new SizzleArray(new SizzleAny()) }, "${0}.size()"));
 		this.setFunction("len", new SizzleFunction(new SizzleInt(), new SizzleType[] { new SizzleMap(new SizzleScalar(), new SizzleScalar()) },
 				"${0}.keySet().size()"));
 		this.setFunction("len", new SizzleFunction(new SizzleInt(), new SizzleType[] { new SizzleString() }, "${0}.length()"));
