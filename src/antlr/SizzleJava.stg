@@ -37,8 +37,10 @@ WhenStatement(all, some, len, type, index, expression, statement) ::= <<
 	<if(all)>
 	boolean _satisfied_<index> = true;
 	for (<type> ___<index> = 0; ___<index> \< <len>; ___<index>++)
-		if (!(<expression>))
+		if (!(<expression>)) {
 			_satisfied_<index> = false;
+			break;
+		}
 	if (_satisfied_<index>) {
 		<statement>
 	}
