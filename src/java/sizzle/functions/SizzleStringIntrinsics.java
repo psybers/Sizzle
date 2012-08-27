@@ -98,7 +98,7 @@ public class SizzleStringIntrinsics {
 	 *         <em>p</em> within <em>s</em> and return the integer index of its
 	 *         first byte, or -1 if it does not occur
 	 */
-	@FunctionSpec(name = "bytesfind", returnType = "string", formalParameters = { "string", "string" })
+	@FunctionSpec(name = "bytesfind", returnType = "int", formalParameters = { "bytes", "bytes" })
 	public static long indexOf(final byte[] p, final byte[] s) {
 		for (int i = 0; i < s.length; i++)
 			for (int j = 0; j < p.length; j++)
@@ -124,7 +124,7 @@ public class SizzleStringIntrinsics {
 	 *         <em>p</em> within <em>s</em> and return the integer index of its
 	 *         first byte, or -1 if it does not occur
 	 */
-	@FunctionSpec(name = "bytesrfind", returnType = "string", formalParameters = { "string", "string" })
+	@FunctionSpec(name = "bytesrfind", returnType = "int", formalParameters = { "bytes", "bytes" })
 	public static long lastIndexOf(final byte[] p, final byte[] s) {
 		for (int i = s.length - p.length; i >= 0; i--)
 			for (int j = 0; j < p.length; j++)
