@@ -1,7 +1,9 @@
 package sizzle.functions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -163,6 +165,15 @@ public class SizzleStringIntrinsics {
 			return str.replaceFirst(Pattern.quote(lit), rep);
 	}
 
+	// cache the regular expression patterns for performance
+	private static Map<String, Matcher> matchers = new HashMap<String, Matcher>();
+
+	private static Matcher getMatcher(final String r) {
+		if (!matchers.containsKey(r))
+			matchers.put(r, Pattern.compile(r).matcher(""));
+		return matchers.get(r);
+	}
+
 	/**
 	 * Search for a match of the regular expression <em>r</em> within <em>s</em>
 	 * , and return a boolean value indicating whether a match was found. (The
@@ -179,7 +190,7 @@ public class SizzleStringIntrinsics {
 	 */
 	@FunctionSpec(name = "match", returnType = "bool", formalParameters = { "string", "string" })
 	public static boolean match(final String r, final String s) {
-		final Matcher m = Pattern.compile(r).matcher(s);
+		final Matcher m = getMatcher(r).reset(s);
 		return m.find();
 	}
 
@@ -201,7 +212,7 @@ public class SizzleStringIntrinsics {
 	 */
 	@FunctionSpec(name = "matchposns", returnType = "array of int", formalParameters = { "string", "string" })
 	public static long[] matchPositions(final String r, final String s) {
-		final Matcher m = Pattern.compile(r).matcher(s);
+		final Matcher m = getMatcher(r).reset(s);
 
 		if (!m.find())
 			return new long[0];
@@ -238,7 +249,7 @@ public class SizzleStringIntrinsics {
 	 */
 	@FunctionSpec(name = "matchstrs", returnType = "array of string", formalParameters = { "string", "string" })
 	public static String[] matchStrings(final String r, final String s) {
-		final Matcher m = Pattern.compile(r).matcher(s);
+		final Matcher m = getMatcher(r).reset(s);
 
 		if (!m.find())
 			return new String[0];
